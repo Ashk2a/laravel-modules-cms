@@ -1,0 +1,16 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Abstractions\Http\Controllers\BaseController;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+
+class HomeController extends BaseController
+{
+    public function getHome(): Factory|View|Application
+    {
+        return view('pages.home');
+    }
+}
