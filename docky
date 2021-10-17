@@ -1,0 +1,228 @@
+#!/usr/bin/env bash
+
+UNAMEOUT="$(uname -s)"
+
+WHITE='\033[1;37m'
+NC='\033[0m'
+
+# Verify operating system is supported...
+case "${UNAMEOUT}" in
+    Linux*)             MACHINE=linux;;
+    Darwin*)            MACHINE=mac;;
+    *)                  MACHINE="UNKNOWN"
+esac
+
+if [ "$MACHINE" == "UNKNOWN" ]; then
+    echo "Unsupported operating system [$(uname -s)]. Docky supports macOS, Linux, and Windows (WSL2)." >&2
+
+    exit 1
+fi
+
+# Define environment variables...
+export CONTAINER_APP_NAME=${CONTAINER_APP_NAME:-"app"}
+export DB_PORT=${DB_PORT:-3306}
+export CONTAINER_USER_NAME=${CONTAINER_USER_NAME}
+
+if [ "$MACHINE" == "linux" ]; then
+    export SEDCMD="sed -i"
+elif [ "$MACHINE" == "mac" ]; then
+    export SEDCMD="sed -i .bak"
+fi
+
+# Ensure that Docker is running...
+if ! docker info > /dev/null 2>&1; then
+    echo -e "${WHITE}Docker is not running.${NC}" >&2
+
+    exit 1
+fi
+
+# Determine if Docky is currently up...
+PSRESULT="$(docker-compose ps -q)"
+
+if docker-compose ps | grep 'Exit'; then
+    echo -e "${WHITE}Shutting down old Docky processes...${NC}" >&2
+
+    docker-compose down > /dev/null 2>&1
+
+    EXEC="no"
+elif [ -n "$PSRESULT" ]; then
+    EXEC="yes"
+else
+    EXEC="no"
+fi
+
+# Function that outputs Docky is not running...
+function docky_is_not_running {
+    echo -e "${WHITE}Docky are not running.${NC}" >&2
+    echo "" >&2
+    echo -e "${WHITE}You may Docky using the following commands:${NC} './docky up' or './docky up -d'" >&2
+
+    exit 1
+}
+
+if [ $# -gt 0 ]; then
+    # Source the ".env" file so environment variables are available...
+    if [ -f ./.env ]; then
+        source ./.env
+    fi
+
+    # Proxy PHP commands to the "php" binary on the application container...
+    if [ "$1" == "php" ]; then
+        shift 1
+
+        if [ "$EXEC" == "yes" ]; then
+            docker-compose exec \
+                -u $CONTAINER_USER_NAME  \
+                "$CONTAINER_APP_NAME" \
+                php "$@"
+        else
+            docky_is_not_running
+        fi
+
+    # Proxy Composer commands to the "composer" binary on the application container...
+    elif [ "$1" == "composer" ]; then
+        shift 1
+
+        if [ "$EXEC" == "yes" ]; then
+            docker-compose exec \
+                -u $CONTAINER_USER_NAME  \
+                "$CONTAINER_APP_NAME" \
+                composer "$@"
+        else
+            docky_is_not_running
+        fi
+
+    # Proxy Artisan commands to the "artisan" binary on the application container...
+    elif [ "$1" == "artisan" ] || [ "$1" == "art" ]; then
+        shift 1
+
+        if [ "$EXEC" == "yes" ]; then
+            docker-compose exec \
+                -u $CONTAINER_USER_NAME  \
+                "$CONTAINER_APP_NAME" \
+                php artisan "$@"
+        else
+            docky_is_not_running
+        fi
+
+    # Proxy Symfony commands to the "bin/console" binary on the application container...
+    elif [ "$1" == "symfony" ] || [ "$1" == "symf" ]; then
+        shift 1
+
+        if [ "$EXEC" == "yes" ]; then
+            docker-compose exec \
+                -u $CONTAINER_USER_NAME  \
+                "$CONTAINER_APP_NAME" \
+                php bin/console "$@"
+        else
+            docky_is_not_running
+        fi
+
+    # Proxy Node commands to the "node" binary on the application container...
+    elif [ "$1" == "node" ]; then
+        shift 1
+
+        if [ "$EXEC" == "yes" ]; then
+            docker-compose exec \
+                -u $CONTAINER_USER_NAME  \
+                "$CONTAINER_APP_NAME" \
+                node "$@"
+        else
+            docky_is_not_running
+        fi
+
+    # Proxy NPM commands to the "npm" binary on the application container...
+    elif [ "$1" == "npm" ]; then
+        shift 1
+
+        if [ "$EXEC" == "yes" ]; then
+            docker-compose exec \
+                -u $CONTAINER_USER_NAME  \
+                "$CONTAINER_APP_NAME" \
+                npm "$@"
+        else
+            docky_is_not_running
+        fi
+
+    # Proxy NPX commands to the "npx" binary on the application container...
+    elif [ "$1" == "npx" ]; then
+        shift 1
+
+        if [ "$EXEC" == "yes" ]; then
+            docker-compose exec \
+                -u $CONTAINER_USER_NAME  \
+                "$CONTAINER_APP_NAME" \
+                npx "$@"
+        else
+            docky_is_not_running
+        fi
+
+    # Proxy YARN commands to the "yarn" binary on the application container...
+    elif [ "$1" == "yarn" ]; then
+        shift 1
+
+        if [ "$EXEC" == "yes" ]; then
+            docker-compose exec \
+                -u $CONTAINER_USER_NAME \
+                "$CONTAINER_APP_NAME" \
+                yarn "$@"
+        else
+            docky_is_not_running
+        fi
+
+    # Initiate a MySQL CLI terminal session within the "mysql" container...
+    elif [ "$1" == "mysql" ]; then
+        shift 1
+
+        if [ "$EXEC" == "yes" ]; then
+            docker-compose exec \
+                mysql \
+                bash -c 'MYSQL_PWD=${MYSQL_PASSWORD} mysql -u ${MYSQL_USER} ${MYSQL_DATABASE}'
+        else
+            docky_is_not_running
+        fi
+
+    # Initiate a PostgreSQL CLI terminal session within the "pgsql" container...
+    elif [ "$1" == "psql" ]; then
+        shift 1
+
+        if [ "$EXEC" == "yes" ]; then
+            docker-compose exec \
+                 pgsql \
+                 bash -c 'PGPASSWORD=${PGPASSWORD} psql -U ${POSTGRES_USER} ${POSTGRES_DB}'
+        else
+            docky_is_not_running
+        fi
+
+    # Initiate a Bash shell within the application container...
+    elif [ "$1" == "shell" ] || [ "$1" == "bash" ] || [ "$1" == "sh" ]; then
+        shift 1
+
+        if [ "$EXEC" == "yes" ]; then
+            docker-compose exec \
+                -u $CONTAINER_USER_NAME  \
+                "$CONTAINER_APP_NAME" \
+                sh
+        else
+            docky_is_not_running
+        fi
+
+    # Initiate a root user Bash shell within the application container...
+    elif [ "$1" == "root-shell" ] ; then
+        shift 1
+
+        if [ "$EXEC" == "yes" ]; then
+            docker-compose exec \
+                "$CONTAINER_APP_NAME" \
+                bash
+        else
+            docky_is_not_running
+        fi
+
+    # Pass unknown commands to the "docker-compose" binary...
+    else
+        docker-compose "$@"
+    fi
+else
+    docker-compose ps
+fi

@@ -1,0 +1,10 @@
+date.timezone = 'UTC'
+memory_limit=512M
+opcache.enable=1
+opcache.revalidate_freq=0
+opcache.max_accelerated_files = 20000
+opcache.memory_consumption=192
+opcache.interned_strings_buffer=16
+opcache.fast_shutdown=1
+realpath_cache_size=4096K
+realpath_cache_ttl=600
