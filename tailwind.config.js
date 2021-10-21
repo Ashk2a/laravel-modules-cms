@@ -6,12 +6,16 @@ module.exports = {
     purge: [
         './resources/**/*.blade.php',
         './src/**/*.{js,jsx,ts,tsx,vue}',
+        './vendor/usernotnull/tall-toasts/config/**/*.php',
+        './vendor/usernotnull/tall-toasts/resources/views/**/*.blade.php',
     ],
     theme: {
         extend: {
             colors: {
-                gray: colors.blueGray,
-            },
+                primary: colors.indigo,
+                secondary: colors.yellow,
+                neutral: colors.blueGray
+            }
         }
     },
     plugins: [
