@@ -1,7 +1,7 @@
 @extends('layouts.default')
 
-@section('content')
+@section('body')
     <x-container.boxed>
-        <h1>Home</h1>
+        <h1>Register</h1>
     </x-container.boxed>
 @endsection
