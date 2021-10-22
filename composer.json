@@ -14,7 +14,8 @@
         "livewire/livewire": "^2.6",
         "spatie/laravel-permission": "^5.1",
         "usernotnull/tall-toasts": "^1.0",
-        "ext-pdo": "*"
+        "ext-pdo": "*",
+        "ext-gmp": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",

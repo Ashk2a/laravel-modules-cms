@@ -2,8 +2,9 @@
 
 namespace App\Providers;
 
+use App\Contracts\Hashing\WotlkHasher;
 use App\Models\DbConnection;
-use Illuminate\Support\Arr;
+use App\Security\Hashing\AzerothHash;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 
@@ -14,6 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        $this->registerWotlkHasher();
     }
 
     /**
@@ -24,6 +26,17 @@ class AppServiceProvider extends ServiceProvider
         $this->addDbConnectionsToConfig();
     }
 
+    /**
+     * @retur void
+     */
+    private function registerWotlkHasher(): void
+    {
+        $this->app->singleton(WotlkHasher::class, fn () => new AzerothHash());
+    }
+
+    /**
+     * @return void
+     */
     private function addDbConnectionsToConfig(): void
     {
         $connections = DbConnection::all();
