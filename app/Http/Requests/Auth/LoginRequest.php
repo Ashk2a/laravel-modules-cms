@@ -28,6 +28,9 @@ class LoginRequest extends BaseFormRequest
             ],
             'password' => [
                 'required'
+            ],
+            'remember_me' => [
+                'boolean'
             ]
         ];
     }

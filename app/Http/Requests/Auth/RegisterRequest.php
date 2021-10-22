@@ -25,7 +25,7 @@ class RegisterRequest extends BaseFormRequest
                 'required',
                 'min:4',
                 'max:24',
-                'unique:account,username'
+                'unique:auth.account,username'
             ],
             'nickname' => [
                 'required',

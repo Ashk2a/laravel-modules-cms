@@ -26,12 +26,10 @@ class Account extends Model
         'email',
         'reg_email',
         'salt',
-        'session_key',
         'verifier',
-        'totp_secret'
     ];
 
-    protected function user(): BelongsTo
+    public function user(): BelongsTo
     {
         return $this->setConnection('website')->belongsTo(User::class);
     }

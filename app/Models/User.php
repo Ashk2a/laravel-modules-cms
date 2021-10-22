@@ -35,7 +35,7 @@ class User extends Authenticatable
     /**
      * @return HasOne
      */
-    protected function account(): HasOne
+    public function account(): HasOne
     {
         return $this->setConnection('auth')->hasOne(Account::class);
     }
