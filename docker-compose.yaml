@@ -22,7 +22,7 @@ services:
         networks:
             - default
             - traefik_proxy
-            - wotlkcore_ac-network
+            - ac-network
         depends_on:
             - mariadb
 
@@ -62,7 +62,8 @@ networks:
     default:
         driver: bridge
         name: ${CONTAINER_BASE_NAME}
-    wotlkcore_ac-network:
+    ac-network:
+        name: ${DB_AUTH_DOCKER_NETWORK}
         external: true
     traefik_proxy:
         external: true
