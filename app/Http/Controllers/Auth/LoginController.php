@@ -31,20 +31,24 @@ class LoginController extends BaseController
         $attempt = Auth::attempt($request->only(['email', 'password']), $rememberMe);
 
         if (false === $attempt) {
-            toast()->danger(
-                trans('toast.danger.wrong_credentials'),
-                trans('toast.title.authentication_failed')
-            );
+            toast()
+                ->danger(
+                    trans('toast.danger.wrong_credentials'),
+                    trans('toast.title.authentication_failed')
+                )
+                ->push();
 
             return redirect()->route('auth.login');
         }
 
         $user = Auth::user();
 
-        toast()->info(
-            trans('toast.info.welcome_back', ['nickname' => $user->nickname]),
-            trans('toast.title.authenticated')
-        );
+        toast()
+            ->info(
+                trans('toast.info.welcome_back', ['nickname' => $user?->nickname]),
+                trans('toast.title.authenticated')
+            )
+            ->push();
 
         return redirect()->route('home');
     }

@@ -57,10 +57,12 @@ class RegisterController extends BaseController
 
         // TODO: send event to trigger email
 
-        toast()->success(
-            trans('toast.success.verification_email_sent', ['email' => $email]),
-            trans('toast.title.registration_succeed')
-        );
+        toast()
+            ->success(
+                trans('toast.success.verification_email_sent', ['email' => $email]),
+                trans('toast.title.registration_succeed')
+            )
+            ->push();
 
         return redirect()->route('auth.login');
     }
