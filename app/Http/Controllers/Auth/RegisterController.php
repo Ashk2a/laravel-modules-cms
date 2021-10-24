@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Abstractions\Http\Controllers\BaseController;
 use App\Contracts\Hashing\WotlkHasher;
 use App\Http\Requests\Auth\RegisterRequest;
+use App\Models\Auth\Account;
 use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -33,27 +34,30 @@ class RegisterController extends BaseController
         $email = Str::lower($request->get('email'));
         $username = Str::upper($request->get('username'));
 
+        [$salt, $verifier] = $wotlkHasher->make($username, $request->get('password'));
+
+        $account = new Account();
+
+        $account
+            ->fill([
+                'username' => $username,
+                'email' => $email,
+                'reg_mail' => $email,
+                'salt' => $salt,
+                'verifier' => $verifier
+            ])
+            ->save();
+
         $user = new User();
 
         $user
             ->fill([
+                'account_id' => $account->id,
                 'nickname' => $request->get('nickname'),
                 'email' => $email,
                 'password' => Hash::make($request->get('password'))
             ])
             ->save();
-
-        [$salt, $verifier] = $wotlkHasher->make($username, $request->get('password'));
-
-        $user
-            ->account()
-            ->create([
-                'username' => $username,
-                'email' => $email,
-                'reg_email' => $email,
-                'salt' => $salt,
-                'verifier' => $verifier
-            ]);
 
         // TODO: send event to trigger email
 

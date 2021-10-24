@@ -11,10 +11,10 @@ use PDO;
 
 class DbConnection extends Model
 {
+    use HasFactory;
+
     const TYPE_WORLD = 1;
     const TYPE_CHARACTERS = 2;
-
-    use HasFactory;
 
     /**
      * @var array

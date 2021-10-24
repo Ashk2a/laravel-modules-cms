@@ -8,10 +8,24 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Realmlist extends Model
 {
+    /**
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
+     * @var string
+     */
     protected $connection = 'auth';
 
+    /**
+     * @var string
+     */
     protected $table = 'realmlist';
 
+    /**
+     * @var string[]
+     */
     protected $fillable = [
         'name',
         'address',
@@ -24,6 +38,9 @@ class Realmlist extends Model
         'allowedSecurityLevel'
     ];
 
+    /**
+     * @return BelongsTo
+     */
     public function server(): BelongsTo
     {
         return $this->setConnection('website')->belongsTo(Server::class);

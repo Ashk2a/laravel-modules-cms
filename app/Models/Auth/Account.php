@@ -9,6 +9,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Account extends Model
 {
     /**
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
      * @var string
      */
     protected $connection = 'auth';
@@ -24,11 +29,14 @@ class Account extends Model
     protected $fillable = [
         'username',
         'email',
-        'reg_email',
+        'reg_mail',
         'salt',
         'verifier',
     ];
 
+    /**
+     * @return BelongsTo
+     */
     public function user(): BelongsTo
     {
         return $this->setConnection('website')->belongsTo(User::class);

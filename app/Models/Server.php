@@ -11,6 +11,9 @@ class Server extends Model
 {
     use HasFactory;
 
+    /**
+     * @var string[]
+     */
     protected $fillable = [
         'realmlist_id',
         'world_db_connection_id',

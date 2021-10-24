@@ -50,6 +50,7 @@ RUN install-php-extensions \
     zip \
     swoole \
     pcntl \
+    gmp \
     xdebug \
     @composer
 
