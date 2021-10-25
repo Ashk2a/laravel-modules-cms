@@ -2,12 +2,37 @@
 
 namespace App\Models;
 
+use Database\Factories\DbConnectionFactory;
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Crypt;
 
+/**
+ * App\Models\DbConnection
+ *
+ * @property int $id
+ * @property string $name
+ * @property bool $type
+ * @property string $host
+ * @property int $port
+ * @property string $database
+ * @property string $prefix
+ * @property string $username
+ * @property string $password
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Server|null $server
+ * @method static DbConnectionFactory factory(...$parameters)
+ * @method static Builder|DbConnection newModelQuery()
+ * @method static Builder|DbConnection newQuery()
+ * @method static Builder|DbConnection query()
+ * @mixin Eloquent
+ */
 class DbConnection extends Model
 {
     use HasFactory;
