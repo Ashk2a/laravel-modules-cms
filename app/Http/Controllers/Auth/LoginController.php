@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Abstractions\Http\Controllers\BaseController;
-use App\Contracts\Services\AuthService;
+use App\Exceptions\Auth\UserNotActivatedException;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Services\AuthService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -27,29 +28,34 @@ class LoginController extends BaseController
      */
     public function post(LoginRequest $request, AuthService $authService): RedirectResponse
     {
-        $user = $authService->login(
-            $request->get('email'),
-            $request->get('password'),
-            $request->get('remember_me', false)
-        );
-
-        if (null === $user) {
-            toast()
-                ->danger(
-                    trans('toast.danger.wrong_credentials'),
-                    trans('toast.title.authentication_failed')
-                )
-                ->push();
+        try {
+            $user = $authService->login(
+                $request->get('email'),
+                $request->get('password'),
+                $request->get('remember_me', false)
+            );
+        } catch (UserNotActivatedException) {
+            $this->flashDanger(
+                trans('toast.warning.not_activated_user'),
+                trans('toast.title.authentication_failed')
+            );
 
             return redirect()->route('auth.login');
         }
 
-        toast()
-            ->info(
-                trans('toast.info.welcome_back', ['nickname' => $user->nickname]),
-                trans('toast.title.authenticated')
-            )
-            ->push();
+        if (null === $user) {
+            $this->flashDanger(
+                trans('toast.danger.wrong_credentials'),
+                trans('toast.title.authentication_failed')
+            );
+
+            return redirect()->route('auth.login');
+        }
+
+        $this->flashInfo(
+            trans('toast.info.welcome_back', ['nickname' => $user->nickname]),
+            trans('toast.title.authenticated')
+        );
 
         return redirect()->route('home');
     }

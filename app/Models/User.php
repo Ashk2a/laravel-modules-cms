@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\DatabaseNotificationCollection;
@@ -65,10 +66,26 @@ class User extends Authenticatable
     ];
 
     /**
+     * @return bool
+     */
+    public function isActivated(): bool
+    {
+        return $this->activations->where('completed', true)->first();
+    }
+
+    /**
      * @return BelongsTo
      */
     public function account(): BelongsTo
     {
         return $this->belongsTo(Account::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function activations(): HasMany
+    {
+        return $this->hasMany(Activation::class);
     }
 }

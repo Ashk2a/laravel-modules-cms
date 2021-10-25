@@ -3,7 +3,7 @@
 namespace App\Console\Commands\User;
 
 use App\Abstractions\Console\Commands\BaseCommand;
-use App\Contracts\Services\AuthService;
+use App\Services\AuthService;
 use App\Http\Requests\Auth\RegisterRequest;
 use Illuminate\Support\Facades\Validator;
 

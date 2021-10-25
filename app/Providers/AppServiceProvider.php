@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use App\Contracts\Hashing\WotlkHasher;
-use App\Contracts\Services\AuthService as AuthServiceContract;
 use App\Models\DbConnection;
 use App\Security\Hashing\AzerothHash;
 use App\Services\AuthService;
@@ -43,7 +42,7 @@ class AppServiceProvider extends ServiceProvider
      */
     private function registerServices(): void
     {
-        $this->app->singleton(AuthServiceContract::class, fn() => new AuthService());
+        $this->app->singleton(AuthService::class, fn() => new AuthService());
     }
 
     /**
