@@ -68,13 +68,13 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Activation
+    | User verification
     |--------------------------------------------------------------------------
-    | Management of user activation.
+    | Management of user verification.
     */
 
-    'activation' => [
-        'auto_completed' => false,
+    'verification' => [
+        'auto' => false,
         'expires' => 259200
     ],
 ];

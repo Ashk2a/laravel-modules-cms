@@ -4,7 +4,7 @@ namespace App\Exceptions\Auth;
 
 use App\Abstractions\Exceptions\BaseException;
 
-class UserNotActivatedException extends BaseException
+class UserNotVerifiedException extends BaseException
 {
 
 }

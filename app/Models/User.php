@@ -31,6 +31,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property-read Account $account
+ * @property-read Collection|Verification[] $verifications
  * @property-read DatabaseNotificationCollection|DatabaseNotification[] $notifications
  * @property-read Collection|Permission[] $permissions
  * @property-read Collection|Role[] $roles
@@ -68,9 +69,9 @@ class User extends Authenticatable
     /**
      * @return bool
      */
-    public function isActivated(): bool
+    public function isVerified(): bool
     {
-        return $this->activations->where('completed', true)->first();
+        return $this->verifications->where('verified', true)->first();
     }
 
     /**
@@ -84,8 +85,8 @@ class User extends Authenticatable
     /**
      * @return HasMany
      */
-    public function activations(): HasMany
+    public function verifications(): HasMany
     {
-        return $this->hasMany(Activation::class);
+        return $this->hasMany(Verification::class);
     }
 }

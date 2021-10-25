@@ -3,10 +3,10 @@
 namespace App\Services;
 
 use App\Contracts\Hashing\WotlkHasher;
-use App\Exceptions\Auth\UserAlreadyActivatedException;
-use App\Exceptions\Auth\UserBadActivationException;
-use App\Exceptions\Auth\UserNotActivatedException;
-use App\Models\Activation;
+use App\Exceptions\Auth\UserAlreadyVerifiedException;
+use App\Exceptions\Auth\UserWrongVerificationException;
+use App\Exceptions\Auth\UserNotVerifiedException;
+use App\Models\Verification;
 use App\Models\Auth\Account;
 use App\Models\User;
 use Illuminate\Contracts\Container\BindingResolutionException;
@@ -22,9 +22,10 @@ class AuthService
      * @param string $nickname
      * @param string $email
      * @param string $password
+     * @param bool|null $verify
      * @return User|null
      */
-    public function register(string $username, string $nickname, string $email, string $password): ?User
+    public function register(string $username, string $nickname, string $email, string $password, ?bool $verify = null): ?User
     {
         $wotlkHasher = app(WotlkHasher::class);
 
@@ -58,21 +59,21 @@ class AuthService
             ])
             ->save();
 
-        $activation = new Activation();
-        $activation->user()->associate($user);
-        $activation->save();
+        $verification = new Verification();
+        $verification->user()->associate($user);
+        $verification->save();
 
-        $complete = Config::get('auth.activation.auto_completed');
+        $verify = $verify ?? Config::get('auth.verification.auto');
 
-        if ($complete) {
+        if ($verify) {
             try {
-                $this->complete($user, $activation->token);
-            } catch (UserAlreadyActivatedException | UserBadActivationException) {
+                $this->verify($user, $verification->token);
+            } catch (UserAlreadyVerifiedException | UserWrongVerificationException) {
                 // Cannot happen in this case
             }
         }
 
-        // TODO: emit event with user and activation as parameters to send a potential notification (mail, discord)
+        // TODO: emit event with user and verification as parameters to send a potential notification (mail, discord)
 
         return $user;
     }
@@ -82,7 +83,7 @@ class AuthService
      * @param string $password
      * @param bool $rememberMe
      * @return User|null
-     * @throws UserNotActivatedException
+     * @throws UserNotVerifiedException
      */
     public function login(string $email, string $password, bool $rememberMe = false): ?User
     {
@@ -92,8 +93,8 @@ class AuthService
 
         $user = User::where('email', $email)->firstOrFail();
 
-        if (false === $user->isActivated()) {
-            throw new UserNotActivatedException();
+        if (false === $user->isVerified()) {
+            throw new UserNotVerifiedException();
         }
 
         Auth::login($user, $rememberMe);
@@ -120,22 +121,22 @@ class AuthService
     /**
      * @param User $user
      * @param string $token
-     * @throws UserAlreadyActivatedException
-     * @throws UserBadActivationException
+     * @throws UserAlreadyVerifiedException
+     * @throws UserWrongVerificationException
      */
-    public function complete(User $user, string $token): void
+    public function verify(User $user, string $token): void
     {
-        $activation = $user->activations->where('token', $token)->first();
+        $verification = $user->verifications->where('token', $token)->first();
 
-        if (null === $activation) {
-            throw new UserBadActivationException();
+        if (null === $verification) {
+            throw new UserWrongVerificationException();
         }
 
-        if ($activation->completed) {
-            throw new UserAlreadyActivatedException();
+        if ($verification->completed) {
+            throw new UserAlreadyVerifiedException();
         }
 
-        $activation->update([
+        $verification->update([
             'completed' => true
         ]);
     }
@@ -147,7 +148,7 @@ class AuthService
     public function forgotPassword(string $email): ?User {
         $user = User::where('email', $email)->first();
 
-        if (null == $user) {
+        if (null === $user) {
             return null;
         }
 

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Abstractions\Http\Controllers\BaseController;
-use App\Exceptions\Auth\UserNotActivatedException;
+use App\Exceptions\Auth\UserNotVerifiedException;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Services\AuthService;
 use Illuminate\Contracts\Foundation\Application;
@@ -34,9 +34,9 @@ class LoginController extends BaseController
                 $request->get('password'),
                 $request->get('remember_me', false)
             );
-        } catch (UserNotActivatedException) {
+        } catch (UserNotVerifiedException) {
             $this->flashDanger(
-                trans('toast.warning.not_activated_user'),
+                trans('toast.warning.user_not_verified'),
                 trans('toast.title.authentication_failed')
             );
 

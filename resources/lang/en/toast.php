@@ -14,7 +14,7 @@ return [
         'welcome_back' => 'Welcome back :nickname !'
     ],
     'warning' => [
-        'not_activated_user' => 'Your account is not activated.',
+        'user_not_verified' => 'Your account is not verified.',
     ],
     'danger' => [
         'wrong_credentials' => 'Wrong credentials. Take your time and try again !',

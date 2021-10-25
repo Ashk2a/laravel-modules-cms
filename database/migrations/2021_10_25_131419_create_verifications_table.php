@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateActivationsTable extends Migration
+class CreateVerificationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateActivationsTable extends Migration
      */
     public function up(): void
     {
-        Schema::create('activations', function (Blueprint $table) {
+        Schema::create('verifications', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users');
             $table->string('token', 32)->unique();
@@ -30,6 +30,6 @@ class CreateActivationsTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('activations');
+        Schema::dropIfExists('verifications');
     }
 }
