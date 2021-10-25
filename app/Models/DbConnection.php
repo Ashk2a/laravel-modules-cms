@@ -61,14 +61,16 @@ class DbConnection extends Model
      */
     public function format(): array
     {
-        return array_merge(Config::get('database.connections.auth', [
+        $format = [
             'host' => $this->host,
             'port' => $this->port,
             'database' => $this->database,
             'username' => $this->username,
             'password' => Crypt::decryptString($this->password),
             'prefix' => $this->prefix,
-        ]));
+        ];
+
+        return array_merge(Config::get('database.connections.auth'), $format);
     }
 
     /**

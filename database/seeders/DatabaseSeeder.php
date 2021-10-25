@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
             'port' => Config::get('database.connections.auth.port'),
             'username' => Config::get('database.connections.auth.username'),
             'password' => Crypt::encryptString(
-                Config::get('database.connections.auth.username')
+                Config::get('database.connections.auth.password')
             )
         ];
     }
