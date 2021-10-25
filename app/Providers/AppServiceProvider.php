@@ -3,8 +3,10 @@
 namespace App\Providers;
 
 use App\Contracts\Hashing\WotlkHasher;
+use App\Contracts\Services\User\UserRegisterService as UserRegisterServiceContract;
 use App\Models\DbConnection;
 use App\Security\Hashing\AzerothHash;
+use App\Services\User\UserRegisterService;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
@@ -17,6 +19,7 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->registerWotlkHasher();
+        $this->registerServices();
     }
 
     /**
@@ -32,7 +35,15 @@ class AppServiceProvider extends ServiceProvider
      */
     private function registerWotlkHasher(): void
     {
-        $this->app->singleton(WotlkHasher::class, fn () => new AzerothHash());
+        $this->app->singleton(WotlkHasher::class, fn() => new AzerothHash());
+    }
+
+    /**
+     * @return void
+     */
+    private function registerServices(): void
+    {
+        $this->app->singleton(UserRegisterServiceContract::class, fn() => new UserRegisterService());
     }
 
     /**

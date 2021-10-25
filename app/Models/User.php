@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Models\Auth\Account;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
@@ -33,10 +33,10 @@ class User extends Authenticatable
     ];
 
     /**
-     * @return HasOne
+     * @return BelongsTo
      */
-    public function account(): HasOne
+    public function account(): BelongsTo
     {
-        return $this->setConnection('auth')->hasOne(Account::class);
+        return $this->belongsTo(Account::class);
     }
 }

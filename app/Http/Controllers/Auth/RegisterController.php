@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Abstractions\Http\Controllers\BaseController;
 use App\Contracts\Hashing\WotlkHasher;
+use App\Contracts\Services\User\UserRegisterService;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\Auth\Account;
 use App\Models\User;
@@ -29,41 +30,32 @@ class RegisterController extends BaseController
      * @param WotlkHasher $wotlkHasher
      * @return RedirectResponse
      */
-    public function post(RegisterRequest $request, WotlkHasher $wotlkHasher): RedirectResponse
+    public function post(RegisterRequest $request, UserRegisterService $userRegisterService): RedirectResponse
     {
-        $email = Str::lower($request->get('email'));
-        $username = Str::upper($request->get('username'));
+        $user = $userRegisterService->register(
+            $request->get('username'),
+            $request->get('nickname'),
+            $request->get('email'),
+            $request->get('password')
+        );
 
-        [$salt, $verifier] = $wotlkHasher->make($username, $request->get('password'));
+        // Internal error server
+        if (null === $user) {
+            toast()
+                ->danger(
+                    trans('toast.danger.cannot_create_account'),
+                    trans('toast.title.registration_failed')
+                )
+                ->push();
 
-        $account = new Account();
-
-        $account
-            ->fill([
-                'username' => $username,
-                'email' => $email,
-                'reg_mail' => $email,
-                'salt' => $salt,
-                'verifier' => $verifier
-            ])
-            ->save();
-
-        $user = new User();
-
-        $user
-            ->fill([
-                'account_id' => $account->id,
-                'nickname' => $request->get('nickname'),
-                'email' => $email,
-                'password' => Hash::make($request->get('password'))
-            ])
-            ->save();
+            return redirect()->route('auth.register');
+        }
 
         // TODO: send event to trigger email
 
         toast()
             ->success(
-                trans('toast.success.verification_email_sent', ['email' => $email]),
+                trans('toast.success.verification_email_sent', ['email' => $user->email]),
                 trans('toast.title.registration_succeed')
             )
             ->push();
