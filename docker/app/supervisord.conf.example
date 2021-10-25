@@ -3,7 +3,8 @@ nodaemon=true
 user=root
 
 [program:php]
-command=/usr/local/bin/php -d variables_order=EGPCS /var/www/app/artisan octane:start --server=swoole --host=0.0.0.0 --port=80
+#command=/usr/local/bin/php -d variables_order=EGPCS /var/www/app/artisan octane:start --server=swoole --host=0.0.0.0 --port=80 --watch
+command=/usr/local/bin/php -d variables_order=EGPCS /var/www/app/artisan serve --host=0.0.0.0 --port=80
 user=www-data
 stdout_logfile=/dev/stdout
 stdout_logfile_maxbytes=0
