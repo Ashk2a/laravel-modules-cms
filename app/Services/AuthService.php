@@ -4,11 +4,11 @@ namespace App\Services;
 
 use App\Contracts\Hashing\WotlkHasher;
 use App\Exceptions\Auth\UserAlreadyVerifiedException;
-use App\Exceptions\Auth\UserWrongVerificationException;
 use App\Exceptions\Auth\UserNotVerifiedException;
-use App\Models\Verification;
 use App\Models\Auth\Account;
+use App\Models\Reminder;
 use App\Models\User;
+use App\Models\Verification;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
@@ -67,8 +67,8 @@ class AuthService
 
         if ($verify) {
             try {
-                $this->verify($user, $verification->token);
-            } catch (UserAlreadyVerifiedException | UserWrongVerificationException) {
+                $this->verify($verification);
+            } catch (UserAlreadyVerifiedException) {
                 // Cannot happen in this case
             }
         }
@@ -119,41 +119,31 @@ class AuthService
     }
 
     /**
-     * @param User $user
-     * @param string $token
+     * @param Verification $verification
      * @throws UserAlreadyVerifiedException
-     * @throws UserWrongVerificationException
      */
-    public function verify(User $user, string $token): void
+    public function verify(Verification $verification): void
     {
-        $verification = $user->verifications->where('token', $token)->first();
+        $user = $verification->user;
 
-        if (null === $verification) {
-            throw new UserWrongVerificationException();
-        }
-
-        if ($verification->completed) {
+        if ($user->isVerified()) {
             throw new UserAlreadyVerifiedException();
         }
 
         $verification->update([
             'completed' => true
         ]);
+
+        $user->verifications()->where('completed', false)->delete();
     }
 
     /**
-     * @param string $email
-     * @return User|null
+     * @param Reminder $reminder
+     * @param string $newPassword
+     * @return void
      */
-    public function forgotPassword(string $email): ?User {
-        $user = User::where('email', $email)->first();
+    public function reset(Reminder $reminder, string $newPassword): void
+    {
 
-        if (null === $user) {
-            return null;
-        }
-
-        // TODO: reminder
-
-        return $user;
     }
 }
