@@ -3,10 +3,10 @@
 namespace App\Providers;
 
 use App\Contracts\Hashing\WotlkHasher;
-use App\Contracts\Services\User\UserRegisterService as UserRegisterServiceContract;
+use App\Contracts\Services\AuthService as AuthServiceContract;
 use App\Models\DbConnection;
 use App\Security\Hashing\AzerothHash;
-use App\Services\User\UserRegisterService;
+use App\Services\AuthService;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
@@ -43,7 +43,7 @@ class AppServiceProvider extends ServiceProvider
      */
     private function registerServices(): void
     {
-        $this->app->singleton(UserRegisterServiceContract::class, fn() => new UserRegisterService());
+        $this->app->singleton(AuthServiceContract::class, fn() => new AuthService());
     }
 
     /**

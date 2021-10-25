@@ -3,7 +3,7 @@
 namespace App\Console\Commands\User;
 
 use App\Abstractions\Console\Commands\BaseCommand;
-use App\Contracts\Services\User\UserRegisterService;
+use App\Contracts\Services\AuthService;
 use App\Http\Requests\Auth\RegisterRequest;
 use Illuminate\Support\Facades\Validator;
 
@@ -26,10 +26,10 @@ class UserCreate extends BaseCommand
     /**
      * Execute the console command.
      *
-     * @param UserRegisterService $userRegisterService
+     * @param AuthService $authService
      * @return int
      */
-    public function handle(UserRegisterService $userRegisterService): int
+    public function handle(AuthService $authService): int
     {
         $rules = (new RegisterRequest())->rules();
         $rules = collect($rules)->except(['password_confirmation'])->all();
@@ -49,7 +49,7 @@ class UserCreate extends BaseCommand
             return self::FAILURE;
         }
 
-        $user = $userRegisterService->register(
+        $user = $authService->register(
             $data['username'],
             $data['nickname'],
             $data['email'],

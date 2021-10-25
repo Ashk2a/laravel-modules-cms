@@ -1,23 +1,20 @@
 <?php
 
-namespace App\Services\User;
+namespace App\Services;
 
 use App\Contracts\Hashing\WotlkHasher;
 use App\Models\Auth\Account;
 use App\Models\User;
-use App\Contracts\Services\User\UserRegisterService as RegisterServiceContract;
+use App\Contracts\Services\AuthService as AuthServiceContract;
 use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
-class UserRegisterService implements RegisterServiceContract
+class AuthService implements AuthServiceContract
 {
     /**
-     * @param string $username
-     * @param string $nickname
-     * @param string $email
-     * @param string $password
-     * @return User|null
+     * @inerhitDoc
      */
     public function register(string $username, string $nickname, string $email, string $password): ?User {
         $wotlkHasher = app(WotlkHasher::class);
@@ -56,5 +53,19 @@ class UserRegisterService implements RegisterServiceContract
             ->save();
 
         return $user;
+    }
+
+    /**
+     * @inerhitDoc
+     */
+    public function login(string $email, string $password, bool $rememberMe = false): ?User
+    {
+        $attempt = Auth::attempt([$email, $password], $rememberMe);
+
+        if (false === $attempt) {
+            return null;
+        }
+
+        return Auth::user();
     }
 }

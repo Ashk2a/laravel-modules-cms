@@ -3,17 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Abstractions\Http\Controllers\BaseController;
-use App\Contracts\Hashing\WotlkHasher;
-use App\Contracts\Services\User\UserRegisterService;
+use App\Contracts\Services\AuthService;
 use App\Http\Requests\Auth\RegisterRequest;
-use App\Models\Auth\Account;
-use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 class RegisterController extends BaseController
 {
@@ -27,12 +22,12 @@ class RegisterController extends BaseController
 
     /**
      * @param RegisterRequest $request
-     * @param WotlkHasher $wotlkHasher
+     * @param AuthService $registrationService
      * @return RedirectResponse
      */
-    public function post(RegisterRequest $request, UserRegisterService $userRegisterService): RedirectResponse
+    public function post(RegisterRequest $request, AuthService $registrationService): RedirectResponse
     {
-        $user = $userRegisterService->register(
+        $user = $registrationService->register(
             $request->get('username'),
             $request->get('nickname'),
             $request->get('email'),
