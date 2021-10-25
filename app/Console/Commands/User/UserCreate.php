@@ -5,7 +5,6 @@ namespace App\Console\Commands\User;
 use App\Abstractions\Console\Commands\BaseCommand;
 use App\Contracts\Services\User\UserRegisterService;
 use App\Http\Requests\Auth\RegisterRequest;
-use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 
 class UserCreate extends BaseCommand
@@ -27,6 +26,7 @@ class UserCreate extends BaseCommand
     /**
      * Execute the console command.
      *
+     * @param UserRegisterService $userRegisterService
      * @return int
      */
     public function handle(UserRegisterService $userRegisterService): int

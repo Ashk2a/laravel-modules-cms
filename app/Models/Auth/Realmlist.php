@@ -5,6 +5,7 @@ namespace App\Models\Auth;
 use App\Models\Server;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Realmlist extends Model
 {
@@ -39,10 +40,10 @@ class Realmlist extends Model
     ];
 
     /**
-     * @return BelongsTo
+     * @return HasOne
      */
-    public function server(): BelongsTo
+    public function server(): HasOne
     {
-        return $this->belongsTo(Server::class);
+        return $this->HasOne(Server::class);
     }
 }

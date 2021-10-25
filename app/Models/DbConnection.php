@@ -4,10 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Crypt;
-use PDO;
 
 class DbConnection extends Model
 {
@@ -48,14 +47,14 @@ class DbConnection extends Model
     }
 
     /**
-     * @return BelongsTo
+     * @return HasOne
      */
-    public function server(): BelongsTo
+    public function server(): HasOne
     {
         $foreignKey = (self::TYPE_WORLD === $this->type)
             ? 'world_db_connection_id'
             : 'characters_db_connection_id';
 
-        return $this->belongsTo(Server::class, $foreignKey);
+        return $this->HasOne(Server::class, $foreignKey);
     }
 }

@@ -5,7 +5,7 @@ namespace App\Models;
 use App\Models\Auth\Realmlist;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Server extends Model
 {
@@ -21,26 +21,26 @@ class Server extends Model
     ];
 
     /**
-     * @return HasOne
+     * @return BelongsTo
      */
-    public function realmlist(): HasOne
+    public function realmlist(): BelongsTo
     {
-        return $this->hasOne(Realmlist::class);
+        return $this->BelongsTo(Realmlist::class);
     }
 
     /**
-     * @return HasOne
+     * @return BelongsTo
      */
-    public function worldDbConnection(): HasOne
+    public function worldDbConnection(): BelongsTo
     {
-        return $this->hasOne(DbConnection::class, 'world_db_connection_id', 'id');
+        return $this->BelongsTo(DbConnection::class, 'world_db_connection_id', 'id');
     }
 
     /**
-     * @return HasOne
+     * @return BelongsTo
      */
-    public function charactersDbConnection(): HasOne
+    public function charactersDbConnection(): BelongsTo
     {
-        return $this->hasOne(DbConnection::class, 'characters_db_connection_id', 'id');
+        return $this->BelongsTo(DbConnection::class, 'characters_db_connection_id', 'id');
     }
 }
