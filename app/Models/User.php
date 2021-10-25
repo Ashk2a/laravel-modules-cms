@@ -71,7 +71,7 @@ class User extends Authenticatable
      */
     public function isVerified(): bool
     {
-        return $this->verifications->where('verified', true)->first();
+        return $this->verifications->where('completed', true)->first() !== null;
     }
 
     /**

@@ -37,7 +37,8 @@ class RegisterRequest extends BaseFormRequest
                 'required',
                 'email',
                 'max:191',
-                'unique:users,email'
+                'unique:users,email',
+                'unique:auth.account,email'
             ],
             'password' => [
                 'required',

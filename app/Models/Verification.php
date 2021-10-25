@@ -33,7 +33,7 @@ class Verification extends Model
      */
     protected $fillable = [
         'token',
-        'verified',
+        'completed',
         'expires_at'
     ];
 
@@ -41,7 +41,7 @@ class Verification extends Model
      * @var string[]
      */
     protected $casts = [
-        'verified' => 'bool'
+        'completed' => 'bool'
     ];
 
     /**

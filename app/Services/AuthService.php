@@ -63,7 +63,7 @@ class AuthService
         $verification->user()->associate($user);
         $verification->save();
 
-        $verify = $verify ?? Config::get('auth.verification.auto');
+        $verify = $verify ?? (bool)Config::get('auth.verification.auto');
 
         if ($verify) {
             try {
