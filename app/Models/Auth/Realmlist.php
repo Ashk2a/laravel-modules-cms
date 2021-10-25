@@ -43,6 +43,6 @@ class Realmlist extends Model
      */
     public function server(): BelongsTo
     {
-        return $this->setConnection('website')->belongsTo(Server::class);
+        return $this->belongsTo(Server::class);
     }
 }

@@ -25,7 +25,7 @@ class Server extends Model
      */
     public function realmlist(): HasOne
     {
-        return $this->setConnection('auth')->hasOne(Realmlist::class);
+        return $this->hasOne(Realmlist::class);
     }
 
     /**
