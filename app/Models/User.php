@@ -66,6 +66,7 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+
     /**
      * @return bool
      */

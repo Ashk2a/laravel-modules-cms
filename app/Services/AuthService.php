@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Contracts\Hashing\WotlkHasher;
+use App\Events\UserRegisterEvent;
 use App\Exceptions\Auth\UserAlreadyVerifiedException;
 use App\Exceptions\Auth\UserNotVerifiedException;
 use App\Models\Auth\Account;
@@ -73,7 +74,7 @@ class AuthService
             }
         }
 
-        // TODO: emit event with user and verification as parameters to send a potential notification (mail, discord)
+        event(new UserRegisterEvent($user, $verification));
 
         return $user;
     }

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
 
 /**
@@ -54,6 +55,7 @@ class Verification extends Model
         parent::boot();
 
         static::creating(function ($query) {
+            $query->completed = false;
             $query->token = Str::random(32);
             $query->expires_at = Carbon::now()->subSeconds(Config::get('auth.verification.expires', 259200));
         });
@@ -65,6 +67,14 @@ class Verification extends Model
     public function hasExpired(): bool
     {
         return $this->expires_at->lte(Carbon::now());
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl(): string
+    {
+        return URL::route('auth.verifications', ['verification' => $this]);
     }
 
     /**

@@ -44,8 +44,6 @@ class RegisterController extends BaseController
             return redirect()->route('auth.register');
         }
 
-        // TODO: send event to trigger email
-
         $this->flashSuccess(
             trans('toast.success.verification_email_sent', ['email' => $user->email]),
             trans('toast.title.registration_succeed')
