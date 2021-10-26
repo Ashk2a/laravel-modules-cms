@@ -3,22 +3,22 @@
 namespace App\Notifications;
 
 use App\Abstractions\Mail\MarkdownMail;
-use App\Abstractions\Notifications\BaseNotification;
+use App\Abstractions\Notifications\BaseUserNotification;
+use App\Abstractions\Notifications\HasDatabaseNotification;
+use App\Abstractions\Notifications\HasMailNotification;
 use App\Models\User;
 use App\Models\Verification;
-use Illuminate\Database\Eloquent\Model;
 
-class UserWelcomeNotification extends BaseNotification
+class UserWelcomeUserNotification extends BaseUserNotification implements HasMailNotification, HasDatabaseNotification
 {
     public function __construct(private Verification $verification)
     {
     }
 
     /**
-     * @param User $user
-     * @return array
+     * @inerhitDoc
      */
-    public function toDatabase($notifiable): array
+    public function toDatabase(User $notifiable): array
     {
         return [
             'verification_id' => $this->verification->id,
@@ -27,10 +27,9 @@ class UserWelcomeNotification extends BaseNotification
     }
 
     /**
-     * @param User $user
-     * @return MarkdownMail
+     * @inerhitDoc
      */
-    public function toMail(User $user): MarkdownMail
+    public function toMail(User $notifiable): MarkdownMail
     {
         $subject = $this->verification->completed
             ? trans('emails.user_welcome.subject')
@@ -38,16 +37,5 @@ class UserWelcomeNotification extends BaseNotification
 
         return (new MarkdownMail($subject))
             ->markdown('emails.user_welcome', ['verification' => $this->verification]);
-    }
-
-    /**
-     * @inerhitDoc
-     */
-    public function via(Model $notifiable): array
-    {
-        return [
-            self::MAIL,
-            self::DATABASE
-        ];
     }
 }

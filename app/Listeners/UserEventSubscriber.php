@@ -4,7 +4,7 @@ namespace App\Listeners;
 
 use App\Abstractions\Listeners\BaseEventSubscriber;
 use App\Events\UserRegisterEvent;
-use App\Notifications\UserWelcomeNotification;
+use App\Notifications\UserWelcomeUserNotification;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Support\Facades\Log;
 
@@ -14,7 +14,7 @@ class UserEventSubscriber extends BaseEventSubscriber
      * @param UserRegisterEvent $event
      */
     public function onUserRegister(UserRegisterEvent $event): void {
-        $event->user->notify(new UserWelcomeNotification($event->verification));
+        $event->user->notify(new UserWelcomeUserNotification($event->verification));
     }
 
     /**
