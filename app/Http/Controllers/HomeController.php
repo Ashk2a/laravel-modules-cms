@@ -10,7 +10,7 @@ use Illuminate\Contracts\View\View;
 
 class HomeController extends BaseController
 {
-    public function getHome(): Factory|View|Application
+    public function get(): Factory|View|Application
     {
         return view('pages.home');
     }

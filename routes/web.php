@@ -1,30 +1,45 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+/*--------------------------------------------------------------------------
+| Guest
+|--------------------------------------------------------------------------*/
+Route::group(['middleware' => 'guest'], function () {
+    /*--------------------------------------------------------------------------
+    | Home
+    |--------------------------------------------------------------------------*/
+    Route::get('/', [HomeController::class, 'get'])->name('home');
 
-Route::get('/', [HomeController::class, 'getHome'])->name('home');
+    /*--------------------------------------------------------------------------
+    | Login
+    |--------------------------------------------------------------------------*/
+    Route::get('auth/login', [LoginController::class, 'get'])->name('auth.login');
+    Route::post('auth/login', [LoginController::class, 'post']);
 
-Route::group(['prefix' => 'auth', 'as' => 'auth.'], function () {
-    Route::get('login', [LoginController::class, 'get'])->name('login');
-    Route::post('login', [LoginController::class, 'post']);
+    /*--------------------------------------------------------------------------
+    | Register
+    |--------------------------------------------------------------------------*/
+    Route::get('auth/register', [RegisterController::class, 'get'])->name('auth.register');
+    Route::post('auth/register', [RegisterController::class, 'post']);
 
-    Route::get('register', [RegisterController::class, 'get'])->name('register');
-    Route::post('register', [RegisterController::class, 'post']);
+    /*--------------------------------------------------------------------------
+    | Verifications
+    |--------------------------------------------------------------------------*/
+    Route::get('auth/verifications/{verification:token}', [VerificationController::class, 'get'])->name('auth.verifications');
+});
 
-    Route::get('verifications/{verification:token}', [VerificationController::class, 'get'])->name('verifications');
+/*--------------------------------------------------------------------------
+| Authenticated
+|--------------------------------------------------------------------------*/
+Route::group(['middleware' => 'auth'], function () {
+    /*--------------------------------------------------------------------------
+    | Logout
+    |--------------------------------------------------------------------------*/
+    Route::get('auth/logout', [LogoutController::class, 'get'])->name('auth.logout');
 });

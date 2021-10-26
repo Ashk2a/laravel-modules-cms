@@ -6,5 +6,7 @@ use App\Abstractions\Http\Controllers\BaseController;
 
 class LogoutController extends BaseController
 {
+    public function get() {
 
+    }
 }

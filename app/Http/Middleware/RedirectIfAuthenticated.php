@@ -2,16 +2,16 @@
 
 namespace App\Http\Middleware;
 
-use App\Providers\RouteServiceProvider;
+use App\Abstractions\Http\HasFlashToast;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class RedirectIfAuthenticated
 {
+    use HasFlashToast;
+
     /**
-     * Handle an incoming request.
-     *
      * @param Request $request
      * @param Closure $next
      * @param string|null ...$guards
@@ -21,7 +21,12 @@ class RedirectIfAuthenticated
     {
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+                $this->flashWarning(
+                    trans('toast.warning.not_allow'),
+                    trans('toast.title.forbidden')
+                );
+
+                return redirect()->route('home');
             }
         }
 
