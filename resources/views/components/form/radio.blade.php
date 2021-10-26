@@ -1,7 +1,6 @@
 <div>
-    <label class="inline-flex items-center">
-        <input {!! $attributes !!}
-            type="radio"
+    <div class="inline-flex items-center">
+        <input {{ $attributes->merge(['class' => '']) }} type="radio"
 
             @if($isWired())
                 wire:model{!! $wireModifier() !!}="{{ $name }}"
@@ -16,8 +15,8 @@
             @endif
         />
 
-        <span class="ml-2">{{ $label }}</span>
-    </label>
+        <x-form.label class="form-label-space-x" :for="$id" :label="$label"/>
+    </div>
 
     @if($hasErrorAndShow($name))
         <x-form.errors :name="$name" />

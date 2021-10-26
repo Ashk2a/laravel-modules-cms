@@ -3,3 +3,6 @@
 @tailwind utilities;
 
 [x-cloak] { display: none; }
+
+@import "variables";
+@import "components/form";

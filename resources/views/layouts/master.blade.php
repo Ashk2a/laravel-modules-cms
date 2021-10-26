@@ -9,7 +9,7 @@
     @livewireStyles
 
     <link href="{{ asset('css/tailwind.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/vendor.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @section('head_style') @endsection
 
     @livewireScripts

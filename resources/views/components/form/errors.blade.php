@@ -1,5 +1,5 @@
 @error($name, $bag)
-    <p {!! $attributes->merge(['class' => 'text-red-500 text-sm italic']) !!}>
+    <p {{ $attributes->merge(['class' => 'form-error']) }}>
         {{ $message }}
     </p>
 @enderror

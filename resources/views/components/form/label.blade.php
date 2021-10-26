@@ -1,4 +1,5 @@
 @if($label)
-    <label {!! $attributes->merge(['class' => 'block text-sm font-medium text-gray-700']) !!}>{{ $label }} @if($required)<span class="text-red-500">*</span>@endif
+    <label {{ $attributes->merge(['class' => 'form-label']) }}>
+        {{ $label }} @if($required)<span class="form-item-required">*</span>@endif
     </label>
 @endif

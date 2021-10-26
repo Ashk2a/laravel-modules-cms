@@ -1,7 +1,9 @@
-<div class="mt-4">
+<div class="form-block-spacing-top">
     <x-form.label :label="$label" :required="true"/>
 
     <select
+        {{ $attributes->merge(['class' => 'form-item form-select' . ($label ? ' form-label-space-y' : '')]) }}>
+
         @if($isWired())
             wire:model{!! $wireModifier() !!}="{{ $name }}"
         @else
@@ -16,9 +18,6 @@
             disabled
         @endif
 
-        {!! $attributes->merge([
-            'class' => ($label ? 'mt-1' : '') . ' block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm rounded-md'
-        ]) !!}>
         @forelse($options as $key => $option)
             <option value="{{ $key }}" @if($isSelected($key)) selected="selected" @endif>
                 {{ $option }}
@@ -29,6 +28,6 @@
     </select>
 
     @if($hasErrorAndShow($name))
-        <x-form.errors :name="$name" />
+        <x-form.errors :name="$name"/>
     @endif
 </div>

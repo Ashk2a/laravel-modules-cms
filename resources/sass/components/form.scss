@@ -1,0 +1,92 @@
+/*--------------------------------------------------------------------------
+| Use by all form item
+|--------------------------------------------------------------------------*/
+.form-item {
+    @apply block
+    w-full
+    appearance-none
+    border
+    border-red-800
+    rounded-md
+    shadow-sm
+    text-base
+    sm:text-sm
+    placeholder-gray-400
+    focus:outline-none
+    focus:ring-gray-500
+    focus:border-gray-500
+    bg-primary-50
+}
+
+.form-block-spacing-top {
+    @apply mt-4 block;
+}
+
+/*--------------------------------------------------------------------------
+| Input
+|--------------------------------------------------------------------------*/
+.form-input {
+    @apply px-3 py-2;
+}
+
+/*--------------------------------------------------------------------------
+| Select
+|--------------------------------------------------------------------------*/
+.form-select {
+    @apply pl-3 pr-10 py-2;
+}
+
+/*--------------------------------------------------------------------------
+| Checkbox
+|--------------------------------------------------------------------------*/
+.form-checkbox {
+    @apply h-4 w-4 appearance-none focus:ring-gray-500 border-gray-300 rounded;
+}
+
+/*--------------------------------------------------------------------------
+| Error
+|--------------------------------------------------------------------------*/
+.form-error {
+    @apply text-red-500 text-sm italic;
+}
+
+.form-submit {
+    @apply disabled:opacity-50
+    mt-4
+    inline-flex
+    items-center
+    py-2
+    px-4
+    border
+    border-transparent
+    rounded-md
+    shadow-sm
+    text-sm
+    font-medium
+    text-white
+    bg-gray-600
+    hover:bg-gray-700
+    focus:outline-none
+    focus:ring-2
+    focus:ring-offset-2
+    focus:ring-gray-500;
+}
+
+/*--------------------------------------------------------------------------
+| Label
+|--------------------------------------------------------------------------*/
+.form-label {
+    @apply block text-sm font-medium text-white;
+}
+
+.form-label-space-x {
+    @apply ml-2;
+}
+
+.form-label-space-y {
+    @apply mt-1;
+}
+
+.form-item-required {
+    @apply text-red-500;
+}

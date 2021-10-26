@@ -5,6 +5,8 @@ namespace App\View\Components\Form;
 use App\Abstractions\View\Components\Form\BaseFormComponent;
 use App\Abstractions\View\Components\Form\Traits\HandlesDefaultAndOldValue;
 use App\Abstractions\View\Components\Form\Traits\HandlesValidationErrors;
+use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Contracts\View\View;
 
 class Input extends BaseFormComponent
 {
@@ -31,15 +33,15 @@ class Input extends BaseFormComponent
      * @param bool $showErrors
      */
     public function __construct(
-        string $name = '',
-        string $label = '',
-        string $type = 'text',
-        bool $required = true,
-        bool $disabled = false,
-        mixed $bind = null,
-        mixed $default = null,
+        string  $name = '',
+        string  $label = '',
+        string  $type = 'text',
+        bool    $required = true,
+        bool    $disabled = false,
+        mixed   $bind = null,
+        mixed   $default = null,
         ?string $language = null,
-        bool $showErrors = true
+        bool    $showErrors = true
     )
     {
         $this->name = $name;

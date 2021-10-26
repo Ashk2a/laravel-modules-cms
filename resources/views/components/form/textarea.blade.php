@@ -1,19 +1,19 @@
-<div class="mt-4">
-    <label class="block">
-        <x-form.label :label="$label" />
+<div class="form-block-spacing-top">
 
-        <textarea
-            @if($isWired())
-                wire:model{!! $wireModifier() !!}="{{ $name }}"
-            @else
-                name="{{ $name }}"
-            @endif
+    <x-form.label :label="$label" :required="$required"/>
 
-            {!! $attributes->merge(['class' => 'block w-full ' . ($label ? 'mt-1' : '')]) !!}
+    <textarea
+        {{ $attributes->merge(['class' => 'form-item' . ($label ? ' form-label-space-y' : '')]) }}
+
+        @if($isWired())
+        wire:model{!! $wireModifier() !!}="{{ $name }}"
+        @else
+        name="{{ $name }}"
+        @endif
+
         >@unless($isWired()){!! $value !!}@endunless</textarea>
-    </label>
 
     @if($hasErrorAndShow($name))
-        <x-form.errors :name="$name" />
+        <x-form.errors :name="$name"/>
     @endif
 </div>
