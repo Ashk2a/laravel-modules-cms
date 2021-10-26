@@ -3,13 +3,13 @@
 namespace App\Notifications;
 
 use App\Abstractions\Mail\MarkdownMail;
-use App\Abstractions\Notifications\BaseUserNotification;
+use App\Abstractions\Notifications\BaseNotification;
 use App\Abstractions\Notifications\HasDatabaseNotification;
 use App\Abstractions\Notifications\HasMailNotification;
 use App\Models\User;
 use App\Models\Verification;
 
-class UserWelcomeUserNotification extends BaseUserNotification implements HasMailNotification, HasDatabaseNotification
+class WelcomeNotification extends BaseNotification implements HasMailNotification, HasDatabaseNotification
 {
     public function __construct(private Verification $verification)
     {
