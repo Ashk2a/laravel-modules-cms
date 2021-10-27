@@ -113,12 +113,6 @@
                             </a>
                         </div>
 
-                        <!-- Logo (lg-) -->
-                        <a href="{{ route('home') }}" class="lg:hidden">
-                            <span class="sr-only">{{ config('app.name') }}</span>
-                            <img src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=600" alt="" class="h-8 w-auto">
-                        </a>
-
                         <div class="flex-1 flex items-center justify-end">
                             <div class="flex items-center lg:ml-8">
                                 <div class="flex space-x-8">

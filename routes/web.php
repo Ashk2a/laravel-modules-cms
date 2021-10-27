@@ -7,6 +7,10 @@ use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('demo', function() {
+    return view('pages.demo');
+});
+
 /*--------------------------------------------------------------------------
 | Guest
 |--------------------------------------------------------------------------*/

@@ -12,14 +12,17 @@ module.exports = {
     ],
     theme: {
         extend: {
+            // Use https://www.tailwindshades.com to generate shades of color
             colors: {
                 primary: colors.blueGray,
                 secondary: colors.sky,
-                neutral: colors.emerald
+                promoted: colors.yellow,
+                neutral: colors.gray,
             }
         }
     },
     plugins: [
         require('@tailwindcss/forms'),
+        require('autoprefixer')
     ]
 }
