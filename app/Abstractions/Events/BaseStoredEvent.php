@@ -11,13 +11,13 @@ abstract class BaseStoredEvent extends BaseEvent
 
     public function __construct()
     {
-        $this->activity = $this->store();
+        $this->activity = $this->buildActivity();
     }
 
     /**
      * @return Activity
      */
-    private function store(): Activity
+    private function buildActivity(): Activity
     {
         $activity = new Activity();
         $activity->fill([

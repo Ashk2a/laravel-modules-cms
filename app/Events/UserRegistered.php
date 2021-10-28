@@ -13,8 +13,6 @@ use Illuminate\Queue\SerializesModels;
 
 class UserRegistered extends BaseStoredEvent
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
-
     /**
      * @param User $user
      * @param Verification $verification
