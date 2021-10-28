@@ -3,26 +3,26 @@
 namespace App\Notifications;
 
 use App\Abstractions\Mail\MarkdownMail;
-use App\Abstractions\Notifications\BaseNotification;
-use App\Abstractions\Notifications\HasDatabaseNotification;
+use App\Abstractions\Notifications\BaseActivityNotification;
 use App\Abstractions\Notifications\HasMailNotification;
+use App\Events\UserRegistered;
 use App\Models\User;
-use App\Models\Verification;
+use JetBrains\PhpStorm\Pure;
 
-class WelcomeNotification extends BaseNotification implements HasMailNotification, HasDatabaseNotification
+class WelcomeNotification extends BaseActivityNotification implements HasMailNotification
 {
-    public function __construct(private Verification $verification)
+    #[Pure] public function __construct(UserRegistered $event)
     {
+        parent::__construct($event);
     }
 
     /**
      * @inerhitDoc
      */
-    public function toDatabase(User $notifiable): array
+    public function toDatabaseData(User $notifiable): array
     {
         return [
-            'verification_id' => $this->verification->id,
-            'completed' => $this->verification->completed
+            'verification_id' => $this->event->verification->id
         ];
     }
 
@@ -31,11 +31,11 @@ class WelcomeNotification extends BaseNotification implements HasMailNotificatio
      */
     public function toMail(User $notifiable): MarkdownMail
     {
-        $subject = $this->verification->completed
+        $subject = $this->event->verification->completed
             ? trans('emails.user_welcome.subject')
             : trans('emails.user_welcome.subject_with_verification');
 
         return (new MarkdownMail($subject))
-            ->markdown('emails.user_welcome', ['verification' => $this->verification]);
+            ->markdown('emails.user_welcome', ['verification' => $this->event->verification]);
     }
 }

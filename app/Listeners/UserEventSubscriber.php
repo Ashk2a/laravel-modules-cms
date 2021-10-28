@@ -3,27 +3,20 @@
 namespace App\Listeners;
 
 use App\Abstractions\Listeners\BaseEventSubscriber;
-use App\Events\UserRegisterEvent;
+use App\Events\UserRegistered;
 use App\Notifications\WelcomeNotification;
-use Illuminate\Contracts\Events\Dispatcher;
-use Illuminate\Support\Facades\Log;
 
 class UserEventSubscriber extends BaseEventSubscriber
 {
-    /**
-     * @param UserRegisterEvent $event
-     */
-    public function onUserRegister(UserRegisterEvent $event): void {
-        $event->user->notify(new WelcomeNotification($event->verification));
-    }
+    protected array $listeners = [
+        UserRegistered::class => 'onUserRegistered'
+    ];
 
     /**
-     * @inerhitDoc
+     * @param UserRegistered $event
      */
-    public function subscribe(Dispatcher $dispatcher): array
+    public function onUserRegistered(UserRegistered $event): void
     {
-        return [
-            UserRegisterEvent::class => 'onUserRegister'
-        ];
+        $event->user->notify(new WelcomeNotification($event));
     }
 }

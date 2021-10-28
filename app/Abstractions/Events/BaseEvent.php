@@ -13,4 +13,16 @@ abstract class BaseEvent
     {
         return Str::snake(class_basename($this));
     }
+
+    protected function notifications(): array
+    {
+        return [];
+    }
+
+    /**
+     * @return void
+     */
+    public function sendNotifications(): void {
+
+    }
 }

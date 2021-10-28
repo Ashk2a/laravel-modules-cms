@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Abstractions\Models\Traits\HasActivities;
+use App\Abstractions\Models\Traits\IsNotifiable;
 use App\Models\Auth\Account;
 use Database\Factories\UserFactory;
 use Eloquent;
@@ -13,7 +15,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\DatabaseNotificationCollection;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -47,7 +48,8 @@ class User extends Authenticatable
 {
     use HasFactory,
         HasRoles,
-        Notifiable;
+        HasActivities,
+        IsNotifiable;
 
     /**
      * @var string[]
@@ -65,7 +67,6 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-
 
     /**
      * @return bool

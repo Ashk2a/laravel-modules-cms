@@ -5,15 +5,20 @@ namespace App\Events;
 use App\Abstractions\Events\BaseStoredEvent;
 use App\Models\User;
 use App\Models\Verification;
+use App\Notifications\WelcomeNotification;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class UserRegisterEvent extends BaseStoredEvent
+class UserRegistered extends BaseStoredEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    /**
+     * @param User $user
+     * @param Verification $verification
+     */
     public function __construct(public User $user, public Verification $verification)
     {
         parent::__construct();
@@ -25,5 +30,15 @@ class UserRegisterEvent extends BaseStoredEvent
     public function subject(): Model
     {
         return $this->user;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function context(): array
+    {
+        return [
+            'verification' => $this->verification->only(['id', 'completed']),
+        ];
     }
 }

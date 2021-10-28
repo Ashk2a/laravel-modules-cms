@@ -31,10 +31,4 @@ abstract class BaseNotification extends Notification
 
         return $via;
     }
-
-    /**
-     * @param User $notifiable
-     * @return array
-     */
-    abstract public function toDatabase(User $notifiable): array;
 }

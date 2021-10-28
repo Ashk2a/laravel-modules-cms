@@ -6,16 +6,17 @@
     "license": "MIT",
     "require": {
         "php": "^8.0",
+        "ext-gmp": "*",
+        "ext-pdo": "*",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.54",
         "laravel/octane": "^1.0",
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.6",
+        "spatie/laravel-activitylog": "^4.3",
         "spatie/laravel-permission": "^5.1",
-        "usernotnull/tall-toasts": "^1.0",
-        "ext-pdo": "*",
-        "ext-gmp": "*"
+        "usernotnull/tall-toasts": "^1.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",

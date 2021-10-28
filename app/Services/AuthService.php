@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Contracts\Hashing\WotlkHasher;
-use App\Events\UserRegisterEvent;
+use App\Events\UserRegistered;
 use App\Exceptions\Auth\UserAlreadyVerifiedException;
 use App\Exceptions\Auth\UserNotVerifiedException;
 use App\Models\Auth\Account;
@@ -74,7 +74,7 @@ class AuthService
             }
         }
 
-        event(new UserRegisterEvent($user, $verification));
+        event(new UserRegistered($user, $verification));
 
         return $user;
     }
