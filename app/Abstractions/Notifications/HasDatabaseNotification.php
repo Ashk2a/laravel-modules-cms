@@ -12,4 +12,9 @@ interface HasDatabaseNotification
      * @return array
      */
     public function toDatabase(User $notifiable): array;
+
+    /**
+     * @return bool
+     */
+    public function isReadable(): bool;
 }

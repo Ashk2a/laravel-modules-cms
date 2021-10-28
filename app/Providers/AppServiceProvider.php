@@ -4,9 +4,11 @@ namespace App\Providers;
 
 use App\Contracts\Hashing\WotlkHasher;
 use App\Models\DbConnection;
+use App\Notifications\Channels\DatabaseChannel;
 use App\Security\Hashing\AzerothHash;
 use App\Services\AuthService;
 use Illuminate\Database\QueryException;
+use Illuminate\Notifications\Channels\DatabaseChannel as LaravelDatabaseChannel;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 
@@ -17,8 +19,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->registerWotlkHasher();
-        $this->registerServices();
+        // Add default WoltkHasher for in game password
+        $this->app->singleton(WotlkHasher::class, fn() => new AzerothHash());
+
+        // Override existing DatabaseChannel
+        $this->app->bind(LaravelDatabaseChannel::class, DatabaseChannel::class);
+
+        // Register helpers services
+        $this->app->singleton(AuthService::class, fn() => new AuthService());
     }
 
     /**
@@ -27,22 +35,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->addDbConnectionsToConfig();
-    }
-
-    /**
-     * @retur void
-     */
-    private function registerWotlkHasher(): void
-    {
-        $this->app->singleton(WotlkHasher::class, fn() => new AzerothHash());
-    }
-
-    /**
-     * @return void
-     */
-    private function registerServices(): void
-    {
-        $this->app->singleton(AuthService::class, fn() => new AuthService());
     }
 
     /**

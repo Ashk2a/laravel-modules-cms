@@ -15,14 +15,13 @@ class CreateActivitiesTable extends Migration
             $table->bigIncrements('id');
             $table->string('log_name')->nullable();
             $table->string('event');
-            $table->text('description')->default('');
+            $table->text('description')->nullable();
             $table->nullableMorphs('subject', 'subject');
             $table->nullableMorphs('causer', 'causer');
             $table->uuid('batch_uuid')->nullable();
-            $table->json('properties')->default('[]');
-            $table->json('context')->default('[]');
+            $table->json('properties')->default('{}');
+            $table->json('context')->default('{}');
             $table->timestamps();
-
 
             $table->index('log_name');
         });

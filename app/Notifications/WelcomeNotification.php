@@ -3,27 +3,17 @@
 namespace App\Notifications;
 
 use App\Abstractions\Mail\MarkdownMail;
-use App\Abstractions\Notifications\BaseActivityNotification;
+use App\Abstractions\Notifications\BaseNotification;
 use App\Abstractions\Notifications\HasMailNotification;
 use App\Events\UserRegistered;
 use App\Models\User;
 use JetBrains\PhpStorm\Pure;
 
-class WelcomeNotification extends BaseActivityNotification implements HasMailNotification
+class WelcomeNotification extends BaseNotification implements HasMailNotification
 {
     #[Pure] public function __construct(UserRegistered $event)
     {
         parent::__construct($event);
-    }
-
-    /**
-     * @inerhitDoc
-     */
-    public function toDatabaseData(User $notifiable): array
-    {
-        return [
-            'verification_id' => $this->event->verification->id
-        ];
     }
 
     /**
