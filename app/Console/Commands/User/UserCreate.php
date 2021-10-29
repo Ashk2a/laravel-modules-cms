@@ -53,7 +53,7 @@ class UserCreate extends BaseCommand
             $data['nickname'],
             $data['email'],
             $data['password'],
-            $this->option('verify', false)
+            $this->option('verify') ?? false
         );
 
         if (null === $user) {

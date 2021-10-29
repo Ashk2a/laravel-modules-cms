@@ -2,7 +2,6 @@
 
 namespace App\Abstractions\Notifications;
 
-use App\Abstractions\Events\BaseStoredEvent;
 use Illuminate\Bus\Queueable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notification;
@@ -19,13 +18,6 @@ abstract class BaseStoredNotification extends Notification implements HasDatabas
         HasDatabaseNotification::class => 'database',
         HasMarkdownMailNotification::class => 'mail'
     ];
-
-    /**
-     * @param BaseStoredEvent $event
-     */
-    public function __construct(public BaseStoredEvent $event)
-    {
-    }
 
     /**
      * @return string

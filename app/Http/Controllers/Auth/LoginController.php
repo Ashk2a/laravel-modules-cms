@@ -43,6 +43,7 @@ class LoginController extends BaseController
             return redirect()->route('auth.login');
         }
 
+        // Authentication just fail cause credentials were wrong
         if (null === $user) {
             $this->flashDanger(
                 trans('toast.danger.wrong_credentials'),

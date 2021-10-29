@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Auth\SessionGuard;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Auth;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -17,5 +19,14 @@ class AuthServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->registerPolicies();
+
+        // Override `session` driver by our custom guard
+        Auth::extend('session', function ($app, $name, array $config) {
+            return new SessionGuard(
+                $name,
+                Auth::createUserProvider($config['provider'] ?? null),
+                $this->app['session.store']
+            );
+        });
     }
 }

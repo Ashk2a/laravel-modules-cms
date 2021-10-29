@@ -12,8 +12,9 @@ class UserRegistered extends BaseStoredEvent
     /**
      * @param User $user
      * @param Verification $verification
+     * @param bool $autoCompleted
      */
-    public function __construct(public User $user, public Verification $verification)
+    public function __construct(public User $user, public Verification $verification, public bool $autoCompleted)
     {
         parent::__construct();
     }
@@ -21,18 +22,8 @@ class UserRegistered extends BaseStoredEvent
     /**
      * @inheritDoc
      */
-    public function subject(): Model
+    public function subject(): ?Model
     {
         return $this->user;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function context(): array
-    {
-        return [
-            'verification' => $this->verification->only(['id', 'completed']),
-        ];
     }
 }

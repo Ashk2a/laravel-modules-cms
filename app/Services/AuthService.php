@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Contracts\Hashing\WotlkHasher;
 use App\Events\UserRegistered;
+use App\Events\UserVerified;
 use App\Exceptions\Auth\UserAlreadyVerifiedException;
 use App\Exceptions\Auth\UserNotVerifiedException;
 use App\Models\Auth\Account;
@@ -23,10 +24,10 @@ class AuthService
      * @param string $nickname
      * @param string $email
      * @param string $password
-     * @param bool|null $verify
+     * @param bool|null $autoCompleted
      * @return User|null
      */
-    public function register(string $username, string $nickname, string $email, string $password, ?bool $verify = null): ?User
+    public function register(string $username, string $nickname, string $email, string $password, ?bool $autoCompleted = null): ?User
     {
         $wotlkHasher = app(WotlkHasher::class);
 
@@ -64,17 +65,17 @@ class AuthService
         $verification->user()->associate($user);
         $verification->save();
 
-        $verify = $verify ?? (bool)Config::get('auth.verification.auto');
+        $autoCompleted = $autoCompleted ?? (bool)Config::get('auth.verification.auto');
 
-        if ($verify) {
+        event(new UserRegistered($user, $verification, $autoCompleted));
+
+        if ($autoCompleted) {
             try {
-                $this->verify($verification);
+                $this->verify($verification, true);
             } catch (UserAlreadyVerifiedException) {
                 // Cannot happen in this case
             }
         }
-
-        event(new UserRegistered($user, $verification));
 
         return $user;
     }
@@ -88,19 +89,11 @@ class AuthService
      */
     public function login(string $email, string $password, bool $rememberMe = false): ?User
     {
-        if (false === Auth::validate([$email, $password])) {
+        if (false === Auth::attempt(['email' => $email, 'password' => $password], $rememberMe)) {
             return null;
         }
 
-        $user = User::where('email', $email)->firstOrFail();
-
-        if (false === $user->isVerified()) {
-            throw new UserNotVerifiedException();
-        }
-
-        Auth::login($user, $rememberMe);
-
-        return $user;
+        return Auth::user();
     }
 
     /**
@@ -121,9 +114,10 @@ class AuthService
 
     /**
      * @param Verification $verification
+     * @param bool $autoCompleted
      * @throws UserAlreadyVerifiedException
      */
-    public function verify(Verification $verification): void
+    public function verify(Verification $verification, bool $autoCompleted = false): void
     {
         $user = $verification->user;
 
@@ -136,6 +130,8 @@ class AuthService
         ]);
 
         $user->verifications()->where('completed', false)->delete();
+
+        event(new UserVerified($verification, $autoCompleted));
     }
 
     /**

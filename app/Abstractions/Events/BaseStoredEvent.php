@@ -63,9 +63,12 @@ abstract class BaseStoredEvent
     }
 
     /**
-     * @return Model
+     * @return Model|null
      */
-    abstract public function subject(): Model;
+    public function subject(): ?Model
+    {
+        return null;
+    }
 
     /**
      * @return Model|null
