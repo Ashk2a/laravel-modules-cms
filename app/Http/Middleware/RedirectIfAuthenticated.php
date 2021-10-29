@@ -6,6 +6,7 @@ use App\Abstractions\Http\HasFlashToast;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 
 class RedirectIfAuthenticated
 {
@@ -19,7 +20,11 @@ class RedirectIfAuthenticated
      */
     public function handle(Request $request, Closure $next, ...$guards): mixed
     {
-        foreach ($guards as $guard) {
+        if (empty($guards)) {
+            $guards[] = Config::get('auth.defaults.guard');
+        }
+
+        foreach (array_unique($guards) as $guard) {
             if (Auth::guard($guard)->check()) {
                 $this->flashWarning(
                     trans('toast.warning.not_allow'),

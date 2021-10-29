@@ -65,10 +65,7 @@ class SessionGuard extends LaravelSessionGuard
      * @param array $credentials
      * @param string $cause
      */
-    public function fireLoginFailedEvent(
-        ?User  $user,
-        array  $credentials = [],
-        string $cause = UserLoginFailed::WRONG_CREDENTIALS_CAUSE): void
+    public function fireLoginFailedEvent(?User  $user, array  $credentials = [], string $cause = UserLoginFailed::WRONG_CREDENTIALS_CAUSE): void
     {
         $context = [
             'ip' => $this?->request?->getClientIp()

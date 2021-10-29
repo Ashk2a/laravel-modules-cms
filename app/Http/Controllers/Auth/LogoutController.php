@@ -3,10 +3,18 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Abstractions\Http\Controllers\BaseController;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 
 class LogoutController extends BaseController
 {
-    public function get() {
+    /**
+     * @return RedirectResponse
+     */
+    public function get(): RedirectResponse
+    {
+        Auth::logout();
 
+        return redirect()->route('home');
     }
 }
