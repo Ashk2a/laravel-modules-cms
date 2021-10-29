@@ -3,15 +3,32 @@
 namespace App\Abstractions\Events;
 
 use App\Models\Activity;
+use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Str;
 
-abstract class BaseStoredEvent extends BaseEvent
+abstract class BaseStoredEvent
 {
+    use Dispatchable, InteractsWithSockets, SerializesModels;
+
+    /**
+     * @var Activity
+     */
     public Activity $activity;
 
     public function __construct()
     {
         $this->activity = $this->buildActivity();
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return Str::snake(class_basename($this));
     }
 
     /**

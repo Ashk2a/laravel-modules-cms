@@ -3,21 +3,21 @@
 namespace App\Abstractions\Notifications;
 
 use App\Abstractions\Events\BaseStoredEvent;
-use App\Models\User;
 use Illuminate\Bus\Queueable;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Str;
 
-abstract class BaseNotification extends Notification implements HasDatabaseNotification
+abstract class BaseStoredNotification extends Notification implements HasDatabaseNotification
 {
     use Queueable;
 
     /**
      * @var array
      */
-    private const NOTIFICATION_TYPES = [
+    public const NOTIFICATION_TYPES = [
         HasDatabaseNotification::class => 'database',
-        HasMailNotification::class => 'mail'
+        HasMarkdownMailNotification::class => 'mail'
     ];
 
     /**
@@ -32,13 +32,13 @@ abstract class BaseNotification extends Notification implements HasDatabaseNotif
      */
     public function getName(): string
     {
-        $snakeClass = Str::snake(class_basename($this));
+        $name = Str::snake(class_basename($this));
 
-        if (Str::endsWith($snakeClass, '_notification')) {
-            return Str::substr($snakeClass, 0, -Str::length('_notification'));
+        if (Str::endsWith($name, '_notification')) {
+            return Str::substr($name, 0, -Str::length('_notification'));
         }
 
-        return $snakeClass;
+        return $name;
     }
 
     /**
@@ -50,10 +50,10 @@ abstract class BaseNotification extends Notification implements HasDatabaseNotif
     }
 
     /**
-     * @param User|null $notifiable
+     * @param Model|null $notifiable
      * @return array
      */
-    public function via(?User $notifiable = null): array
+    public function via(?Model $notifiable = null): array
     {
         $via = [];
 
@@ -69,7 +69,7 @@ abstract class BaseNotification extends Notification implements HasDatabaseNotif
     /**
      * @inerhitDoc
      */
-    public function toDatabase(User $notifiable): array
+    public function toDatabase(Model $notifiable): array
     {
         return [];
     }

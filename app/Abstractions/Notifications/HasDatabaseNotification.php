@@ -2,16 +2,15 @@
 
 namespace App\Abstractions\Notifications;
 
-use App\Models\Activity;
-use App\Models\User;
+use Illuminate\Database\Eloquent\Model;
 
 interface HasDatabaseNotification
 {
     /**
-     * @param User $notifiable
+     * @param Model $notifiable
      * @return array
      */
-    public function toDatabase(User $notifiable): array;
+    public function toDatabase(Model $notifiable): array;
 
     /**
      * @return bool
