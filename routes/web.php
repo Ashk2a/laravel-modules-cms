@@ -1,13 +1,15 @@
 <?php
 
+use App\Http\Controllers\Auth\ForgetPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('demo', function() {
+Route::get('demo', function () {
     return view('pages.demo');
 });
 
@@ -33,9 +35,21 @@ Route::group(['middleware' => 'guest'], function () {
     Route::post('auth/register', [RegisterController::class, 'post']);
 
     /*--------------------------------------------------------------------------
-    | Verifications
+    | Verify
     |--------------------------------------------------------------------------*/
-    Route::get('auth/verifications/{verification:token}', [VerificationController::class, 'get'])->name('auth.verifications');
+    Route::get('auth/verify/{verification:token}', [VerificationController::class, 'get'])->name('auth.verify');
+
+    /*--------------------------------------------------------------------------
+    | Forget password
+    |--------------------------------------------------------------------------*/
+    Route::get('auth/forget', [ForgetPasswordController::class, 'get'])->name('auth.forget');
+    Route::post('auth/forget', [ForgetPasswordController::class, 'post']);
+
+    /*--------------------------------------------------------------------------
+    | Reset password
+    |--------------------------------------------------------------------------*/
+    Route::get('auth/reset/{reminder:token}', [ResetPasswordController::class, 'get'])->name('auth.reset');
+    Route::post('auth/reset/{reminder:token}', [ResetPasswordController::class, 'post']);
 });
 
 /*--------------------------------------------------------------------------

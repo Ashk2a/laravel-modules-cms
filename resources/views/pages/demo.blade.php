@@ -6,6 +6,7 @@
     <x-container.fluid class="bg-gray-900 py-10">
         <x-container.boxed>
             <h1 class="text-2xl">Form components</h1>
+
             <x-form>
                 <x-form.input type="email" label="Email"/>
                 <x-form.input type="text" label="Text"/>

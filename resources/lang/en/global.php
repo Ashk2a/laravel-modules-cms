@@ -10,8 +10,12 @@ return [
     'nickname' => 'Nickname',
     'password' => 'Password',
     'password_confirmation' => 'Password confirmation',
+    'new_password' => 'New password',
+    'new_password_confirmation' => 'New password confirmation',
     'remember_me' => 'Remember me',
     'login' => 'Login',
     'register' => 'Register',
+    'send' => 'Send',
+    'reset_my_password' => 'Reset my password',
     'forget_password' => 'Forget password'
 ];

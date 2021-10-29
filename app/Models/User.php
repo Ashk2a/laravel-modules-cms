@@ -91,4 +91,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Verification::class);
     }
+
+    /**
+     * @return HasMany
+     */
+    public function reminders(): HasMany
+    {
+        return $this->hasMany(Reminder::class);
+    }
 }

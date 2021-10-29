@@ -36,18 +36,12 @@ class RegisterController extends BaseController
 
         // Internal error server
         if (null === $user) {
-            $this->flashDanger(
-                trans('toast.danger.cannot_create_account'),
-                trans('toast.title.registration_failed')
-            );
+            $this->flashDanger(trans('toast.danger.cannot_create_account'));
 
             return redirect()->route('auth.register');
         }
 
-        $this->flashSuccess(
-            trans('toast.success.verification_email_sent', ['email' => $user->email]),
-            trans('toast.title.registration_succeed')
-        );
+        $this->flashSuccess(trans('toast.success.verification_email_sent', ['email' => $user->email]));
 
         return redirect()->route('auth.login');
     }

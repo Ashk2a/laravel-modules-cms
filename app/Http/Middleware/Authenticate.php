@@ -17,10 +17,7 @@ class Authenticate extends Middleware
     protected function redirectTo($request): ?string
     {
         if (!$request->expectsJson()) {
-            $this->flashWarning(
-                trans('toast.warning.not_allow'),
-                trans('toast.title.forbidden')
-            );
+            $this->flashWarning(trans('toast.warning.not_allow'));
 
             return route('auth.login');
         }

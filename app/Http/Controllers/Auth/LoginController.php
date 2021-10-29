@@ -35,28 +35,19 @@ class LoginController extends BaseController
                 $request->get('remember_me', false)
             );
         } catch (UserNotVerifiedException) {
-            $this->flashDanger(
-                trans('toast.warning.user_not_verified'),
-                trans('toast.title.authentication_failed')
-            );
+            $this->flashWarning(trans('toast.warning.user_not_verified'));
 
             return redirect()->route('auth.login');
         }
 
         // Authentication just fail cause credentials were wrong
         if (null === $user) {
-            $this->flashDanger(
-                trans('toast.danger.wrong_credentials'),
-                trans('toast.title.authentication_failed')
-            );
+            $this->flashDanger(trans('toast.danger.wrong_credentials'));
 
             return redirect()->route('auth.login');
         }
 
-        $this->flashInfo(
-            trans('toast.info.welcome_back', ['nickname' => $user->nickname]),
-            trans('toast.title.authenticated')
-        );
+        $this->flashInfo(trans('toast.info.welcome_back', ['nickname' => $user->nickname]));
 
         return redirect()->route('home');
     }

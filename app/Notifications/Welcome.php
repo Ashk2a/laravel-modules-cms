@@ -9,7 +9,7 @@ use App\Events\UserRegistered;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
-class UserWelcome extends BaseStoredNotification implements HasMarkdownMailNotification
+class Welcome extends BaseStoredNotification implements HasMarkdownMailNotification
 {
     public function __construct(public UserRegistered $event)
     {
@@ -21,11 +21,11 @@ class UserWelcome extends BaseStoredNotification implements HasMarkdownMailNotif
     public function toMail(Model|User $notifiable): MarkdownMail
     {
         $subject = $this->event->autoCompleted
-            ? trans('emails.user_welcome.subject')
-            : trans('emails.user_welcome.subject_with_verification');
+            ? trans('emails.welcome.subject')
+            : trans('emails.welcome.subject_with_verification');
 
         return (new MarkdownMail($subject))
-            ->markdown('emails.user_welcome', [
+            ->markdown('emails.welcome', [
                 'completed' => $this->event->autoCompleted,
                 'url' => $this->event->verification->getUrl()
             ]);

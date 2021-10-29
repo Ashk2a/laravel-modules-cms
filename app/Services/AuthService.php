@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Contracts\Hashing\WotlkHasher;
+use App\Events\UserForgetPassword;
 use App\Events\UserRegistered;
 use App\Events\UserVerified;
 use App\Exceptions\Auth\UserAlreadyVerifiedException;
@@ -81,6 +82,28 @@ class AuthService
     }
 
     /**
+     * @param Verification $verification
+     * @param bool $autoCompleted
+     * @throws UserAlreadyVerifiedException
+     */
+    public function verify(Verification $verification, bool $autoCompleted = false): void
+    {
+        $user = $verification->user;
+
+        if ($user->isVerified()) {
+            throw new UserAlreadyVerifiedException();
+        }
+
+        $verification->update([
+            'completed' => true
+        ]);
+
+        $user->verifications()->where('completed', false)->delete();
+
+        event(new UserVerified($verification, $autoCompleted));
+    }
+
+    /**
      * @param string $email
      * @param string $password
      * @param bool $rememberMe
@@ -113,25 +136,22 @@ class AuthService
     }
 
     /**
-     * @param Verification $verification
-     * @param bool $autoCompleted
-     * @throws UserAlreadyVerifiedException
+     * @param string $email
+     * @return bool
      */
-    public function verify(Verification $verification, bool $autoCompleted = false): void
+    public function forget(string $email): bool
     {
-        $user = $verification->user;
+        $user = User::where('email', $email)->first();
 
-        if ($user->isVerified()) {
-            throw new UserAlreadyVerifiedException();
+        if (null === $user) {
+            return false;
         }
 
-        $verification->update([
-            'completed' => true
-        ]);
+        $reminder = $user->reminders()->create();
 
-        $user->verifications()->where('completed', false)->delete();
+        event(new UserForgetPassword($reminder));
 
-        event(new UserVerified($verification, $autoCompleted));
+        return true;
     }
 
     /**
@@ -141,6 +161,10 @@ class AuthService
      */
     public function reset(Reminder $reminder, string $newPassword): void
     {
+        $reminder->user->update([
+            'password' => Hash::make($newPassword)
+        ]);
 
+        $reminder->delete();
     }
 }

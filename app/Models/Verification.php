@@ -46,8 +46,6 @@ class Verification extends Model
     ];
 
     /**
-     * Automatically set a random value to token and set expires_at value
-     *
      * @inerhitDoc
      */
     protected static function boot(): void
@@ -74,7 +72,7 @@ class Verification extends Model
      */
     public function getUrl(): string
     {
-        return URL::route('auth.verifications', ['verification' => $this]);
+        return URL::route('auth.verify', ['verification' => $this]);
     }
 
     /**

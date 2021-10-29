@@ -26,15 +26,9 @@ class VerificationController extends BaseController
         try {
             $this->authService->verify($verification);
 
-            $this->flashInfo(
-                trans('toast.info.user_has_been_verified'),
-                trans('toast.title.user_verification')
-            );
+            $this->flashInfo(trans('toast.info.user_has_been_verified'));
         } catch (UserAlreadyVerifiedException $e) {
-            $this->flashWarning(
-                trans('toast.warning.user_already_verified'),
-                trans('toast.title.user_verification')
-            );
+            $this->flashWarning(trans('toast.warning.user_already_verified'));
         }
 
         return redirect()->route('auth.login');

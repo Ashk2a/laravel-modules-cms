@@ -7,8 +7,7 @@ module.exports = {
         './resources/**/*.blade.php',
         './resources/**/*.scss',
         './src/**/*.{js,jsx,ts,tsx,vue}',
-        './vendor/usernotnull/tall-toasts/config/**/*.php',
-        './vendor/usernotnull/tall-toasts/resources/views/**/*.blade.php',
+        './config/tall-toasts.php'
     ],
     theme: {
         extend: {

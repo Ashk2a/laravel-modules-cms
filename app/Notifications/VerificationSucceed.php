@@ -8,7 +8,7 @@ use App\Abstractions\Notifications\HasMarkdownMailNotification;
 use App\Events\UserVerified;
 use Illuminate\Database\Eloquent\Model;
 
-class UserVerificationSucceed extends BaseStoredNotification implements HasMarkdownMailNotification
+class VerificationSucceed extends BaseStoredNotification implements HasMarkdownMailNotification
 {
     public function __construct(public UserVerified $event)
     {
@@ -16,7 +16,7 @@ class UserVerificationSucceed extends BaseStoredNotification implements HasMarkd
 
     public function toMail(Model $notifiable): MarkdownMail
     {
-        return (new MarkdownMail(trans('emails.user_verification_succeed.subject')))
-            ->markdown('emails.user_verification_succeed');
+        return (new MarkdownMail(trans('emails.verification_succeed.subject')))
+            ->markdown('emails.verification_succeed');
     }
 }

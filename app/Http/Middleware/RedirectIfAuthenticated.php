@@ -26,10 +26,7 @@ class RedirectIfAuthenticated
 
         foreach (array_unique($guards) as $guard) {
             if (Auth::guard($guard)->check()) {
-                $this->flashWarning(
-                    trans('toast.warning.not_allow'),
-                    trans('toast.title.forbidden')
-                );
+                $this->flashWarning(trans('toast.warning.not_allow'));
 
                 return redirect()->route('home');
             }

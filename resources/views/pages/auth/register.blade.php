@@ -2,7 +2,7 @@
 
 @section('content')
     <x-container.boxed>
-        <h1>Register</h1>
+        <h1>@lang('global.register')</h1>
 
         <x-form method="POST" :action="route('auth.register')">
             <x-form.input type="text" name="username" :label="trans('global.username')"/>

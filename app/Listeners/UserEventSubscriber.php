@@ -3,12 +3,14 @@
 namespace App\Listeners;
 
 use App\Abstractions\Listeners\BaseEventSubscriber;
+use App\Events\UserForgetPassword;
 use App\Events\UserLogin;
 use App\Events\UserLoginFailed;
 use App\Events\UserRegistered;
 use App\Events\UserVerified;
-use App\Notifications\UserVerificationSucceed;
-use App\Notifications\UserWelcome;
+use App\Notifications\ResetPasswordProcedure;
+use App\Notifications\VerificationSucceed;
+use App\Notifications\Welcome;
 
 class UserEventSubscriber extends BaseEventSubscriber
 {
@@ -16,7 +18,8 @@ class UserEventSubscriber extends BaseEventSubscriber
         UserRegistered::class => 'onUserRegistered',
         UserLogin::class => 'onUserLogin',
         UserLoginFailed::class => 'onUserLoginFailed',
-        UserVerified::class => 'onUserVerified'
+        UserVerified::class => 'onUserVerified',
+        UserForgetPassword::class => 'onUserForgetPassword'
     ];
 
     /**
@@ -25,7 +28,7 @@ class UserEventSubscriber extends BaseEventSubscriber
      */
     public function onUserRegistered(UserRegistered $event): void
     {
-        $event->user->notify(new UserWelcome($event));
+        $event->user->notify(new Welcome($event));
     }
 
     /**
@@ -51,7 +54,16 @@ class UserEventSubscriber extends BaseEventSubscriber
     public function onUserVerified(UserVerified $event): void
     {
         if (false === $event->autoCompleted) {
-            $event->verification->user->notify(new UserVerificationSucceed($event));
+            $event->verification->user->notify(new VerificationSucceed($event));
         }
+    }
+
+    /**
+     * @param UserForgetPassword $event
+     * @return void
+     */
+    public function onUserForgetPassword(UserForgetPassword $event): void
+    {
+        $event->reminder->user->notify(new ResetPasswordProcedure($event));
     }
 }

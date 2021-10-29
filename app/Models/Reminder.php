@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
 
 /**
@@ -53,6 +54,14 @@ class Reminder extends Model
     public function hasExpired(): bool
     {
         return $this->expires_at->lte(Carbon::now());
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl(): string
+    {
+        return URL::route('auth.reset', ['reminder' => $this]);
     }
 
     /**
