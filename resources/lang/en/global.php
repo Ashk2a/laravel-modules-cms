@@ -14,6 +14,7 @@ return [
     'new_password_confirmation' => 'New password confirmation',
     'remember_me' => 'Remember me',
     'login' => 'Login',
+    'logout' => 'Logout',
     'register' => 'Register',
     'send' => 'Send',
     'reset_my_password' => 'Reset my password',

@@ -14,9 +14,9 @@
         From: "opacity-100"
         To: "opacity-0"
     -->
-    {{--<div class="fixed inset-0 bg-black bg-opacity-25" aria-hidden="true"></div>--}}
+{{--<div class="fixed inset-0 bg-black bg-opacity-25" aria-hidden="true"></div>--}}
 
-    <!--
+<!--
       Off-canvas menu, show/hide based on off-canvas menu state.
 
       Entering: "transition ease-in-out duration-300 transform"
@@ -56,9 +56,13 @@
         <div class="bg-gray-900">
             <x-container.boxed class="flex h-10 items-center justify-between">
                 <div class="flex flex-1 items-center justify-end space-x-6">
-                    <x-header.topbar.link>@lang('global.create_an_account')</x-header.topbar.link>
-                    <span class="h-6 w-px bg-gray-600" aria-hidden="true"></span>
-                    <x-header.topbar.link>@lang('global.sign_in')</x-header.topbar.link>
+                    @if (false === auth()->check())
+                        <x-header.topbar.link :link="route('auth.register')">@lang('global.create_an_account')</x-header.topbar.link>
+                        <span class="h-6 w-px bg-gray-600" aria-hidden="true"></span>
+                        <x-header.topbar.link :link="route('auth.login')">@lang('global.sign_in')</x-header.topbar.link>
+                    @else
+                        <x-header.topbar.link :link="route('auth.logout')">@lang('global.logout')</x-header.topbar.link>
+                    @endif
                 </div>
             </x-container.boxed>
         </div>

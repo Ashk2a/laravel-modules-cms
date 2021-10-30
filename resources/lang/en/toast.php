@@ -7,8 +7,9 @@ return [
     ],
     'info' => [
         'welcome_back' => 'Welcome back :nickname !',
+        'goodbye' => 'Good bye, see you soon !',
         'user_has_been_verified' => 'Your account has been successfully verified.',
-        'forget_password_procedure_sent' => 'If your email exists in our database you will receive a mail to reset your password.'
+        'forget_password_procedure_sent' => 'If your email exists in our database you will receive a mail to reset your password.',
     ],
     'warning' => [
         'user_not_verified' => 'Your account is not verified.',

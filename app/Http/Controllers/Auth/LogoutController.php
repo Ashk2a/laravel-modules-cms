@@ -15,6 +15,8 @@ class LogoutController extends BaseController
     {
         Auth::logout();
 
+        $this->flashInfo(trans('toast.info.goodbye'));
+
         return redirect()->route('home');
     }
 }
