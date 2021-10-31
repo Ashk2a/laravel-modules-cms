@@ -1,3 +1,7 @@
+@php
+
+@endphp
+
 <header class="relative z-10">
     <nav class="fixed w-full" aria-label="top">
         <!-- Top navigation -->
