@@ -27,29 +27,11 @@
                 <div class="hidden lg:grid lg:grid-cols-5">
                     <!-- Left -->
                     <div class="col-span-2">
-                        <ul class="flex justify-between items-center">
-                            <li class="flex justify-center items-center group w-full border-transparent border-b-2 hover:border-gold-500 hover:bg-black hover:bg-opacity-10">
-                                <a href="#" class="flex inline-flex justify-center items-center w-full text-lg text-transparent bg-clip-text bg-gradient-to-b from-gold-500 to-gold-50 py-[1.5rem] group-hover:text-gray-50">
-                                    <span>News</span>
-                                </a>
-                            </li>
-                            <li class="flex justify-center items-center group w-full border-transparent border-b-2 hover:border-gold-500 hover:bg-black hover:bg-opacity-10">
-                                <a href="#" class="flex inline-flex justify-center items-center w-full text-lg text-transparent bg-clip-text bg-gradient-to-b from-gold-500 to-gold-50 py-[1.5rem] group-hover:text-gray-50">
-                                    <span>Game</span>
-                                    <x-heroicon class="h-4 w-4 ml-2 text-gold-300 group-hover:text-gray-50">
-                                        M19 9l-7 7-7-7
-                                    </x-heroicon>
-                                </a>
-                            </li>
-                            <li class="flex justify-center items-center group w-full border-transparent border-b-2 hover:border-gold-500 hover:bg-black hover:bg-opacity-10">
-                                <a href="#" class="flex inline-flex justify-center items-center w-full text-lg text-transparent bg-clip-text bg-gradient-to-b from-gold-500 to-gold-50 py-[1.5rem] group-hover:text-gray-50">
-                                    <span>Community</span>
-                                    <x-heroicon class="h-4 w-4 ml-2 text-gold-300 group-hover:text-gray-50">
-                                        M19 9l-7 7-7-7
-                                    </x-heroicon>
-                                </a>
-                            </li>
-                        </ul>
+                        <x-menu.part>
+                            <x-menu.item title="News"></x-menu.item>
+                            <x-menu.item title="Game" :children="['nothing']"></x-menu.item>
+                            <x-menu.item title="Community" :children="['nothing']"></x-menu.item>
+                        </x-menu.part>
                     </div>
 
                     <!-- Center - Logo -->
@@ -59,35 +41,13 @@
 
                     <!-- Right -->
                     <div class="col-span-2">
-                        <ul class="flex justify-between items-center">
-                            <li class="flex justify-center items-center group w-full border-transparent border-b-2 hover:border-gold-500 hover:bg-black hover:bg-opacity-10">
-                                <a href="#" class="flex inline-flex justify-center items-center w-full text-lg text-transparent bg-clip-text bg-gradient-to-b from-gold-500 to-gold-50 py-[1.5rem] group-hover:text-gray-50">
-                                    <span>News</span>
-                                </a>
-                            </li>
-                            <li class="flex justify-center items-center group w-full border-transparent border-b-2 hover:border-gold-500 hover:bg-black hover:bg-opacity-10">
-                                <a href="#" class="flex inline-flex justify-center items-center w-full text-lg text-transparent bg-clip-text bg-gradient-to-b from-gold-500 to-gold-50 py-[1.5rem] group-hover:text-gray-50">
-                                    <span>Game</span>
-                                    <x-heroicon class="h-4 w-4 ml-2 text-gold-300 group-hover:text-gray-50">
-                                        M19 9l-7 7-7-7
-                                    </x-heroicon>
-                                </a>
-                            </li>
-                            <li class="flex justify-center items-center group w-full border-transparent border-b-2 hover:border-gold-500 hover:bg-black hover:bg-opacity-10">
-                                <a href="#" class="flex inline-flex justify-center items-center w-full text-lg text-transparent bg-clip-text bg-gradient-to-b from-gold-500 to-gold-50 py-[1.5rem] group-hover:text-gray-50">
-                                    <span>Community</span>
-                                    <x-heroicon class="h-4 w-4 ml-2 text-gold-300 group-hover:text-gray-50">
-                                        M19 9l-7 7-7-7
-                                    </x-heroicon>
-                                </a>
-                            </li>
-                        </ul>
+                        <x-menu.part>
+                            <x-menu.item title="Vote"></x-menu.item>
+                            <x-menu.item title="Shop"></x-menu.item>
+                            <x-menu.item title="Admin" :children="['nothing']"></x-menu.item>
+                        </x-menu.part>
                     </div>
-
-
                 </div>
-
-
             </x-container.boxed>
         </div>
     </nav>
