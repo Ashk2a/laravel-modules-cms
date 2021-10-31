@@ -11,7 +11,7 @@
 
         <!-- Secondary navigation -->
         <div class="bg-black bg-opacity-20">
-            <x-container.boxed>
+            <x-container.boxed class="border-b-[1px] border-black border-opacity-20">
                 <!-- Mobile menu (lg-) -->
                 <div class="flex flex-1 items-center lg:hidden">
                     <button type="button" class="-ml-2 p-2 rounded-md text-gray-300">
@@ -54,7 +54,7 @@
 
                     <!-- Center - Logo -->
                     <div class="col-span-1">
-                        <img src="{{ asset('images/logo/img.png') }}" class="absolute left-1/2 transform -translate-x-1/2 mt-[-40px]  h-[15.5rem]" alt="Logo"/>
+                        <img src="{{ asset('images/logo/img.png') }}" class="absolute left-1/2 transform -translate-x-1/2 mt-[-40px] h-[12.5rem] xl:h-[15.5rem]" alt="Logo"/>
                     </div>
 
                     <!-- Right -->
