@@ -1,5 +1,6 @@
 const plugin = require("tailwindcss/plugin");
 const colors = require("tailwindcss/colors");
+const theme = require("./theme");
 
 module.exports = {
     mode: 'jit',
@@ -11,13 +12,9 @@ module.exports = {
     ],
     theme: {
         extend: {
-            // Use https://www.tailwindshades.com to generate shades of color
-            colors: {
-                primary: colors.blueGray,
-                secondary: colors.sky,
-                promoted: colors.yellow,
-                neutral: colors.gray,
-            }
+            colors: theme.colors,
+            fontSize: theme.fontSize,
+            fontFamily: theme.fontFamily
         }
     },
     plugins: [
