@@ -1,20 +1,20 @@
 <div
     @mouseover="open = {{ $root->id }}"
     @mouseleave="open = false"
-    :class="{'border-gold-500 bg-gradient-to-b from-brown-600-03a to-brown-600-80a' : open === {{ $root->id }} }"
-    class="flex justify-center items-center group w-full border-transparent border-b-2 hover:border-gold-500 hover:bg-gradient-to-b hover:from-brown-600-03a hover:to-brown-600-80a"
+    :class="{'menu-root-open' : open === {{ $root->id }} }"
+    class="menu-root"
 >
     <a
         href="#"
         :class="{'text-gray-50' : open === {{ $root->id }} }"
-        class="flex inline-flex justify-center items-center w-full text-lg font-medium text-transparent bg-clip-text bg-gradient-to-b from-gold-500 to-gold-50 py-[1.5rem] group-hover:text-gray-50"
+        class="menu-root-item"
     >
         <span>{{ $root->name }}</span>
 
         @if (false === $root->categories->isEmpty())
             <x-heroicon
                 x-bind:class="{'text-gray-50' : open === {{ $root->id }} }"
-                class="h-4 w-4 ml-2 text-gold-300 group-hover:text-gray-50"
+                class="menu-root-icon"
             >
                 M19 9l-7 7-7-7
             </x-heroicon>
@@ -28,7 +28,7 @@
         @mouseover="open = {{ $root->id }}"
         @mouseleave="open = false"
         x-show="open === {{ $root->id }}"
-        class="absolute top-[4.80rem] p-6 grid grid-cols-2 gap-x-10 w-full bg-gradient-to-t from-brown-600-80a to-brown-600-80a"
+        class="menu-dropdown"
     >
         @foreach($root->categories as $category)
             <div class="col-span-1">

@@ -1,0 +1,48 @@
+/*--------------------------------------------------------------------------
+| Use by side left and right
+|--------------------------------------------------------------------------*/
+.menu-side {
+    @apply relative
+    flex justify-between items-center;
+}
+
+/*--------------------------------------------------------------------------
+| Item level 1
+|--------------------------------------------------------------------------*/
+.menu-root {
+    @apply flex justify-center items-center
+    w-full
+    border-transparent border-b-2;
+}
+
+.menu-root-open {
+    @apply border-gold-500
+    bg-gradient-to-b from-brown-600-03a to-brown-600-80a;
+}
+
+.menu-root-item {
+    @apply flex inline-flex justify-center items-center
+    w-full py-[1.5rem]
+    text-lg font-medium text-transparent
+    bg-clip-text bg-gradient-to-b from-gold-500 to-gold-50
+    group-hover:text-gray-50;
+}
+
+.menu-root-icon {
+    @apply h-4 w-4
+    ml-2
+    text-gold-300
+    group-hover:text-gray-50;
+}
+
+/*--------------------------------------------------------------------------
+| Dropdown
+|--------------------------------------------------------------------------*/
+.menu-dropdown {
+    @apply absolute top-[4.80rem]
+    p-6 w-full
+    grid grid-cols-2 gap-x-10
+    bg-gradient-to-t
+    from-brown-600-80a
+    to-brown-600-80a;
+}

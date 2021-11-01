@@ -1,10 +1,10 @@
 @tailwind base;
 @tailwind components;
 
-@tailwind utilities;
-
 @import "components/form";
+@import "components/menu";
 
+@tailwind utilities;
 
 [x-cloak] {
     display: none;
