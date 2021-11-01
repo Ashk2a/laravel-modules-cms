@@ -43,6 +43,9 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static Builder|User query()
  * @method static Builder|User role($roles, $guard = null)
  * @mixin Eloquent
+ * @property-read Collection|Activity[] $actions
+ * @property-read Collection|Activity[] $activities
+ * @property-read Collection|Reminder[] $reminders
  */
 class User extends Authenticatable
 {
