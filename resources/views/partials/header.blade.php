@@ -1,5 +1,7 @@
 @php
-
+    $menu = \App\Models\MenuItem::buildTree();
+    $leftRoots = $menu->where('type', \App\Models\MenuItem::TYPE_ROOT_SIDE_LEFT);
+    $rightRoots = $menu->where('type', \App\Models\MenuItem::TYPE_ROOT_SIDE_RIGHT);
 @endphp
 
 <header class="relative z-10">
@@ -31,11 +33,7 @@
                 <div class="hidden lg:grid lg:grid-cols-5">
                     <!-- Left -->
                     <div class="col-span-2">
-                        <x-menu.part>
-                            <x-menu.item title="News"></x-menu.item>
-                            <x-menu.item title="Game" :children="['nothing']"></x-menu.item>
-                            <x-menu.item title="Community" :children="['nothing']"></x-menu.item>
-                        </x-menu.part>
+                        <x-menu.side :roots="$leftRoots"/>
                     </div>
 
                     <!-- Center - Logo -->
@@ -45,11 +43,7 @@
 
                     <!-- Right -->
                     <div class="col-span-2">
-                        <x-menu.part>
-                            <x-menu.item title="Vote"></x-menu.item>
-                            <x-menu.item title="Shop"></x-menu.item>
-                            <x-menu.item title="Admin" :children="['nothing']"></x-menu.item>
-                        </x-menu.part>
+                        <x-menu.side :roots="$rightRoots"/>
                     </div>
                 </div>
             </x-container.boxed>
