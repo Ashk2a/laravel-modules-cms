@@ -10,27 +10,29 @@
     w-full
     appearance-none
     border
-    border-gray-700
+    border-gray-900
     rounded-md
     shadow-sm
     text-base
+    text-gray-100
+    focus:text-white
     sm:text-sm
-    placeholder-gray-400
+    placeholder-gray-200
     focus:outline-none
-    focus:ring-gray-500
-    focus:border-gray-500
-    bg-gray-50
+    focus:ring-gold-500
+    focus:border-gold-500
+    bg-brown-600
 }
 
 .form-block-spacing-top {
-    @apply mt-4 block;
+    @apply mt-6 block;
 }
 
 /*--------------------------------------------------------------------------
 | Input
 |--------------------------------------------------------------------------*/
 .form-input {
-    @apply px-3 py-2;
+    @apply px-3 py-3;
 }
 
 /*--------------------------------------------------------------------------

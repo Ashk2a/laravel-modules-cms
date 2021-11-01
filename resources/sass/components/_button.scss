@@ -1,0 +1,125 @@
+/*--------------------------------------------------------------------------
+| Base
+|--------------------------------------------------------------------------*/
+.btn {
+    @apply
+    flex items-center
+    disabled:opacity-50 disabled:cursor-not-allowed
+    border-transparent border-[1px]
+    shadow-md
+    transition-colors duration-300
+    tracking-wide transform
+}
+
+/*--------------------------------------------------------------------------
+| Size
+|--------------------------------------------------------------------------*/
+.btn-xs {
+    @apply text-xs px-4 py-1;
+
+    > .btn-icon {
+        @apply h-3 w-3
+    }
+}
+
+.btn-sm {
+    @apply text-sm px-4 py-1.5;
+
+    > .btn-icon {
+        @apply h-4 w-4
+    }
+}
+
+.btn-base {
+    @apply text-base px-6 py-2;
+
+    > .btn-icon {
+        @apply h-5 w-5
+    }
+}
+
+.btn-xl {
+    @apply text-xl px-7 py-2.5;
+
+    > .btn-icon {
+        @apply h-6 w-6
+    }
+}
+
+.btn-2xl {
+    @apply text-2xl px-8 py-3;
+
+    > .btn-icon {
+        @apply h-7 w-7
+    }
+}
+
+/*--------------------------------------------------------------------------
+| Gold
+|--------------------------------------------------------------------------*/
+.btn-gold {
+    @apply
+    border-gold-200 hover:border-gold-400
+    text-white
+    bg-gold-600 hover:bg-gold-500
+}
+
+.btn-gold-invert {
+    @apply
+    border-gold-300 hover:border-gold-400
+    text-gold-300 hover:text-white
+    bg-transparent hover:bg-gold-800
+}
+
+/*--------------------------------------------------------------------------
+| Brown
+|--------------------------------------------------------------------------*/
+.btn-brown {
+    @apply
+    border-brown-200 hover:border-brown-400
+    text-white
+    bg-brown-300 hover:bg-brown-200
+}
+
+.btn-brown-invert {
+    @apply
+    border-brown-200 hover:border-brown-400
+    text-brown-200 hover:text-white
+    bg-transparent hover:bg-brown-200
+}
+
+/*--------------------------------------------------------------------------
+| Red
+|--------------------------------------------------------------------------*/
+.btn-red {
+    @apply
+    border-red-300 hover:border-red-200
+    text-gold-400 hover:text-gold-300
+    bg-red-800 hover:bg-red-700
+    ring-darkGray-900
+    ring-[1px]
+}
+
+.btn-red-invert {
+    @apply
+    border-red-500 hover:border-red-400
+    text-red-500 hover:text-white
+    bg-transparent hover:bg-red-800
+}
+
+/*--------------------------------------------------------------------------
+| Lightblue
+|--------------------------------------------------------------------------*/
+.btn-lightBlue {
+    @apply
+    border-lightBlue-200 hover:border-lightBlue-400
+    text-white
+    bg-lightBlue-500 hover:bg-lightBlue-400
+}
+
+.btn-lightBlue-invert {
+    @apply
+    border-lightBlue-200 hover:border-lightBlue-400
+    text-lightBlue-500 hover:text-white
+    bg-transparent hover:bg-lightBlue-500
+}

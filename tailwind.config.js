@@ -14,7 +14,10 @@ module.exports = {
         extend: {
             colors: theme.colors,
             fontSize: theme.fontSize,
-            fontFamily: theme.fontFamily
+            fontFamily: theme.fontFamily,
+            boxShadow: {
+                test: '0 0 5px 5px rgba(0,0,0,.2)',
+            },
         }
     },
     plugins: [

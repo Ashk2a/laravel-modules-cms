@@ -5,7 +5,7 @@
     class="menu-root"
 >
     <a
-        href="#"
+        href="{{ $root->href }}"
         :class="{'text-gray-50' : open === {{ $root->id }} }"
         class="menu-root-item"
     >
@@ -38,7 +38,7 @@
                 <ul class="ml-4 space-y-2">
                     @foreach($category->items as $item)
                         <li class="text-gold-400 hover:text-gray-50 xl:text-base text-sm">
-                            <a href="" class="">{{ $item->name }}</a>
+                            <a href="{{ $item->href }}" class="">{{ $item->name }}</a>
                         </li>
                     @endforeach
                 </ul>

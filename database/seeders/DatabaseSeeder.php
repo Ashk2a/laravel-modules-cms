@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\URL;
 
 class DatabaseSeeder extends Seeder
 {
@@ -121,6 +122,11 @@ class DatabaseSeeder extends Seeder
             'name' => 'Shop',
             'type' => MenuItem::TYPE_ROOT_SIDE_RIGHT,
             'href' => '/'
+        ],
+        [
+            'name' => 'Create an account',
+            'type' => MenuItem::TYPE_ROOT_SIDE_RIGHT,
+            'href' => '/auth/register'
         ],
     ];
 

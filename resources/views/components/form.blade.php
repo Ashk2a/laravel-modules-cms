@@ -10,6 +10,6 @@
     {!! $slot !!}
 
     @if ($showHelper === true)
-        <div class="text-right text-sm mt-4"><span class="text-red-500">* </span>@lang('global.required_fields')</div>
+        <div class="text-right text-white text-sm mt-4"><span class="text-red-500">* </span>@lang('global.required_fields')</div>
     @endif
 </form>

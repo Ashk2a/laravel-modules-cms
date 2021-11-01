@@ -7,7 +7,7 @@
 <header class="relative z-10">
     <nav class="fixed w-full" aria-label="top">
         <!-- Top navigation -->
-        <div class="bg-gray-900 bg-opacity-50">
+        <div class="bg-gray-900 bg-opacity-90">
             <x-container.boxed class="flex h-[30px] items-center justify-between">
                 <div class="flex flex-1 items-center justify-end">
                     {{--<a href="" class="text-sm text-gray-300 hover:text-gray-50">ACCOUNT</a>--}}
@@ -16,7 +16,7 @@
         </div>
 
         <!-- Secondary navigation -->
-        <div class="bg-black bg-opacity-20">
+        <div class="bg-brown-500 bg-opacity-90">
             <x-container.boxed class="border-b-[1px] border-black border-opacity-20">
                 <div class="grid grid-cols-5 lg:py-0 py-3">
                     <!-- Menu Left -->
