@@ -32,13 +32,13 @@
     >
         @foreach($root->categories as $category)
             <div class="col-span-1">
-                <h2 class="text-gray-50 font-medium">{{ $category->name }}</h2>
+                <h2 class="text-gray-50 font-medium xl:text-base text-sm">{{ $category->name }}</h2>
                 <div class="w-full bg-gold-900 h-[1px] mb-3"></div>
 
                 <ul class="ml-4 space-y-2">
                     @foreach($category->items as $item)
-                        <li class="text-gold-400 hover:text-gray-50">
-                            <a href="">{{ $item->name }}</a>
+                        <li class="text-gold-400 hover:text-gray-50 xl:text-base text-sm">
+                            <a href="" class="">{{ $item->name }}</a>
                         </li>
                     @endforeach
                 </ul>

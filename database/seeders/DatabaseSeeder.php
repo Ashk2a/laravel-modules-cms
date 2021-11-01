@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
     ];
 
     private const MENU = [
+        // Left side
         [
             'name' => 'News',
             'type' => MenuItem::TYPE_ROOT_SIDE_LEFT,
@@ -109,7 +110,18 @@ class DatabaseSeeder extends Seeder
                     ]
                 ]
             ]
-        ]
+        ],
+        // Right side
+        [
+            'name' => 'Vote',
+            'type' => MenuItem::TYPE_ROOT_SIDE_RIGHT,
+            'href' => '/'
+        ],
+        [
+            'name' => 'Shop',
+            'type' => MenuItem::TYPE_ROOT_SIDE_RIGHT,
+            'href' => '/'
+        ],
     ];
 
     /**

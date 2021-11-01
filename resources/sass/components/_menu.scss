@@ -3,7 +3,8 @@
 |--------------------------------------------------------------------------*/
 .menu-side {
     @apply relative
-    flex justify-between items-center;
+    hidden lg:flex
+    justify-between items-center;
 }
 
 /*--------------------------------------------------------------------------
@@ -23,7 +24,7 @@
 .menu-root-item {
     @apply flex inline-flex justify-center items-center
     w-full py-[1.5rem]
-    text-lg font-medium text-transparent
+    text-base xl:text-lg font-medium text-transparent
     bg-clip-text bg-gradient-to-b from-gold-500 to-gold-50
     group-hover:text-gray-50;
 }
@@ -39,9 +40,9 @@
 | Dropdown
 |--------------------------------------------------------------------------*/
 .menu-dropdown {
-    @apply absolute top-[4.80rem]
+    @apply absolute xl:top-[4.80rem] top-[4.6rem]
     p-6 w-full
-    grid grid-cols-2 gap-x-10
+    grid grid-cols-2 xl:gap-x-10 gap-x-6
     bg-gradient-to-t
     from-brown-600-80a
     to-brown-600-80a;
