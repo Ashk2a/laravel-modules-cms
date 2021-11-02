@@ -8,7 +8,6 @@ use App\Events\UserRegistered;
 use App\Events\UserVerified;
 use App\Exceptions\Auth\UserAlreadyVerifiedException;
 use App\Exceptions\Auth\UserNotVerifiedException;
-use App\Models\Auth\Account;
 use App\Models\Reminder;
 use App\Models\User;
 use App\Models\Verification;
@@ -41,19 +40,7 @@ class AuthService
             return null;
         }
 
-        $account = new Account();
-        $account
-            ->fill([
-                'username' => $username,
-                'email' => $email,
-                'reg_mail' => $email,
-                'salt' => $salt,
-                'verifier' => $verifier
-            ])
-            ->save();
-
         $user = new User();
-        $user->account()->associate($account);
         $user
             ->fill([
                 'nickname' => $nickname,
@@ -61,6 +48,14 @@ class AuthService
                 'password' => Hash::make($password)
             ])
             ->save();
+
+        $user->accounts()->create([
+            'username' => $username,
+            'email' => $email,
+            'reg_mail' => $email,
+            'salt' => $salt,
+            'verifier' => $verifier
+        ]);
 
         $verification = new Verification();
         $verification->user()->associate($user);
