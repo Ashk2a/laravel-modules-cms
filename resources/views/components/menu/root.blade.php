@@ -2,18 +2,18 @@
     @mouseover="open = {{ $root->id }}"
     @mouseleave="open = false"
     :class="{'menu-root-open' : open === {{ $root->id }} }"
-    class="menu-root"
+    class="menu-root group"
 >
     <a
         href="{{ $root->href }}"
-        :class="{'text-gray-50' : open === {{ $root->id }} }"
+        :class="{'text-gray-50' : open === {{ $root->id }}, 'text-transparent bg-clip-text bg-gradient-to-b from-gold-500 to-gold-50' : open !== {{ $root->id }} }"
         class="menu-root-item"
     >
         <span>{{ $root->name }}</span>
 
         @if (false === $root->categories->isEmpty())
             <x-heroicon
-                x-bind:class="{'text-gray-50' : open === {{ $root->id }} }"
+                x-bind:class="{'text-gray-50' : open === {{ $root->id }}, 'text-gold-300' : open !== {{ $root->id }} }"
                 class="menu-root-icon"
             >
                 M19 9l-7 7-7-7

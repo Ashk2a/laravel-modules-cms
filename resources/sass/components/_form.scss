@@ -2,7 +2,8 @@
 | Use by all form item
 |--------------------------------------------------------------------------*/
 .form {
-    color: theme('colors.black');
+    color: theme('colors.white');
+    @apply grid gap-y-6
 }
 
 .form-item {
@@ -22,10 +23,6 @@
     focus:ring-gold-500
     focus:border-gold-500
     bg-brown-600
-}
-
-.form-block-spacing-top {
-    @apply mt-6 block;
 }
 
 /*--------------------------------------------------------------------------
@@ -90,7 +87,7 @@
 }
 
 .form-label-space-y {
-    @apply mt-1;
+    @apply mb-1;
 }
 
 .form-item-required {

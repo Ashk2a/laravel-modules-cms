@@ -1,4 +1,4 @@
-<div class="form-block-spacing-top">
+<div>
     <x-form.label :label="$label" :required="true"/>
 
     <select

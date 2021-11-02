@@ -1,7 +1,7 @@
 @extends('layouts.default')
 
 @section('content')
-    <x-section.top class="bg-opacity-20" style="background-image: url('{{ asset('images/background/bg-1.jpg') }}')">
+    <x-section.top class="bg-opacity-20" style="background-image: url('{{ asset('images/background/home.jpg') }}')">
         <x-section.boxed class="h-[12rem]">
 
         </x-section.boxed>
