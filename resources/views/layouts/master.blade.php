@@ -22,6 +22,8 @@
 
 @yield('body')
 
+@include('partials.footer')
+
 @section('body_js') @endsection
 
 </body>

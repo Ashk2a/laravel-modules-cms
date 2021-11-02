@@ -7,7 +7,7 @@
 @endphp
 
 @section('content')
-    <x-section.top>
+    <x-section.top class="pb-10">
         <x-container.fluid>
             <x-container.boxed>
                 <h1 class="text-2xl">Button component</h1>

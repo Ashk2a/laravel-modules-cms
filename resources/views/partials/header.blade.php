@@ -7,7 +7,7 @@
 <header class="relative z-10">
     <nav class="fixed w-full" aria-label="top">
         <!-- Top navigation -->
-        <div class="bg-gray-900 bg-opacity-90">
+        <div class="bg-darkGray-900">
             <x-container.boxed class="flex h-[30px] items-center justify-between">
                 <div class="flex flex-1 items-center justify-end">
                     {{--<a href="" class="text-sm text-gray-300 hover:text-gray-50">ACCOUNT</a>--}}

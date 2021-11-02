@@ -5,6 +5,7 @@
 @import "components/button";
 @import "components/form";
 @import "components/menu";
+@import "components/section";
 
 [x-cloak] {
     display: none;
@@ -15,5 +16,5 @@ html {
 }
 
 body {
-    background-color: theme('colors.brown.500') !important;
+    background: url("/images/texture/dark-blue.jpg");
 }

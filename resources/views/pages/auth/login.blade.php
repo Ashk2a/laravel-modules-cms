@@ -1,8 +1,7 @@
 @extends('layouts.default')
 
 @section('content')
-    <x-section.top style="background-image: url('{{ asset('images/background/auth.jpg') }}')">
-        <x-section.boxed class="px-5 py-6 max-w-[30rem] bg-brown-500 bg-opacity-95 border-[2px] border-brown-400 shadow-test">
+    <x-section.auth>
             <h1 class="text-2xl text-white font-bold text-center mb-10">@lang('global.authentication')</h1>
 
             <x-form method="POST" :action="route('auth.login')">
@@ -12,7 +11,7 @@
                 <x-form.group>
                     <x-form.input type="password" name="password" :label="trans('global.password')"/>
                 </x-form.group>
-                <x-form.group class="flex justify-between text-sm">
+                <x-form.group class="flex justify-end text-sm">
                     <div class="flex items-center">
                         <x-form.checkbox name="remember_me" :label="trans('global.remember_me')"></x-form.checkbox>
                     </div>
@@ -31,8 +30,5 @@
                     <a href="{{ route('auth.register') }}">@lang('global.already_have_an_account')</a>
                 </div>
             </div>
-
-
-        </x-section.boxed>
-    </x-section.top>
+    </x-section.auth>
 @endsection
