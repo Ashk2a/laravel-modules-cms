@@ -123,3 +123,12 @@
     text-lightBlue-500 hover:text-white
     bg-transparent hover:bg-lightBlue-500
 }
+
+/*--------------------------------------------------------------------------
+| Discord
+|--------------------------------------------------------------------------*/
+.btn-discord {
+    @apply border-[#99aab5] hover:border-[#99aab5]
+    text-white
+    bg-[#7289da] hover:bg-opacity-95
+}
