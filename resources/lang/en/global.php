@@ -19,6 +19,7 @@ return [
     'send' => 'Send',
     'authentication' => 'Authentication',
     'reset_my_password' => 'Reset my password',
+    'reset_now' => 'Reset now',
     'forget_password' => 'Forget password ?',
     'forget_my_password' => 'Forget my password',
     'already_have_an_account' => 'Have not yet an account ?'
