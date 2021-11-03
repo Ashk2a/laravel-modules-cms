@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Contracts\Hashing\WotlkHasher;
 use App\Events\UserForgetPassword;
 use App\Events\UserRegistered;
+use App\Events\UserResetPassword;
 use App\Events\UserVerified;
 use App\Exceptions\Auth\UserAlreadyVerifiedException;
 use App\Exceptions\Auth\UserNotVerifiedException;
@@ -159,6 +160,8 @@ class AuthService
         $reminder->user->update([
             'password' => Hash::make($newPassword)
         ]);
+
+        event(new UserResetPassword($reminder->user));
 
         $reminder->delete();
     }

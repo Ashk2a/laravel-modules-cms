@@ -7,6 +7,7 @@ use App\Events\UserForgetPassword;
 use App\Events\UserLogin;
 use App\Events\UserLoginFailed;
 use App\Events\UserRegistered;
+use App\Events\UserResetPassword;
 use App\Events\UserVerified;
 use App\Notifications\ResetPasswordProcedure;
 use App\Notifications\VerificationSucceed;
@@ -19,7 +20,8 @@ class UserEventSubscriber extends BaseEventSubscriber
         UserLogin::class => 'onUserLogin',
         UserLoginFailed::class => 'onUserLoginFailed',
         UserVerified::class => 'onUserVerified',
-        UserForgetPassword::class => 'onUserForgetPassword'
+        UserForgetPassword::class => 'onUserForgetPassword',
+        UserResetPassword::class => 'onUserResetPassword',
     ];
 
     /**
@@ -65,5 +67,9 @@ class UserEventSubscriber extends BaseEventSubscriber
     public function onUserForgetPassword(UserForgetPassword $event): void
     {
         $event->reminder->user->notify(new ResetPasswordProcedure($event));
+    }
+
+    public function onUserResetPassword(UserResetPassword $event): void
+    {
     }
 }
