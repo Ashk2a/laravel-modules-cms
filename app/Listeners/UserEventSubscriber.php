@@ -69,6 +69,10 @@ class UserEventSubscriber extends BaseEventSubscriber
         $event->reminder->user->notify(new ResetPasswordProcedure($event));
     }
 
+    /**
+     * @param UserResetPassword $event
+     * @return void
+     */
     public function onUserResetPassword(UserResetPassword $event): void
     {
     }
