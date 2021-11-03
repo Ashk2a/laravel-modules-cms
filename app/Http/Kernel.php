@@ -5,7 +5,6 @@ namespace App\Http;
 use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\CheckConfiguration;
 use App\Http\Middleware\EncryptCookies;
-use App\Http\Middleware\Localization;
 use App\Http\Middleware\PreventRequestsDuringMaintenance;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Middleware\TrimStrings;
@@ -26,6 +25,11 @@ use Illuminate\Routing\Middleware\ThrottleRequests;
 use Illuminate\Routing\Middleware\ValidateSignature;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRedirectFilter;
+use Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRoutes;
+use Mcamara\LaravelLocalization\Middleware\LaravelLocalizationViewPath;
+use Mcamara\LaravelLocalization\Middleware\LocaleCookieRedirect;
+use Mcamara\LaravelLocalization\Middleware\LocaleSessionRedirect;
 
 class Kernel extends HttpKernel
 {
@@ -43,8 +47,7 @@ class Kernel extends HttpKernel
         ValidatePostSize::class,
         TrimStrings::class,
         ConvertEmptyStringsToNull::class,
-        CheckConfiguration::class,
-        Localization::class
+        CheckConfiguration::class
     ];
 
     /**
@@ -84,6 +87,11 @@ class Kernel extends HttpKernel
         'password.confirm' => RequirePassword::class,
         'signed' => ValidateSignature::class,
         'throttle' => ThrottleRequests::class,
-        'verified' => EnsureEmailIsVerified::class,
+        // Localization
+        'localize' => LaravelLocalizationRoutes::class,
+        'localizationRedirect' => LaravelLocalizationRedirectFilter::class,
+        'localeSessionRedirect' => LocaleSessionRedirect::class,
+        'localeCookieRedirect' => LocaleCookieRedirect::class,
+        'localeViewPath' => LaravelLocalizationViewPath::class
     ];
 }

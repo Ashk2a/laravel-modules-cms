@@ -8,56 +8,59 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
-Route::get('demo', function () {
-    return view('pages.demo');
-});
-
-/*--------------------------------------------------------------------------
-| Home
-|--------------------------------------------------------------------------*/
-Route::get('/', [HomeController::class, 'get'])->name('home');
-
-/*--------------------------------------------------------------------------
-| Guest
-|--------------------------------------------------------------------------*/
-Route::group(['middleware' => 'guest'], function () {
-    /*--------------------------------------------------------------------------
-    | Login
-    |--------------------------------------------------------------------------*/
-    Route::get('auth/login', [LoginController::class, 'get'])->name('auth.login');
-    Route::post('auth/login', [LoginController::class, 'post']);
+Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']], function () {
+    Route::get('demo', function () {
+        return view('pages.demo');
+    });
 
     /*--------------------------------------------------------------------------
-    | Register
+    | Home
     |--------------------------------------------------------------------------*/
-    Route::get('auth/register', [RegisterController::class, 'get'])->name('auth.register');
-    Route::post('auth/register', [RegisterController::class, 'post']);
+    Route::get('/', [HomeController::class, 'get'])->name('home');
 
     /*--------------------------------------------------------------------------
-    | Verify
+    | Guest
     |--------------------------------------------------------------------------*/
-    Route::get('auth/verify/{verification:token}', [VerificationController::class, 'get'])->name('auth.verify');
+    Route::group(['middleware' => 'guest'], function () {
+        /*--------------------------------------------------------------------------
+        | Login
+        |--------------------------------------------------------------------------*/
+        Route::get('auth/login', [LoginController::class, 'get'])->name('auth.login');
+        Route::post('auth/login', [LoginController::class, 'post']);
+
+        /*--------------------------------------------------------------------------
+        | Register
+        |--------------------------------------------------------------------------*/
+        Route::get('auth/register', [RegisterController::class, 'get'])->name('auth.register');
+        Route::post('auth/register', [RegisterController::class, 'post']);
+
+        /*--------------------------------------------------------------------------
+        | Verify
+        |--------------------------------------------------------------------------*/
+        Route::get('auth/verify/{verification:token}', [VerificationController::class, 'get'])->name('auth.verify');
+
+        /*--------------------------------------------------------------------------
+        | Forget password
+        |--------------------------------------------------------------------------*/
+        Route::get('auth/forget', [ForgetPasswordController::class, 'get'])->name('auth.forget');
+        Route::post('auth/forget', [ForgetPasswordController::class, 'post']);
+
+        /*--------------------------------------------------------------------------
+        | Reset password
+        |--------------------------------------------------------------------------*/
+        Route::get('auth/reset/{reminder:token}', [ResetPasswordController::class, 'get'])->name('auth.reset');
+        Route::post('auth/reset/{reminder:token}', [ResetPasswordController::class, 'post']);
+    });
 
     /*--------------------------------------------------------------------------
-    | Forget password
+    | Authenticated
     |--------------------------------------------------------------------------*/
-    Route::get('auth/forget', [ForgetPasswordController::class, 'get'])->name('auth.forget');
-    Route::post('auth/forget', [ForgetPasswordController::class, 'post']);
-
-    /*--------------------------------------------------------------------------
-    | Reset password
-    |--------------------------------------------------------------------------*/
-    Route::get('auth/reset/{reminder:token}', [ResetPasswordController::class, 'get'])->name('auth.reset');
-    Route::post('auth/reset/{reminder:token}', [ResetPasswordController::class, 'post']);
-});
-
-/*--------------------------------------------------------------------------
-| Authenticated
-|--------------------------------------------------------------------------*/
-Route::group(['middleware' => 'auth'], function () {
-    /*--------------------------------------------------------------------------
-    | Logout
-    |--------------------------------------------------------------------------*/
-    Route::get('auth/logout', [LogoutController::class, 'get'])->name('auth.logout');
+    Route::group(['middleware' => 'auth'], function () {
+        /*--------------------------------------------------------------------------
+        | Logout
+        |--------------------------------------------------------------------------*/
+        Route::get('auth/logout', [LogoutController::class, 'get'])->name('auth.logout');
+    });
 });

@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug' => (bool)env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -79,6 +79,8 @@ return [
     | to any of the locales which will be supported by the application.
     |
     */
+
+    'available_locales' => ['en', 'fr'],
 
     'locale' => 'en',
 

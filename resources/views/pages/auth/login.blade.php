@@ -23,11 +23,11 @@
 
             <div class="flex items-center justify-between text-sm italic text-right text-sm italic text-gold-400 hover:text-gold-600 mt-6">
                 <div class="flex">
-                    <a href="{{ route('auth.forget') }}">@lang('global.forget_password')</a>
+                    <a href="{{ locale()->localizeURL(route('auth.forget')) }}">@lang('global.forget_password')</a>
                 </div>
 
                 <div class="flex">
-                    <a href="{{ route('auth.register') }}">@lang('global.already_have_an_account')</a>
+                    <a href="{{ locale()->localizeURL(route('auth.register')) }}">@lang('global.already_have_an_account')</a>
                 </div>
             </div>
     </x-section.auth>

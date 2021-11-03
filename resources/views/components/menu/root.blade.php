@@ -5,7 +5,7 @@
     class="menu-root group"
 >
     <a
-        href="{{ $root->href }}"
+        href="{{ locale()->localizeURL($root->href) }}"
         :class="{'text-gray-50' : open === {{ $root->id }}, 'text-transparent bg-clip-text bg-gradient-to-b from-gold-500 to-gold-50' : open !== {{ $root->id }} }"
         class="menu-root-item"
     >
@@ -38,7 +38,7 @@
                 <ul class="ml-4 space-y-2">
                     @foreach($category->items as $item)
                         <li class="text-gold-400 hover:text-gray-50 xl:text-base text-sm">
-                            <a href="{{ $item->href }}" class="">{{ $item->name }}</a>
+                            <a href="{{ locale()->localizeURL($item->href) }}" class="">{{ $item->name }}</a>
                         </li>
                     @endforeach
                 </ul>
