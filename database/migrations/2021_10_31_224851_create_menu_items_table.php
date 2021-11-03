@@ -18,7 +18,7 @@ class CreateMenuItemsTable extends Migration
             $table->integer('type');
             $table->integer('position');
             $table->foreignId('parent_id')->nullable()->references('id')->on('menu_items');
-            $table->string('name');
+            $table->json('name');
             $table->string('href')->nullable();
 
             $table->timestamps();

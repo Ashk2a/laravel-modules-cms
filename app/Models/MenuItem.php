@@ -12,6 +12,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
 use JetBrains\PhpStorm\Pure;
+use Spatie\Translatable\HasTranslations;
 
 /**
  * App\Models\MenuItem
@@ -35,10 +36,14 @@ use JetBrains\PhpStorm\Pure;
  */
 class MenuItem extends Model
 {
+    use HasTranslations;
+
     public const TYPE_ROOT_SIDE_LEFT = 0;
     public const TYPE_ROOT_SIDE_RIGHT = 1;
     public const TYPE_CATEGORY = 2;
     public const TYPE_NORMAL_ITEM = 3;
+
+    public $translatable = ['name'];
 
     /**
      * @var array
