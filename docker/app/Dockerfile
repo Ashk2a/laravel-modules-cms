@@ -47,6 +47,7 @@ RUN install-php-extensions \
     bcmath \
     igbinary \
     gd \
+    exif \
     zip \
     swoole \
     pcntl \
