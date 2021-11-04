@@ -2,24 +2,29 @@
 
 namespace Database\Seeders;
 
+use App\Models\Auth\Account;
 use App\Models\DbConnection;
 use App\Models\MenuItem;
+use App\Models\News;
+use App\Models\NewsCategory;
 use App\Models\Server;
+use App\Models\User;
+use App\Services\AuthService;
+use App\Services\NewsService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\URL;
 
 class DatabaseSeeder extends Seeder
 {
-    private const DEFAULT_WORLD_DB_CONNECTION = [
+    private const WORLD_DB_CONNECTION = [
         'name' => 'docker-world',
         'type' => DbConnection::TYPE_WORLD,
         'database' => 'acore_world',
     ];
 
-    private const DEFAULT_CHARACTERS_DB_CONNECTION = [
+    private const CHARACTERS_DB_CONNECTION = [
         'name' => 'docker-characters',
         'type' => DbConnection::TYPE_CHARACTERS,
         'database' => 'acore_characters',
@@ -30,7 +35,7 @@ class DatabaseSeeder extends Seeder
         [
             'name' => 'News',
             'type' => MenuItem::TYPE_ROOT_SIDE_LEFT,
-            'href' => '/'
+            'href' => '/news'
         ],
         [
             'name' => 'Game',
@@ -130,10 +135,24 @@ class DatabaseSeeder extends Seeder
         ],
     ];
 
+    private const NEWS_CATEGORIES = [
+        ['en' => 'News', 'fr' => 'Nouveautés'],
+        ['en' => 'Events', 'fr' => 'Évènements'],
+        ['en' => 'Competition', 'fr' => 'Concours'],
+    ];
+
+    private array $dbConnectionTemplate;
+
+    private User $adminUser;
+
     /**
-     * @param array $dbConnectionTemplate
+     * @param AuthService $authService
+     * @param NewsService $newsService
      */
-    public function __construct(private array $dbConnectionTemplate = [])
+    public function __construct(
+        private AuthService $authService,
+        private NewsService $newsService
+    )
     {
         $this->dbConnectionTemplate = [
             'host' => Config::get('database.connections.auth.host'),
@@ -154,20 +173,41 @@ class DatabaseSeeder extends Seeder
     {
         Model::unguard();
 
+        // Clear all accounts for tests
+        Account::where('id', '>', 0)->delete();
+
+        $this->adminUser = $this->createAdminUser();
         $this->createDefaultServer();
         $this->createMenu();
+
+        $this->createNewsCategories();
+        $this->createNews(10);
     }
 
     /**
-     * @return Server
+     * @return User
      */
-    private function createDefaultServer(): Server
+    private function createAdminUser(): User
+    {
+        return $this->authService->register(
+            'admin',
+            'admin',
+            'admin@example.com',
+            'password',
+            true
+        );
+    }
+
+    /**
+     * @return void
+     */
+    private function createDefaultServer(): void
     {
         $worldDbConnection = DbConnection::factory()
             ->create(
                 array_merge(
                     $this->dbConnectionTemplate,
-                    self::DEFAULT_WORLD_DB_CONNECTION
+                    self::WORLD_DB_CONNECTION
                 )
             );
 
@@ -175,11 +215,11 @@ class DatabaseSeeder extends Seeder
             ->create(
                 array_merge(
                     $this->dbConnectionTemplate,
-                    self::DEFAULT_CHARACTERS_DB_CONNECTION
+                    self::CHARACTERS_DB_CONNECTION
                 )
             );
 
-        return Server::factory()
+        Server::factory()
             ->create([
                 'realmlist_id' => 1,
                 'world_db_connection_id' => $worldDbConnection->id,
@@ -209,7 +249,7 @@ class DatabaseSeeder extends Seeder
                 );
 
                 foreach ($categoryDefinition['items'] ?? [] as $itemPosition => $itemDefinition) {
-                    $item = $this->createMenuItem(
+                    $this->createMenuItem(
                         $itemPosition,
                         MenuItem::TYPE_NORMAL_ITEM,
                         $category->id,
@@ -241,5 +281,42 @@ class DatabaseSeeder extends Seeder
         $menuItem->save();
 
         return $menuItem;
+    }
+
+    /**
+     * @return void
+     */
+    private function createNewsCategories(): void
+    {
+        foreach (self::NEWS_CATEGORIES as $categoryNames) {
+            NewsCategory::create([
+                'name' => $categoryNames
+            ]);
+        }
+    }
+
+    /**
+     * @param int $count
+     * @return void
+     */
+    private function createNews(int $count = 30): void
+    {
+        /**
+         * @var $allNews News[]
+         */
+        $allNews = News::factory()
+            ->count($count)
+            ->for($this->adminUser, 'author')
+            ->make();
+
+        foreach ($allNews as $news) {
+            $this->newsService->create(
+                $news->author,
+                $news->getTranslations('title'),
+                $news->getTranslations('description'),
+                $news->getTranslations('content'),
+                $news->category
+            );
+        }
     }
 }

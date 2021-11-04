@@ -33,6 +33,7 @@ use Spatie\Translatable\HasTranslations;
  * @property-read MenuItem|null $category
  * @property-read Collection|MenuItem[] $items
  * @property-read MenuItem|null $root
+ * @property-read array $translations
  */
 class MenuItem extends Model
 {
