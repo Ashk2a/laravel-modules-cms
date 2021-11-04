@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\NewsController;
 use App\Http\Controllers\Auth\ForgetPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
@@ -19,6 +20,11 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
     | Home
     |--------------------------------------------------------------------------*/
     Route::get('/', [HomeController::class, 'get'])->name('home');
+
+    /*--------------------------------------------------------------------------
+    | News
+    |--------------------------------------------------------------------------*/
+    Route::resource('news', NewsController::class, ['only' => ['index', 'show']]);
 
     /*--------------------------------------------------------------------------
     | Guest

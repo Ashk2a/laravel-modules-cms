@@ -2,7 +2,7 @@
 
 @section('content')
     <x-section.auth>
-            <h1 class="text-2xl text-white font-bold text-center mb-10">@lang('global.authentication')</h1>
+            <h1 class="text-2xl text-white font-bold text-center mb-10 text-shadow">@lang('global.authentication')</h1>
 
             <x-form method="POST" :action="route('auth.login')">
                 <x-form.group>

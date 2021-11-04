@@ -6,6 +6,7 @@ return [
     'required_fields' => 'Required fields',
 
     'email' => 'Email address',
+    'news_and_update' => 'News and update',
     'username' => 'Account name',
     'nickname' => 'Nickname',
     'password' => 'Password',

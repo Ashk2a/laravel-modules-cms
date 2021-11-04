@@ -43,7 +43,7 @@ class MenuItem extends Model
     public const TYPE_CATEGORY = 2;
     public const TYPE_NORMAL_ITEM = 3;
 
-    public $translatable = ['name'];
+    public array $translatable = ['name'];
 
     /**
      * @var array

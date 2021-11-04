@@ -2,9 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "utils/text";
+
 @import "components/button";
 @import "components/form";
 @import "components/menu";
+@import "components/news";
 @import "components/section";
 
 [x-cloak] {

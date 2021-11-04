@@ -37,7 +37,9 @@
 
                     <!-- Center - Logo -->
                     <div class="col-span-1">
-                        <img src="{{ asset('images/logo/img.png') }}" class="absolute left-1/2 transform -translate-x-1/2 mt-[-40px] lg:mt-[-30px] h-[9.5rem] md:h-[13.5rem] xl:h-[14.5rem]" alt="Logo"/>
+                        <a href="{{ locale()->localizeURL(route('home')) }}" class="hover:opacity-95">
+                            <img src="{{ asset('images/logo/img.png') }}" class="absolute left-1/2 transform -translate-x-1/2 mt-[-40px] lg:mt-[-30px] h-[9.5rem] md:h-[13.5rem] xl:h-[14.5rem]" alt="Logo"/>
+                        </a>
                     </div>
 
                     <!-- Menu Right -->

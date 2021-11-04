@@ -1,0 +1,14 @@
+.news-item {
+    @apply grid grid-cols-8 gap-x-8
+    hover:bg-black hover:bg-opacity-20
+    p-8
+    border-darkGray-800 border-b-[1px] first:border-t-[1px]
+}
+
+.news-item-image {
+    @apply hidden sm:block
+    sm:col-span-2 col-span-3
+    bg-cover bg-no-repeat
+    w-full h-[100px] lg:h-[175px]
+    border-gray-700 border-[1px] group-hover:border-gold-500
+}
