@@ -6,9 +6,12 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateMediaTable extends Migration
 {
-    public function up()
+    /**
+     * @return void
+     */
+    public function up(): void
     {
-        Schema::create('media', function (Blueprint $table) {
+        Schema::create('medias', function (Blueprint $table) {
             $table->bigIncrements('id');
 
             $table->morphs('model');
