@@ -8,16 +8,16 @@
     <nav class="fixed w-full" aria-label="top">
         <!-- Top navigation -->
         <div class="bg-darkGray-900">
-            <x-container.boxed class="flex h-[30px] items-center justify-between">
+            <x-container.default class="flex h-[30px] items-center justify-between">
                 <div class="flex flex-1 items-center justify-end">
                     {{--<a href="" class="text-sm text-gray-300 hover:text-gray-50">ACCOUNT</a>--}}
                 </div>
-            </x-container.boxed>
+            </x-container.default>
         </div>
 
         <!-- Secondary navigation -->
         <div class="bg-brown-500 bg-opacity-90">
-            <x-container.boxed class="border-b-[1px] border-black border-opacity-20">
+            <x-container.default class="border-b-[1px] border-black border-opacity-20">
                 <div class="grid grid-cols-5 lg:py-0 py-3">
                     <!-- Menu Left -->
                     <div class="col-span-2">
@@ -47,7 +47,7 @@
                         <x-menu.side :roots="$rightRoots"/>
                     </div>
                 </div>
-            </x-container.boxed>
+            </x-container.default>
         </div>
     </nav>
 </header>
