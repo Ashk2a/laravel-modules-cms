@@ -41,14 +41,11 @@ class AuthService
             return null;
         }
 
-        $user = new User();
-        $user
-            ->fill([
-                'nickname' => $nickname,
-                'email' => $email,
-                'password' => Hash::make($password)
-            ])
-            ->save();
+        $user = User::create([
+            'nickname' => $nickname,
+            'email' => $email,
+            'password' => Hash::make($password)
+        ]);
 
         $user->accounts()->create([
             'username' => $username,
