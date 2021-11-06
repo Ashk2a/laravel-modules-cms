@@ -1,4 +1,4 @@
-$shadow: rgba(0, 0, 0, 0.5);
+$shadow: rgba(0, 0, 0, 0.15);
 
 .text-shadow {
     text-shadow: 1px 0 0 $shadow, -1px 0 0 $shadow, 0 1px 0 $shadow, 0 -2px 0 $shadow, 1px 1px $shadow, -1px -1px 0 $shadow, 1px -1px 0 $shadow, -1px 1px 0 $shadow;

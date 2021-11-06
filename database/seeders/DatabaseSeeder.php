@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
     private const MENU = [
         // Left side
         [
-            'name' => 'News',
+            'name' => ['en' => 'News', 'fr' => 'Actualités'],
             'type' => MenuItem::TYPE_ROOT_SIDE_LEFT,
             'href' => '/news'
         ],
@@ -131,7 +131,7 @@ class DatabaseSeeder extends Seeder
         [
             'name' => 'Create an account',
             'type' => MenuItem::TYPE_ROOT_SIDE_RIGHT,
-            'href' => '/auth/register'
+            'href' => '/register'
         ],
     ];
 

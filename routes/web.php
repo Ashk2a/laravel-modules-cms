@@ -33,31 +33,31 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
         /*--------------------------------------------------------------------------
         | Login
         |--------------------------------------------------------------------------*/
-        Route::get('auth/login', [LoginController::class, 'get'])->name('auth.login');
-        Route::post('auth/login', [LoginController::class, 'post']);
+        Route::get('login', [LoginController::class, 'get'])->name('auth.login');
+        Route::post('login', [LoginController::class, 'post']);
 
         /*--------------------------------------------------------------------------
         | Register
         |--------------------------------------------------------------------------*/
-        Route::get('auth/register', [RegisterController::class, 'get'])->name('auth.register');
-        Route::post('auth/register', [RegisterController::class, 'post']);
+        Route::get('register', [RegisterController::class, 'get'])->name('auth.register');
+        Route::post('register', [RegisterController::class, 'post']);
 
         /*--------------------------------------------------------------------------
         | Verify
         |--------------------------------------------------------------------------*/
-        Route::get('auth/verify/{verification:token}', [VerificationController::class, 'get'])->name('auth.verify');
+        Route::get('verify/{verification:token}', [VerificationController::class, 'get'])->name('auth.verify');
 
         /*--------------------------------------------------------------------------
         | Forget password
         |--------------------------------------------------------------------------*/
-        Route::get('auth/forget', [ForgetPasswordController::class, 'get'])->name('auth.forget');
-        Route::post('auth/forget', [ForgetPasswordController::class, 'post']);
+        Route::get('forget', [ForgetPasswordController::class, 'get'])->name('auth.forget');
+        Route::post('forget', [ForgetPasswordController::class, 'post']);
 
         /*--------------------------------------------------------------------------
         | Reset password
         |--------------------------------------------------------------------------*/
-        Route::get('auth/reset/{reminder:token}', [ResetPasswordController::class, 'get'])->name('auth.reset');
-        Route::post('auth/reset/{reminder:token}', [ResetPasswordController::class, 'post']);
+        Route::get('reset/{reminder:token}', [ResetPasswordController::class, 'get'])->name('auth.reset');
+        Route::post('reset/{reminder:token}', [ResetPasswordController::class, 'post']);
     });
 
     /*--------------------------------------------------------------------------
@@ -67,6 +67,6 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
         /*--------------------------------------------------------------------------
         | Logout
         |--------------------------------------------------------------------------*/
-        Route::get('auth/logout', [LogoutController::class, 'get'])->name('auth.logout');
+        Route::get('logout', [LogoutController::class, 'get'])->name('auth.logout');
     });
 });

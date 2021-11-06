@@ -6,10 +6,6 @@
     @apply h-[16rem] md:h-[20rem] lg:h-[26rem] xl:h-[28rem] bg-no-repeat bg-top bg-cover;
 }
 
-.section-padding-bot-footer {
+.section-full {
     @apply pb-[4rem] md:pb-[8rem] lg:pb-[9rem] xl:pb-[11rem];
-}
-
-.section-boxed-auth {
-    @apply px-5 py-6 bg-brown-500 bg-opacity-95 border-[2px] border-brown-400;
 }
