@@ -60,11 +60,11 @@ class MenuItem extends Model
     /**
      * @return Collection|array|MenuItem[]
      */
-    public static function buildTree(): Collection|array
+    public static function buildTree(array $types): Collection|array
     {
         return self::query()
             ->with(['categories', 'categories.items'])
-            ->whereIn('type', [self::TYPE_ROOT_SIDE_LEFT, self::TYPE_ROOT_SIDE_RIGHT])
+            ->whereIn('type', $types)
             ->get();
     }
 

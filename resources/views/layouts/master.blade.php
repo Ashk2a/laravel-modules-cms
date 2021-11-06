@@ -18,11 +18,9 @@
 
     @section('head_js') @endsection
 </head>
-<body id="app">
+<body>
 
 @yield('body')
-
-@include('partials.footer')
 
 @section('body_js') @endsection
 

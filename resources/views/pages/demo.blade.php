@@ -3,7 +3,7 @@
 @php
     $colors = ['red', 'lightBlue', 'gold', 'brown'];
     $types = ['', 'invert'];
-    $sizes = ['xs', 'sm', 'base', 'xl', '2xl']
+    $sizes = ['xs', 'sm', 'base', 'xl', '2xl'];
 @endphp
 
 @section('content')

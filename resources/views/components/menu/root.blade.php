@@ -6,6 +6,7 @@
 >
     <a
         href="{{ locale()->localizeURL($root->href) }}"
+        @if (false === $root->categories->isEmpty()) @click.prevent="" @endif
         :class="{'text-gray-50' : open === {{ $root->id }}, 'text-transparent bg-clip-text bg-gradient-to-b from-gold-500 to-gold-50' : open !== {{ $root->id }} }"
         class="menu-root-item"
     >

@@ -1,7 +1,6 @@
 @php
-    $menu = \App\Models\MenuItem::buildTree();
-    $leftRoots = $menu->where('type', \App\Models\MenuItem::TYPE_ROOT_SIDE_LEFT);
-    $rightRoots = $menu->where('type', \App\Models\MenuItem::TYPE_ROOT_SIDE_RIGHT);
+    $leftRoots = \App\Models\MenuItem::buildTree([\App\Models\MenuItem::TYPE_ROOT_SIDE_LEFT]);
+    $rightRoots = \App\Models\MenuItem::buildTree([\App\Models\MenuItem::TYPE_ROOT_SIDE_RIGHT]);
 @endphp
 
 <header class="relative z-10">
@@ -21,7 +20,7 @@
                 <div class="grid grid-cols-5 lg:py-0 py-3">
                     <!-- Menu Left -->
                     <div class="col-span-2">
-                        <x-menu.side :roots="$leftRoots"/>
+                        <x-menu.nav :roots="$leftRoots"/>
 
                         <!-- Mobile menu (lg-) -->
                         <div class="flex flex-1 items-center lg:hidden">
@@ -44,7 +43,7 @@
 
                     <!-- Menu Right -->
                     <div class="col-span-2">
-                        <x-menu.side :roots="$rightRoots"/>
+                        <x-menu.nav :roots="$rightRoots"/>
                     </div>
                 </div>
             </x-container.default>

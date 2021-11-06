@@ -1,4 +1,4 @@
-@props(['title' => 'MISSING TITLE'])
+@props(['title' => 'MISSING TITLE', 'actions' => null])
 
 <x-container.fluid {{ $attributes->merge(['class' => 'section-title flex']) }}>
     <x-container.default class="flex items-end">
@@ -7,9 +7,11 @@
                 <h1 class="text-white text-shadow text-xl md:text-2xl lg:text-3xl font-medium" style="">{{ $title }}</h1>
             </div>
 
-            <div class="flex">
-                <x-button class="btn-lightBlue btn-sm">Ok</x-button>
-            </div>
+            @if ($actions)
+                <div class="flex">
+                    {{ $actions }}
+                </div>
+            @endif
         </div>
     </x-container.default>
 </x-container.fluid>
