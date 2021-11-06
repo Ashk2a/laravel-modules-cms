@@ -41,8 +41,9 @@ class MenuItem extends Model
 
     public const TYPE_ROOT_SIDE_LEFT = 0;
     public const TYPE_ROOT_SIDE_RIGHT = 1;
-    public const TYPE_CATEGORY = 2;
-    public const TYPE_NORMAL_ITEM = 3;
+    public const TYPE_ROOT_ADMIN = 2;
+    public const TYPE_CATEGORY = 3;
+    public const TYPE_NORMAL_ITEM = 4;
 
     public array $translatable = ['name'];
 
@@ -132,7 +133,7 @@ class MenuItem extends Model
     public function root(): BelongsTo
     {
         return $this->belongsTo(__CLASS__, 'parent_id', 'id')
-            ->whereIn('type', [self::TYPE_ROOT_SIDE_LEFT, self::TYPE_ROOT_SIDE_RIGHT]);
+            ->whereIn('type', [self::TYPE_ROOT_SIDE_LEFT, self::TYPE_ROOT_SIDE_RIGHT, self::TYPE_ROOT_ADMIN]);
     }
 
     /**

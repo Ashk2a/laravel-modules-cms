@@ -15,22 +15,22 @@ class MenuSeeder extends Seeder
             'href' => '/news'
         ],
         [
-            'name' => 'Game',
+            'name' => ['en' => 'Game', 'fr' => 'Jeu'],
             'type' => MenuItem::TYPE_ROOT_SIDE_LEFT,
             'categories' => [
                 [
-                    'name' => 'Play with us',
+                    'name' => ['en' => 'Play with us', 'fr' => 'Jouer avec nous'],
                     'items' => [
                         [
-                            'name' => 'Create an account',
+                            'name' => ['en' => 'Create an account', 'fr' => 'Créer un compte'],
                             'href' => '#'
                         ],
                         [
-                            'name' => 'Account transfer',
+                            'name' => ['en' => 'Account transfer', 'fr' => 'Transfert de compte'],
                             'href' => '#'
                         ],
                         [
-                            'name' => 'Download the game',
+                            'name' => ['en' => 'Download the game', 'fr' => 'Télécharger le jeu'],
                             'href' => '#'
                         ]
                     ]
@@ -39,15 +39,15 @@ class MenuSeeder extends Seeder
                     'name' => 'Mythic Difficulty',
                     'items' => [
                         [
-                            'name' => 'About us',
+                            'name' => ['en' => 'About us', 'fr' => 'À propos de nous'],
                             'href' => '#'
                         ],
                         [
-                            'name' => 'The concept',
+                            'name' => ['en' => 'Our concept', 'fr' => 'Notre concept'],
                             'href' => '#'
                         ],
                         [
-                            'name' => 'Rules and conditions',
+                            'name' => ['en' => 'Rules and conditions', 'fr' => 'Règles et conditions'],
                             'href' => '#'
                         ]
                     ]
@@ -101,12 +101,12 @@ class MenuSeeder extends Seeder
             'href' => '/'
         ],
         [
-            'name' => 'Shop',
+            'name' => ['en' => 'Shop', 'fr' => 'Boutique'],
             'type' => MenuItem::TYPE_ROOT_SIDE_RIGHT,
             'href' => '/'
         ],
         [
-            'name' => 'Create an account',
+            'name' => ['en' => 'Create an account', 'fr' => 'Créer un compte'],
             'type' => MenuItem::TYPE_ROOT_SIDE_RIGHT,
             'href' => '/register'
         ],
