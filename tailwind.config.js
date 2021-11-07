@@ -1,5 +1,3 @@
-const plugin = require("tailwindcss/plugin");
-const colors = require("tailwindcss/colors");
 const theme = require("./theme");
 
 module.exports = {
@@ -8,7 +6,8 @@ module.exports = {
         './resources/**/*.blade.php',
         './resources/**/*.scss',
         './src/**/*.{js,jsx,ts,tsx,vue}',
-        './config/tall-toasts.php'
+        './config/tall-toasts.php',
+        './vendor/filament/forms/resources/views/**/*.blade.php',
     ],
     theme: {
         extend: {
@@ -23,6 +22,7 @@ module.exports = {
     plugins: [
         require('postcss-import'),
         require('@tailwindcss/forms'),
+        require('@tailwindcss/typography'),
         require('autoprefixer')
     ]
 }

@@ -1,5 +1,9 @@
+const colors = require("tailwindcss/colors");
+
 module.exports = {
     colors: {
+        danger: colors.rose,
+        primary: colors.blue,
         gold: {
             '50': '#ffe291',
             '100': '#fdd464',

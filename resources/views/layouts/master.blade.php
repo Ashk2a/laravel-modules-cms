@@ -1,28 +1,26 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>{{ config('app.name') }}</title>
+
+    <meta charset="utf-8">
+    <meta name="application-name" content="{{ config('app.name') }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     @livewireStyles
 
-    <link href="{{ asset('css/tailwind.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    @section('head_style') @endsection
+    @stack('styles')
 
     @livewireScripts
     @toastScripts
     <script src="{{ asset('js/app.js') }}" defer></script>
-
-    @section('head_js') @endsection
+    @stack('scripts')
 </head>
-<body>
+<body class="antialiased">
 
 @yield('body')
-
-@section('body_js') @endsection
 
 </body>
 </html>

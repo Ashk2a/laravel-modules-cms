@@ -11,7 +11,7 @@
         "php": "^8.0",
         "ext-gmp": "*",
         "ext-pdo": "*",
-        "ahmed-aliraqi/laravel-media-uploader": "^6.2",
+        "filament/forms": "^2.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.54",
