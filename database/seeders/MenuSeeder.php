@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Abstractions\Database\Seeders\BaseSeeder;
 use App\Models\MenuItem;
 use Illuminate\Support\Arr;
+use Spatie\Permission\Models\Permission;
 
 class MenuSeeder extends BaseSeeder
 {
@@ -113,7 +114,14 @@ class MenuSeeder extends BaseSeeder
         ],
     ];
 
-    private const ADMIN_MENU = [];
+    private const ADMIN_MENU = [
+        [
+            'name' => ['en' => 'Dashboard', 'fr' => 'Tableau de bord'],
+            'type' => MenuItem::TYPE_ROOT_ADMIN,
+            'href' => '/manager',
+            'required_permission_name' => 'manager'
+        ],
+    ];
 
     /**
      * @return void
@@ -169,9 +177,14 @@ class MenuSeeder extends BaseSeeder
     {
         $href = Arr::get($definition, 'href');
         $typeHref = Arr::get($definition, 'type_href');
+        $requiredPermissionName = Arr::get($definition, 'required_permission_name');
 
         if (null !== $href && null === $typeHref) {
             $typeHref = MenuItem::TYPE_HREF_INTERNAL;
+        }
+
+        if (null !== $requiredPermissionName) {
+            $definition['required_permission_id'] = Permission::where('name', $requiredPermissionName)->first()?->id;
         }
 
         return MenuItem::create([

@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\NewsController;
 use App\Http\Controllers\Auth\ForgetPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
@@ -8,6 +7,8 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Manager\DashboardController;
+use App\Http\Controllers\NewsController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -68,5 +69,12 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
         | Logout
         |--------------------------------------------------------------------------*/
         Route::get('logout', [LogoutController::class, 'get'])->name('auth.logout');
+    });
+
+    /*--------------------------------------------------------------------------
+    | Manager
+    |--------------------------------------------------------------------------*/
+    Route::group(['prefix' => 'manager'], function () {
+        Route::get('/', [DashboardController::class, 'index'])->name('manager.index');
     });
 });

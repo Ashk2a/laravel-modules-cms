@@ -1,5 +1,5 @@
 @php
-    $roots = \App\Models\MenuItem::buildTree([\App\Models\MenuItem::TYPE_ROOT_SIDE_LEFT, \App\Models\MenuItem::TYPE_ROOT_SIDE_RIGHT]);
+    $roots = \App\Models\MenuItem::buildTree([\App\Models\MenuItem::TYPE_ROOT_ADMIN]);
 @endphp
 
 <div x-data="{side: false}">
