@@ -2,13 +2,13 @@
 
 namespace Database\Seeders;
 
+use App\Abstractions\Database\Seeders\BaseSeeder;
 use App\Models\News;
 use App\Models\NewsCategory;
 use App\Models\User;
 use App\Services\NewsService;
-use Illuminate\Database\Seeder;
 
-class NewsSeeder extends Seeder
+class NewsSeeder extends BaseSeeder
 {
     private const NEWS_CATEGORIES = [
         ['en' => 'News', 'fr' => 'Nouveautés'],
@@ -23,7 +23,7 @@ class NewsSeeder extends Seeder
      */
     public function __construct(private NewsService $newsService)
     {
-        $this->adminUser = UserSeeder::fetchAdminUser();
+        $this->adminUser = $this->fetchAdminUser();
     }
 
     /**

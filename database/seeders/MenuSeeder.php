@@ -2,10 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Abstractions\Database\Seeders\BaseSeeder;
 use App\Models\MenuItem;
-use Illuminate\Database\Seeder;
+use Illuminate\Support\Arr;
 
-class MenuSeeder extends Seeder
+class MenuSeeder extends BaseSeeder
 {
     private const PUBLIC_MENU = [
         // Left side
@@ -166,17 +167,22 @@ class MenuSeeder extends Seeder
      */
     private function createMenuItem(int $position, int $type, ?int $parentId = null, array $definition = []): MenuItem
     {
-        $menuItem = new MenuItem();
-        $menuItem->fill([
+        $href = Arr::get($definition, 'href');
+        $typeHref = Arr::get($definition, 'type_href');
+
+        if (null !== $href && null === $typeHref) {
+            $typeHref = MenuItem::TYPE_HREF_INTERNAL;
+        }
+
+        return MenuItem::create([
             'position' => $position,
             'name' => $definition['name'],
             'type' => $type,
-            'href' => $definition['href'] ?? null,
-            'parent_id' => $parentId
+            'href' => $href,
+            'type_href' => $typeHref,
+            'parent_id' => $parentId,
+            'auth_condition' => Arr::get($definition, 'auth_condition', MenuItem::AUTH_CONDITION_NONE),
+            'required_permission_id' => Arr::get($definition, 'required_permission_id')
         ]);
-
-        $menuItem->save();
-
-        return $menuItem;
     }
 }

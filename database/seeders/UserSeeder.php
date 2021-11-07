@@ -2,12 +2,13 @@
 
 namespace Database\Seeders;
 
+use App\Abstractions\Database\Seeders\BaseSeeder;
 use App\Models\Auth\Account;
+use App\Models\Role;
 use App\Models\User;
 use App\Services\AuthService;
-use Illuminate\Database\Seeder;
 
-class UserSeeder extends Seeder
+class UserSeeder extends BaseSeeder
 {
     public const ADMIN_USERNAME = 'admin';
     public const ADMIN_NICKNAME = 'admin';
@@ -22,14 +23,6 @@ class UserSeeder extends Seeder
     }
 
     /**
-     * @return User
-     */
-    public static function fetchAdminUser(): User
-    {
-        return User::where('email', self::ADMIN_EMAIL)->first();
-    }
-
-    /**
      * @return void
      */
     public function run(): void
@@ -37,12 +30,14 @@ class UserSeeder extends Seeder
         // Remove admin auth.account
         Account::where('username', self::ADMIN_USERNAME)->delete();
 
-        $this->authService->register(
+        $user = $this->authService->register(
             self::ADMIN_USERNAME,
             self::ADMIN_NICKNAME,
             self::ADMIN_EMAIL,
             self::ADMIN_PASSWORD,
             true
         );
+
+        $user?->assignRole(Role::MODERATOR, Role::ADMINISTRATOR);
     }
 }

@@ -2,13 +2,13 @@
 
 namespace Database\Seeders;
 
+use App\Abstractions\Database\Seeders\BaseSeeder;
 use App\Models\DbConnection;
 use App\Models\Server;
-use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Crypt;
 
-class ServerSeeder extends Seeder
+class ServerSeeder extends BaseSeeder
 {
     private const WORLD_DB_CONNECTION = [
         'name' => 'docker-world',

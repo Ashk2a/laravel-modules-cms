@@ -9,9 +9,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Auth;
 use JetBrains\PhpStorm\Pure;
+use Mcamara\LaravelLocalization\Exceptions\UnsupportedLocaleException;
+use Spatie\Permission\Models\Permission;
 use Spatie\Translatable\HasTranslations;
 
 /**
@@ -23,6 +24,13 @@ use Spatie\Translatable\HasTranslations;
  * @property int|null $parent_id
  * @property string $name
  * @property string|null $href
+ * @property-read MenuItem|null $category
+ * @property-read Collection|MenuItem[] $items
+ * @property-read MenuItem|null $root
+ * @property-read array $translations
+ * @property int|null $type_href
+ * @property int $auth_condition
+ * @property int|null $required_permission_id
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property-read Collection|MenuItem[] $categories
@@ -30,10 +38,6 @@ use Spatie\Translatable\HasTranslations;
  * @method static Builder|MenuItem newQuery()
  * @method static Builder|MenuItem query()
  * @mixin Eloquent
- * @property-read MenuItem|null $category
- * @property-read Collection|MenuItem[] $items
- * @property-read MenuItem|null $root
- * @property-read array $translations
  */
 class MenuItem extends Model
 {
@@ -44,6 +48,13 @@ class MenuItem extends Model
     public const TYPE_ROOT_ADMIN = 2;
     public const TYPE_CATEGORY = 3;
     public const TYPE_NORMAL_ITEM = 4;
+
+    public const TYPE_HREF_INTERNAL = 0;
+    public const TYPE_HREF_EXTERNAL = 1;
+
+    public const AUTH_CONDITION_NONE = 0;
+    public const AUTH_CONDITION_ONLY_GUEST = 1;
+    public const AUTH_CONDITION_ONLY_AUTHENTICATED = 2;
 
     public array $translatable = ['name'];
 
@@ -70,11 +81,42 @@ class MenuItem extends Model
     }
 
     /**
-     * @param int $type
+     * @return string
+     */
+    public function getUrl(): string
+    {
+        $default = '/';
+
+        try {
+            return match ($this->type_href) {
+                self::TYPE_HREF_INTERNAL => locale()->localizeURL($this->href),
+                self::TYPE_HREF_EXTERNAL => $this->href,
+                default => locale()->localizeURL(),
+            };
+        } catch (UnsupportedLocaleException $e) {
+            return $default;
+        }
+    }
+
+    /**
      * @return bool
      */
-    public function isTypeOf(int $type): bool {
-        return $this->type === $type;
+    public function canShowed(): bool
+    {
+        $user = Auth::user();
+
+        if (null === $user) {
+            return ($this->auth_condition === self::AUTH_CONDITION_NONE && $this->required_permission_id === null)
+                || $this->auth_condition === self::AUTH_CONDITION_ONLY_GUEST;
+        }
+
+        $can = true;
+
+        if ($this->required_permission_id !== null) {
+            $can = $user->can($this->requiredPermission->name);
+        }
+
+        return $can && $this->auth_condition !== self::AUTH_CONDITION_ONLY_GUEST;
     }
 
     /**
@@ -83,6 +125,15 @@ class MenuItem extends Model
     #[Pure] public function isRootSideLeft(): bool
     {
         return $this->isTypeOf(self::TYPE_ROOT_SIDE_LEFT);
+    }
+
+    /**
+     * @param int $type
+     * @return bool
+     */
+    public function isTypeOf(int $type): bool
+    {
+        return $this->type === $type;
     }
 
     /**
@@ -143,5 +194,13 @@ class MenuItem extends Model
     {
         return $this->belongsTo(__CLASS__, 'parent_id', 'id')
             ->where('type', self::TYPE_CATEGORY);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function requiredPermission(): BelongsTo
+    {
+        return $this->belongsTo(Permission::class, 'required_permission_id');
     }
 }

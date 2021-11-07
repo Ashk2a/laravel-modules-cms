@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
+use App\Abstractions\Database\Seeders\BaseSeeder;
 
-class DatabaseSeeder extends Seeder
+class DatabaseSeeder extends BaseSeeder
 {
     /**
      * @return void
@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             ServerSeeder::class,
+            RbacSeeder::class,
             UserSeeder::class,
             MenuSeeder::class,
             NewsSeeder::class

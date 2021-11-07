@@ -10,6 +10,7 @@ use App\Events\UserVerified;
 use App\Exceptions\Auth\UserAlreadyVerifiedException;
 use App\Exceptions\Auth\UserNotVerifiedException;
 use App\Models\Reminder;
+use App\Models\Role;
 use App\Models\User;
 use App\Models\Verification;
 use Illuminate\Contracts\Container\BindingResolutionException;
@@ -46,6 +47,8 @@ class AuthService
             'email' => $email,
             'password' => Hash::make($password)
         ]);
+
+        $user->assignRole(Role::USER);
 
         $user->accounts()->create([
             'username' => $username,
