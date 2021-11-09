@@ -25,5 +25,7 @@ return [
     'forget_my_password' => 'Forget my password',
     'already_have_an_account' => 'Have not yet an account ?',
     'help_username' => 'Your game account username',
-    'help_nickname' => 'Your visible name on our services'
+    'help_nickname' => 'Your visible name on our services',
+    'my_account' => 'My account',
+    'see_my_profile' => 'See my profile'
 ];
