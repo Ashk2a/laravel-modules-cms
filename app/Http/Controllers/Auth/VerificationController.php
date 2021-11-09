@@ -11,24 +11,18 @@ use Illuminate\Http\RedirectResponse;
 class VerificationController extends BaseController
 {
     /**
-     * @param AuthService $authService
-     */
-    public function __construct(private AuthService $authService)
-    {
-    }
-
-    /**
      * @param Verification $verification
+     * @param AuthService $authService
      * @return RedirectResponse
      */
-    public function get(Verification $verification): RedirectResponse
+    public function get(Verification $verification, AuthService $authService): RedirectResponse
     {
         try {
-            $this->authService->verify($verification);
+            $authService->verify($verification);
 
-            $this->flashInfo(trans('toast.info.user_has_been_verified'));
+            $this->flashNowInfo(trans('toast.info.user_has_been_verified'));
         } catch (UserAlreadyVerifiedException $e) {
-            $this->flashWarning(trans('toast.warning.user_already_verified'));
+            $this->flashNowWarning(trans('toast.warning.user_already_verified'));
         }
 
         return redirect()->route('auth.login');

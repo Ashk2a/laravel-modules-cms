@@ -3,7 +3,7 @@
 @section('content')
     <x-section.top class="bg-opacity-20 pb-10" style="background-image: url('{{ asset('images/background/home.jpg') }}')">
         <x-section.boxed class="">
-            <livewire:test-component/>
+
         </x-section.boxed>
 
         <x-section.boxed>

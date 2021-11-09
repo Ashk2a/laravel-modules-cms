@@ -23,5 +23,7 @@ return [
     'reset_now' => 'Réinitialiser maintenant',
     'forget_password' => 'Mot de passe oublié ?',
     'forget_my_password' => 'Retrouver mon mot de passe',
-    'already_have_an_account' => 'Pas encore de compte principal ?'
+    'already_have_an_account' => 'Pas encore de compte principal ?',
+    'help_username' => 'Votre nom de compte en jeu',
+    'help_nickname' => 'Votre nom visible sur nos services'
 ];

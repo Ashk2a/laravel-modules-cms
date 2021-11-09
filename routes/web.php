@@ -32,33 +32,13 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
     |--------------------------------------------------------------------------*/
     Route::group(['middleware' => 'guest'], function () {
         /*--------------------------------------------------------------------------
-        | Login
+        | Auth
         |--------------------------------------------------------------------------*/
         Route::get('login', [LoginController::class, 'get'])->name('auth.login');
-        Route::post('login', [LoginController::class, 'post']);
-
-        /*--------------------------------------------------------------------------
-        | Register
-        |--------------------------------------------------------------------------*/
         Route::get('register', [RegisterController::class, 'get'])->name('auth.register');
-        Route::post('register', [RegisterController::class, 'post']);
-
-        /*--------------------------------------------------------------------------
-        | Verify
-        |--------------------------------------------------------------------------*/
         Route::get('verify/{verification:token}', [VerificationController::class, 'get'])->name('auth.verify');
-
-        /*--------------------------------------------------------------------------
-        | Forget password
-        |--------------------------------------------------------------------------*/
         Route::get('forget', [ForgetPasswordController::class, 'get'])->name('auth.forget');
-        Route::post('forget', [ForgetPasswordController::class, 'post']);
-
-        /*--------------------------------------------------------------------------
-        | Reset password
-        |--------------------------------------------------------------------------*/
         Route::get('reset/{reminder:token}', [ResetPasswordController::class, 'get'])->name('auth.reset');
-        Route::post('reset/{reminder:token}', [ResetPasswordController::class, 'post']);
     });
 
     /*--------------------------------------------------------------------------
@@ -66,7 +46,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
     |--------------------------------------------------------------------------*/
     Route::group(['middleware' => 'auth'], function () {
         /*--------------------------------------------------------------------------
-        | Logout
+        | Auth - logout
         |--------------------------------------------------------------------------*/
         Route::get('logout', [LogoutController::class, 'get'])->name('auth.logout');
     });

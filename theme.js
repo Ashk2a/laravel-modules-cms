@@ -1,9 +1,5 @@
-const colors = require("tailwindcss/colors");
-
-module.exports = {
+let theme = {
     colors: {
-        danger: colors.rose,
-        primary: colors.blue,
         gold: {
             '50': '#ffe291',
             '100': '#fdd464',
@@ -102,3 +98,9 @@ module.exports = {
     },
     fontFamily: {roboto: 'Roboto'}
 };
+
+// Filament forms
+theme.colors.danger = theme.colors.red;
+theme.colors.primary = theme.colors.gold;
+
+module.exports = theme

@@ -23,5 +23,7 @@ return [
     'reset_now' => 'Reset now',
     'forget_password' => 'Forget password ?',
     'forget_my_password' => 'Forget my password',
-    'already_have_an_account' => 'Have not yet an account ?'
+    'already_have_an_account' => 'Have not yet an account ?',
+    'help_username' => 'Your game account username',
+    'help_nickname' => 'Your visible name on our services'
 ];
