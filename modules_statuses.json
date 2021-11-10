@@ -1,0 +1,5 @@
+{
+    "Core": true,
+    "Auth": true,
+    "Ui": true
+}

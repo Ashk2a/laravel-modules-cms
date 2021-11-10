@@ -1,0 +1,14 @@
+{
+    "name": "Ui",
+    "alias": "ui",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Ui\\Providers\\UiServiceProvider",
+        "Modules\\Ui\\Providers\\RouteServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

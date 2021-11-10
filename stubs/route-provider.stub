@@ -1,0 +1,13 @@
+<?php
+
+namespace $NAMESPACE$;
+
+use Modules\Core\Providers\ModuleRouteServiceProvider;
+
+class $CLASS$ extends ModuleRouteServiceProvider
+{
+    /**
+     * @var string
+     */
+    protected string $moduleName = '$MODULE$';
+}
