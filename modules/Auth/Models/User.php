@@ -2,10 +2,10 @@
 
 namespace Modules\Auth\Models;
 
-use Database\Factories\UserFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -13,6 +13,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\DatabaseNotificationCollection;
 use Illuminate\Support\Carbon;
+use Modules\Auth\Database\Factories\UserFactory;
 use Modules\Core\Database\Eloquent\Concerns\HasActivities;
 use Modules\Core\Database\Eloquent\Concerns\IsNotifiable;
 use Modules\Core\Models\Activity;
@@ -69,6 +70,14 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    /**
+     * @return Factory
+     */
+    protected static function newFactory(): Factory
+    {
+        return UserFactory::new();
+    }
 
     /**
      * @return bool

@@ -2,7 +2,7 @@
 
 namespace Modules\Auth\Contracts\Hashing;
 
-use Modules\Realm\Models\Account;
+use Modules\Auth\Models\Account;
 
 interface WotlkHasher
 {

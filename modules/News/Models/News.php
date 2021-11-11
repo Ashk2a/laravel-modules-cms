@@ -2,10 +2,10 @@
 
 namespace Modules\News\Models;
 
-use Database\Factories\NewsFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Carbon;
 use Modules\Auth\Models\User;
 use Modules\Core\Models\Comment;
+use Modules\News\Database\Factories\NewsFactory;
 use Spatie\Translatable\HasTranslations;
 
 /**
@@ -47,6 +48,14 @@ class News extends Model
         'description',
         'content',
     ];
+
+    /**
+     * @return Factory
+     */
+    protected static function newFactory(): Factory
+    {
+        return NewsFactory::new();
+    }
 
     /**
      * @return BelongsTo

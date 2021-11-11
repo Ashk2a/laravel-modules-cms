@@ -10,6 +10,12 @@
         "Modules\\Auth\\Providers\\EventServiceProvider",
         "Modules\\Auth\\Providers\\AuthServiceProvider"
     ],
+    "migration": {
+        "seeds": [
+            "Modules\\Auth\\Database\\Seeders\\RbacSeeder",
+            "Modules\\Auth\\Database\\Seeders\\UserSeeder"
+        ]
+    },
     "aliases": {},
     "files": [],
     "requires": []

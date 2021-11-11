@@ -2,13 +2,14 @@
 
 namespace Modules\Realm\Models;
 
-use Database\Factories\ServerFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
+use Modules\Realm\Database\Factories\ServerFactory;
 
 /**
  * Modules\Realm\Models\Server
@@ -40,6 +41,14 @@ class Server extends Model
         'world_db_connection_id',
         'characters_db_connection_id'
     ];
+
+    /**
+     * @return Factory
+     */
+    protected static function newFactory(): Factory
+    {
+        return ServerFactory::new();
+    }
 
     /**
      * @return BelongsTo

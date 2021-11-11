@@ -10,7 +10,7 @@ use Livewire\Redirector;
 use Modules\Auth\Models\User;
 use Modules\Auth\Services\AuthService;
 use Modules\Core\Http\Livewire\AbstractFormComponent;
-use Modules\Realm\Models\Account;
+use Modules\Auth\Models\Account;
 
 class RegisterComponent extends AbstractFormComponent
 {

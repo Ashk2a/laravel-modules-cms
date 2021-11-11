@@ -3,11 +3,16 @@
     "alias": "ui",
     "description": "",
     "keywords": [],
-    "priority": 0,
+    "priority": 3,
     "providers": [
         "Modules\\Ui\\Providers\\ModuleServiceProvider",
         "Modules\\Ui\\Providers\\RouteServiceProvider"
     ],
+    "migration": {
+        "seeds": [
+            "Modules\\Ui\\Database\\Seeders\\MenuSeeder"
+        ]
+    },
     "aliases": {},
     "files": [],
     "requires": []

@@ -3,13 +3,18 @@
     "alias": "news",
     "description": "",
     "keywords": [],
-    "priority": 0,
+    "priority": 1000,
     "providers": [
         "Modules\\News\\Providers\\ModuleServiceProvider",
         "Modules\\News\\Providers\\RouteServiceProvider",
         "Modules\\News\\Providers\\EventServiceProvider",
         "Modules\\News\\Providers\\AuthServiceProvider"
     ],
+    "migration": {
+        "seeds": [
+            "Modules\\News\\Database\\Seeders\\NewsSeeder"
+        ]
+    },
     "aliases": {},
     "files": [],
     "requires": []

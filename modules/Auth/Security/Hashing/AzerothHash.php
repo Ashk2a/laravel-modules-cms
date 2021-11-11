@@ -2,10 +2,10 @@
 
 namespace Modules\Auth\Security\Hashing;
 
-use Modules\Auth\Contracts\Hashing\WotlkHasher;
-use Modules\Realm\Models\Account;
 use Exception;
 use JetBrains\PhpStorm\Pure;
+use Modules\Auth\Contracts\Hashing\WotlkHasher;
+use Modules\Auth\Models\Account;
 
 class AzerothHash implements WotlkHasher
 {

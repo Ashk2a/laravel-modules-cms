@@ -2,15 +2,16 @@
 
 namespace Modules\Realm\Models;
 
-use Database\Factories\DbConnectionFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Crypt;
+use Modules\Realm\Database\Factories\DbConnectionFactory;
 
 /**
  * Modules\Realm\Models\DbConnection
@@ -53,6 +54,14 @@ class DbConnection extends Model
         'username',
         'password',
     ];
+
+    /**
+     * @return Factory
+     */
+    protected static function newFactory(): Factory
+    {
+        return DbConnectionFactory::new();
+    }
 
     /**
      * Format the object for config.databases.connections collections.
