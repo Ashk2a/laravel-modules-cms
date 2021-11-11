@@ -5,8 +5,8 @@
     "keywords": [],
     "priority": 0,
     "providers": [
-        "Modules\\Core\\Providers\\CoreServiceProvider",
-        "Modules\\Core\\Providers\\CoreRouteServiceProvider"
+        "Modules\\Core\\Providers\\ModuleServiceProvider",
+        "Modules\\Core\\Providers\\RouteServiceProvider"
     ],
     "aliases": {},
     "files": [],

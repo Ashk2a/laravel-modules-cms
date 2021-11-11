@@ -67,24 +67,49 @@ return [
 
     'stubs' => [
         'enabled' => true,
-        'path' => base_path('stubs'),
+        'path' => base_path('stubs/modules'),
         'files' => [
             'routes/web' => 'Routes/web.php',
             'routes/web_manager' => 'Routes/web_manager.php',
             'routes/api' => 'Routes/api.php',
+            'providers/route-provider' => 'Providers/RouteServiceProvider.php',
+            'providers/module-provider' => 'Providers/ModuleServiceProvider.php',
+            'providers/auth-provider' => 'Providers/AuthServiceProvider.php',
+            'providers/event-provider' => 'Providers/EventServiceProvider.php',
             'scaffold/config' => 'Config/config.php',
             'assets/js/app' => 'Resources/assets/js/app.js',
             'assets/sass/app' => 'Resources/assets/sass/app.scss',
             'composer' => 'composer.json',
         ],
         'replacements' => [
-            'routes/web' => ['LOWER_NAME', 'STUDLY_NAME'],
-            'routes/api' => ['LOWER_NAME'],
-            'webpack' => ['LOWER_NAME'],
-            'json' => ['LOWER_NAME', 'STUDLY_NAME', 'MODULE_NAMESPACE', 'PROVIDER_NAMESPACE'],
-            'views/index' => ['LOWER_NAME'],
-            'views/master' => ['LOWER_NAME', 'STUDLY_NAME'],
             'scaffold/config' => ['STUDLY_NAME'],
+            'providers/module-provider' => [
+                'MODULE_NAMESPACE',
+                'PROVIDER_NAMESPACE',
+                'STUDLY_NAME',
+                'LOWER_NAME'
+            ],
+            'providers/route-provider' => [
+                'MODULE_NAMESPACE',
+                'PROVIDER_NAMESPACE',
+                'STUDLY_NAME',
+            ],
+            'providers/auth-provider' => [
+                'MODULE_NAMESPACE',
+                'PROVIDER_NAMESPACE',
+                'STUDLY_NAME',
+            ],
+            'providers/event-provider' => [
+                'MODULE_NAMESPACE',
+                'PROVIDER_NAMESPACE',
+                'STUDLY_NAME',
+            ],
+            'json' => [
+                'LOWER_NAME',
+                'STUDLY_NAME',
+                'MODULE_NAMESPACE',
+                'PROVIDER_NAMESPACE'
+            ],
             'composer' => [
                 'LOWER_NAME',
                 'STUDLY_NAME',
@@ -141,7 +166,6 @@ return [
             'config' => ['path' => 'Config', 'generate' => true],
             'command' => ['path' => 'Console', 'generate' => true],
             'contracts' => ['path' => 'Contracts', 'generate' => true],
-            'provider' => ['path' => 'Providers', 'generate' => true],
             'routes' => ['path' => 'Routes', 'generate' => true],
             'event' => ['path' => 'Events', 'generate' => true],
             'listener' => ['path' => 'Listeners', 'generate' => true],
@@ -149,11 +173,7 @@ return [
             'notifications' => ['path' => 'Notifications', 'generate' => true],
             'exceptions' => ['path' => 'Exceptions', 'generate' => true],
             'services' => ['path' => 'Services', 'generate' => true],
-            // Models
             'model' => ['path' => 'Models', 'generate' => true],
-            'model-auth' => ['path' => 'Models/Auth', 'generate' => true],
-            'model-world' => ['path' => 'Models/World', 'generate' => true],
-            'model-character' => ['path' => 'Models/Character', 'generate' => true],
             // Database
             'migration' => ['path' => 'Database/Migrations', 'generate' => true],
             'factory' => ['path' => 'Database/Factories', 'generate' => true],
@@ -177,7 +197,8 @@ return [
             'lang_en' => ['path' => 'Resources/lang/en', 'generate' => true],
             'lang_fr' => ['path' => 'Resources/lang/fr', 'generate' => true],
 
-            // Disable
+            // Unused
+            'provider' => ['path' => 'Providers', 'generate' => false],
             'request' => ['path' => 'Http/Requests', 'generate' => false],
             'seeder' => ['path' => 'Database/Seeders', 'generate' => false],
             'controller' => ['path' => 'Http/Controllers', 'generate' => false],

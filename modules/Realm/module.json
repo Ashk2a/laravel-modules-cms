@@ -1,0 +1,14 @@
+{
+    "name": "Realm",
+    "alias": "realm",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Realm\\Providers\\ModuleServiceProvider",
+        "Modules\\Realm\\Providers\\RouteServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

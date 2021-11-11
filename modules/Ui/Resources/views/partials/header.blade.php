@@ -1,13 +1,13 @@
 @php
-    $leftRoots = \App\Models\MenuItem::buildTree([\App\Models\MenuItem::TYPE_ROOT_SIDE_LEFT]);
-    $rightRoots = \App\Models\MenuItem::buildTree([\App\Models\MenuItem::TYPE_ROOT_SIDE_RIGHT])
+    $leftRoots = \Modules\Ui\Models\MenuItem::buildTree([\Modules\Ui\Models\MenuItem::TYPE_ROOT_SIDE_LEFT]);
+    $rightRoots = \Modules\Ui\Models\MenuItem::buildTree([\Modules\Ui\Models\MenuItem::TYPE_ROOT_SIDE_RIGHT])
 @endphp
 
 <header class="relative z-10">
     <nav class="fixed w-full" aria-label="top">
         <!-- Top navigation -->
         <div class="bg-darkGray-900 text-md border-b-[1px] border-gray-800">
-            <x-container.default class="flex h-[35px] items-center justify-between relative" x-data="{account: false}">
+            <x-ui::container.default class="flex h-[35px] items-center justify-between relative" x-data="{account: false}">
                 <div class="flex flex-1 items-center justify-end">
                     <a href=""
                        @click.prevent="account = !account"
@@ -74,23 +74,23 @@
                         @endauth
                     </ul>
                 </div>
-            </x-container.default>
+            </x-ui::container.default>
         </div>
 
         <!-- Secondary navigation -->
         <div class="bg-brown-500 bg-opacity-90">
-            <x-container.default class="border-b-[1px] border-black border-opacity-20">
+            <x-ui::container.default class="border-b-[1px] border-black border-opacity-20">
                 <div class="grid grid-cols-5 lg:py-0 py-3">
                     <!-- Menu Left -->
                     <div class="col-span-2">
-                        <x-menu.nav :roots="$leftRoots"/>
+                        <x-ui::menu.nav :roots="$leftRoots"/>
 
                         <!-- Mobile menu (lg-) -->
                         <div class="flex flex-1 items-center lg:hidden">
                             <button type="button" class="-ml-2 p-2 rounded-md text-gold-300">
-                                <x-heroicon class="h-6 w-6 inline">
+                                <x-ui::heroicon class="h-6 w-6 inline">
                                     M4 6h16M4 12h16M4 18h16
-                                </x-heroicon>
+                                </x-ui::heroicon>
 
                                 <span class="">Menu</span>
                             </button>
@@ -106,10 +106,10 @@
 
                     <!-- Menu Right -->
                     <div class="col-span-2">
-                        <x-menu.nav :roots="$rightRoots"/>
+                        <x-ui::menu.nav :roots="$rightRoots"/>
                     </div>
                 </div>
-            </x-container.default>
+            </x-ui::container.default>
         </div>
     </nav>
 </header>

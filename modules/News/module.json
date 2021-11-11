@@ -1,0 +1,16 @@
+{
+    "name": "News",
+    "alias": "news",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\News\\Providers\\ModuleServiceProvider",
+        "Modules\\News\\Providers\\RouteServiceProvider",
+        "Modules\\News\\Providers\\EventServiceProvider",
+        "Modules\\News\\Providers\\AuthServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

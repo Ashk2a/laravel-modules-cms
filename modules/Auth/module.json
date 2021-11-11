@@ -5,8 +5,10 @@
     "keywords": [],
     "priority": 0,
     "providers": [
-        "Modules\\Auth\\Providers\\AuthServiceProvider",
-        "Modules\\Auth\\Providers\\RouteServiceProvider"
+        "Modules\\Auth\\Providers\\ModuleServiceProvider",
+        "Modules\\Auth\\Providers\\RouteServiceProvider",
+        "Modules\\Auth\\Providers\\EventServiceProvider",
+        "Modules\\Auth\\Providers\\AuthServiceProvider"
     ],
     "aliases": {},
     "files": [],

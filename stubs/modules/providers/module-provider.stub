@@ -1,0 +1,18 @@
+<?php
+
+namespace $MODULE_NAMESPACE$\$STUDLY_NAME$\$PROVIDER_NAMESPACE$;
+
+use Modules\Core\Providers\AbstractModuleServiceProvider;
+
+class ModuleServiceProvider extends AbstractModuleServiceProvider
+{
+    /**
+     * @var string
+     */
+    protected string $moduleName = '$STUDLY_NAME$';
+
+    /**
+     * @var string
+     */
+    protected string $moduleNameLower = '$LOWER_NAME$';
+}

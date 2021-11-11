@@ -2,9 +2,9 @@
 
 namespace Modules\Ui\Providers;
 
-use Modules\Core\Providers\ModuleRouteServiceProvider;
+use Modules\Core\Providers\AbstractRouteServiceProvider;
 
-class RouteServiceProvider extends ModuleRouteServiceProvider
+class RouteServiceProvider extends AbstractRouteServiceProvider
 {
     /**
      * @var string

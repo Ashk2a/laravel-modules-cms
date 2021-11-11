@@ -2,146 +2,97 @@
 
 namespace Modules\Core\Providers;
 
-use Config;
-use Illuminate\Contracts\Http\Kernel;
-use Illuminate\Routing\Router;
-use Illuminate\Support\ServiceProvider;
+use Fruitcake\Cors\HandleCors;
+use Illuminate\Auth\Middleware\AuthenticateWithBasicAuth;
+use Illuminate\Auth\Middleware\Authorize;
+use Illuminate\Auth\Middleware\RequirePassword;
+use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
+use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
+use Illuminate\Foundation\Http\Middleware\ValidatePostSize;
+use Illuminate\Http\Middleware\SetCacheHeaders;
+use Illuminate\Notifications\Channels\DatabaseChannel as LaravelDatabaseChannel;
+use Illuminate\Routing\Middleware\SubstituteBindings;
+use Illuminate\Routing\Middleware\ThrottleRequests;
+use Illuminate\Routing\Middleware\ValidateSignature;
+use Illuminate\Session\Middleware\StartSession;
+use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRedirectFilter;
+use Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRoutes;
+use Mcamara\LaravelLocalization\Middleware\LaravelLocalizationViewPath;
+use Mcamara\LaravelLocalization\Middleware\LocaleCookieRedirect;
+use Mcamara\LaravelLocalization\Middleware\LocaleSessionRedirect;
+use Modules\Core\Http\Middleware\Authenticate;
+use Modules\Core\Http\Middleware\CheckConfiguration;
+use Modules\Core\Http\Middleware\EncryptCookies;
+use Modules\Core\Http\Middleware\PreventRequestsDuringMaintenance;
+use Modules\Core\Http\Middleware\RedirectIfAuthenticated;
+use Modules\Core\Http\Middleware\TrimStrings;
+use Modules\Core\Http\Middleware\TrustProxies;
+use Modules\Core\Http\Middleware\VerifyCsrfToken;
+use Modules\Core\Notifications\Channels\DatabaseChannel;
+use Spatie\Permission\Middlewares\PermissionMiddleware;
+use Spatie\Permission\Middlewares\RoleMiddleware;
+use Spatie\Permission\Middlewares\RoleOrPermissionMiddleware;
 
-abstract class ModuleServiceProvider extends ServiceProvider
+class ModuleServiceProvider extends AbstractModuleServiceProvider
 {
-    /**
-     * @var string
-     */
-    protected string $moduleName;
+    protected string $moduleName = 'Core';
+
+    protected string $moduleNameLower = 'core';
+
+    protected array $middleware = [
+        TrustProxies::class,
+        HandleCors::class,
+        PreventRequestsDuringMaintenance::class,
+        ValidatePostSize::class,
+        TrimStrings::class,
+        ConvertEmptyStringsToNull::class,
+        CheckConfiguration::class
+    ];
+
+    protected array $middlewareGroups = [
+        'web' => [
+            EncryptCookies::class,
+            AddQueuedCookiesToResponse::class,
+            StartSession::class,
+            ShareErrorsFromSession::class,
+            VerifyCsrfToken::class,
+            SubstituteBindings::class,
+        ],
+
+        'api' => [
+            'throttle:api',
+            SubstituteBindings::class,
+        ],
+    ];
+
+    protected array $routeMiddleware = [
+        'auth' => Authenticate::class,
+        'auth.basic' => AuthenticateWithBasicAuth::class,
+        'cache.headers' => SetCacheHeaders::class,
+        'can' => Authorize::class,
+        'guest' => RedirectIfAuthenticated::class,
+        'password.confirm' => RequirePassword::class,
+        'signed' => ValidateSignature::class,
+        'throttle' => ThrottleRequests::class,
+        // Localization
+        'localize' => LaravelLocalizationRoutes::class,
+        'localizationRedirect' => LaravelLocalizationRedirectFilter::class,
+        'localeSessionRedirect' => LocaleSessionRedirect::class,
+        'localeCookieRedirect' => LocaleCookieRedirect::class,
+        'localeViewPath' => LaravelLocalizationViewPath::class,
+        // RBAC
+        'role' => RoleMiddleware::class,
+        'permission' => PermissionMiddleware::class,
+        'role_or_permission' => RoleOrPermissionMiddleware::class,
+    ];
 
     /**
-     * @var string
-     */
-    protected string $moduleNameLower;
-
-    /**
-     * @var array
-     */
-    protected array $middleware = [];
-
-    /**
-     * @var array
-     */
-    protected array $routeMiddleware = [];
-
-    /**
-     * @var array
-     */
-    protected array $middlewareGroups = [];
-
-    /**
-     * @return void
-     */
-    public function boot(): void
-    {
-        $this
-            ->registerMiddleware()
-            ->registerConfig()
-            ->registerTranslations()
-            ->registerViews()
-            ->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
-    }
-
-    /**
-     * @return $this
-     */
-    protected function registerMiddleware(): self
-    {
-        $kernel = app(Kernel::class);
-        $router = app(Router::class);
-
-        foreach ($this->middleware as $middleware) {
-            $kernel->pushMiddleware($middleware);
-        }
-
-        foreach ($this->routeMiddleware as $name => $class) {
-            $router->aliasMiddleware($name, $class);
-        }
-
-        foreach ($this->middlewareGroups as $name => $group) {
-            $router->middlewareGroup($name, $group);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return $this
-     */
-    protected function registerConfig(): self
-    {
-        $this->publishes([
-            module_path($this->moduleName, 'Config/config.php') => config_path($this->moduleNameLower . '.php'),
-        ], 'config');
-
-        $this->mergeConfigFrom(module_path($this->moduleName, 'Config/config.php'), $this->moduleNameLower);
-
-        return $this;
-    }
-
-    /**
-     * @return $this
-     */
-    protected function registerTranslations(): self
-    {
-        $langPath = resource_path('lang/modules/' . $this->moduleNameLower);
-
-        if (is_dir($langPath)) {
-            $this->loadTranslationsFrom($langPath, $this->moduleNameLower);
-        } else {
-            $this->loadTranslationsFrom(
-                module_path($this->moduleName, 'Resources/lang'),
-                $this->moduleNameLower
-            );
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return $this
-     */
-    protected function registerViews(): self
-    {
-        $viewPath = resource_path('views/modules/' . $this->moduleNameLower);
-
-        $sourcePath = module_path($this->moduleName, 'Resources/views');
-
-        $this->publishes(
-            [$sourcePath => $viewPath],
-            ['views', $this->moduleNameLower . '-module-views']
-        );
-
-        $paths = [];
-
-        foreach (Config::get('view.paths') as $path) {
-            if (is_dir($path . '/modules/' . $this->moduleNameLower)) {
-                $paths[] = $path . '/modules/' . $this->moduleNameLower;
-            }
-        }
-
-        $this->loadViewsFrom(array_merge($paths, [$sourcePath]), $this->moduleNameLower);
-
-        return $this;
-    }
-
-    /**
-     * @return void
+     * @inheritDoc
      */
     public function register(): void
     {
-    }
-
-    /**
-     * @return array
-     */
-    public function provides(): array
-    {
-        return parent::provides();
+        // Override existing DatabaseChannel
+        $this->app->bind(LaravelDatabaseChannel::class, DatabaseChannel::class);
     }
 }

@@ -1,5 +1,5 @@
 @php
-    $roots = \App\Models\MenuItem::buildTree([\App\Models\MenuItem::TYPE_ROOT_ADMIN]);
+    $roots = \Modules\Ui\Models\MenuItem::buildTree([\Modules\Ui\Models\MenuItem::TYPE_ROOT_ADMIN]);
 @endphp
 
 <div x-data="{side: false}">
@@ -8,11 +8,11 @@
         <ul class="flex flex-col space-y-2">
             {{-- Manager nav --}}
             <li class="flex">
-                <x-button class="btn-brown p-1" @click="side = 'manager'">
-                    <x-heroicon class="h-5 w-5">
+                <x-ui::button class="btn-brown p-1" @click="side = 'manager'">
+                    <x-ui::heroicon class="h-5 w-5">
                         M13 10V3L4 14h7v7l9-11h-7z
-                    </x-heroicon>
-                </x-button>
+                    </x-ui::heroicon>
+                </x-ui::button>
             </li>
         </ul>
 
@@ -32,8 +32,8 @@
         class="overflow-y-auto fixed z-50 w-[24rem] mx-auto p-5 top-0 bottom-0 left-auto bg-blueGray-800 right-0 border-l-2 border-brown-600"
     >
         <h1 class="text-xl text-white text-shadow text-left">Manager</h1>
-        <x-container.separator class="h-[2px] my-3"/>
+        <x-ui::container.separator class="h-[2px] my-3"/>
 
-        <x-menu.side-nav :roots="$roots"/>
+        <x-ui::menu.side-nav :roots="$roots"/>
     </div>
 </div>

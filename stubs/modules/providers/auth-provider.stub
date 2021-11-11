@@ -1,0 +1,21 @@
+<?php
+
+namespace $MODULE_NAMESPACE$\$STUDLY_NAME$\$PROVIDER_NAMESPACE$;
+
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+
+class AuthServiceProvider extends ServiceProvider
+{
+    /**
+     * @var array
+     */
+    protected $policies = [];
+
+    /**
+     * @return void
+     */
+    public function boot(): void
+    {
+        $this->registerPolicies();
+    }
+}
