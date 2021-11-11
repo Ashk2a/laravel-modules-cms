@@ -8,7 +8,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Livewire\Redirector;
 use Modules\Auth\Exceptions\UserNotVerifiedException;
-use Modules\AUth\Services\AuthService;
+use Modules\Auth\Services\AuthService;
 use Modules\Core\Http\Livewire\AbstractFormComponent;
 
 class LoginComponent extends AbstractFormComponent
