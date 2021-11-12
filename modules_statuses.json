@@ -1,0 +1,7 @@
+{
+    "Core": true,
+    "Auth": true,
+    "Ui": true,
+    "Realm": true,
+    "News": true
+}

@@ -1,0 +1,13 @@
+<?php
+
+namespace $MODULE_NAMESPACE$\$STUDLY_NAME$\$PROVIDER_NAMESPACE$;
+
+use Modules\Core\Providers\AbstractRouteServiceProvider;
+
+class RouteServiceProvider extends AbstractRouteServiceProvider
+{
+    /**
+     * @var string
+     */
+    protected string $moduleName = '$STUDLY_NAME$';
+}

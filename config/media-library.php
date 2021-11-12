@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Media;
+use Modules\Core\Models\Media;
 
 return [
 

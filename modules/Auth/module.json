@@ -1,0 +1,22 @@
+{
+    "name": "Auth",
+    "alias": "auth",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Auth\\Providers\\ModuleServiceProvider",
+        "Modules\\Auth\\Providers\\RouteServiceProvider",
+        "Modules\\Auth\\Providers\\EventServiceProvider",
+        "Modules\\Auth\\Providers\\AuthServiceProvider"
+    ],
+    "migration": {
+        "seeds": [
+            "Modules\\Auth\\Database\\Seeders\\RbacSeeder",
+            "Modules\\Auth\\Database\\Seeders\\UserSeeder"
+        ]
+    },
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

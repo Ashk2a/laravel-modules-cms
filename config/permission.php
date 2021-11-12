@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Role;
+use Modules\Auth\Models\Role;
 
 return [
 

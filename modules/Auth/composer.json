@@ -1,0 +1,23 @@
+{
+    "name": "wowlf/auth",
+    "description": "",
+    "authors": [
+        {
+            "name": "Ashk",
+            "email": "timed2a@hotmail.fr"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Auth\\": ""
+        }
+    }
+}

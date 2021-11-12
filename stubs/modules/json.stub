@@ -1,0 +1,19 @@
+{
+    "name": "$STUDLY_NAME$",
+    "alias": "$LOWER_NAME$",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "$MODULE_NAMESPACE$\\$STUDLY_NAME$\\$PROVIDER_NAMESPACE$\\ModuleServiceProvider",
+        "$MODULE_NAMESPACE$\\$STUDLY_NAME$\\$PROVIDER_NAMESPACE$\\RouteServiceProvider",
+        "$MODULE_NAMESPACE$\\$STUDLY_NAME$\\$PROVIDER_NAMESPACE$\\EventServiceProvider",
+        "$MODULE_NAMESPACE$\\$STUDLY_NAME$\\$PROVIDER_NAMESPACE$\\AuthServiceProvider"
+    ],
+    "migration": {
+        "seeds": []
+    },
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

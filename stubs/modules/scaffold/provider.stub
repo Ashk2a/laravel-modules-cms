@@ -1,0 +1,33 @@
+<?php
+
+namespace $NAMESPACE$;
+
+use Modules\Core\Providers\ModuleServiceProvider;
+
+class $CLASS$ extends ModuleServiceProvider
+{
+    /**
+     * @var string
+     */
+    protected string $moduleName = '$MODULE$';
+
+    /**
+     * @var string
+     */
+    protected string $moduleNameLower = '$LOWER_NAME$';
+
+    /**
+     * @var array
+     */
+    protected array $middleware = [];
+
+    /**
+     * @var array
+     */
+    protected array $routeMiddleware = [];
+
+    /**
+     * @var array
+     */
+    protected array $middlewareGroups = [];
+}

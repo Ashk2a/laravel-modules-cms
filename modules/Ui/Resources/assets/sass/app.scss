@@ -1,0 +1,15 @@
+@import "utils/text";
+
+@import "components/button";
+@import "components/form";
+@import "components/menu";
+@import "components/news";
+@import "components/section";
+
+[x-cloak] {
+    display: none;
+}
+
+body {
+    background: url("/images/texture/dark-blue.jpg");
+}

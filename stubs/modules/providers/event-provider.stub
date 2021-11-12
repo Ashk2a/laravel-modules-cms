@@ -1,0 +1,9 @@
+<?php
+
+namespace $MODULE_NAMESPACE$\$STUDLY_NAME$\$PROVIDER_NAMESPACE$;
+
+use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+
+class EventServiceProvider extends ServiceProvider
+{
+}

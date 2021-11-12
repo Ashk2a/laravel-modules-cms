@@ -1,0 +1,19 @@
+{
+    "name": "Realm",
+    "alias": "realm",
+    "description": "",
+    "keywords": [],
+    "priority": 2,
+    "providers": [
+        "Modules\\Realm\\Providers\\ModuleServiceProvider",
+        "Modules\\Realm\\Providers\\RouteServiceProvider"
+    ],
+    "migration": {
+        "seeds": [
+            "Modules\\Realm\\Database\\Seeders\\ServerSeeder"
+        ]
+    },
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

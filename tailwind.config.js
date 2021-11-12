@@ -4,10 +4,12 @@ module.exports = {
     mode: 'jit',
     purge: [
         './resources/**/*.blade.php',
+        './modules/**/Resources/**/*.blade.php',
+
         './resources/**/*.scss',
-        './src/**/*.{js,jsx,ts,tsx,vue}',
+        './modules/**/Resources/**/*.scss',
+
         './config/tall-toasts.php',
-        './vendor/filament/forms/resources/views/**/*.blade.php',
     ],
     theme: {
         extend: {
