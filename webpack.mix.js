@@ -1,7 +1,7 @@
 const mix = require('laravel-mix');
-const tailwindcss = require('tailwindcss');
 const fs = require('fs');
 const path = require('path');
+const tailwind = require('tailwindcss');
 
 // https://codeanddeploy.com/blog/laravel/combine-the-nwidart-laravel-modules-assets-to-public-using-laravel-mix
 
@@ -17,7 +17,7 @@ mix
     .sass('resources/sass/app.scss', 'public/css')
     .options({
         processCssUrls: false,
-        postCss: [ tailwindcss('./tailwind.config.js') ],
+        postCss: [ tailwind('./tailwind.config.js') ],
     })
 
 modules.forEach(function(mod){

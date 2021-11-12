@@ -15,7 +15,7 @@ class UserCreate extends AbstractCommand
      *
      * @var string
      */
-    protected $signature = 'user:create {--username=} {--nickname=} {--email=} {--password=} {--random} {--verify}';
+    protected $signature = 'user:create {--username=} {--nickname=} {--email=} {--password=} {--verify}';
 
     /**
      * The console command description.
@@ -44,7 +44,7 @@ class UserCreate extends AbstractCommand
         );
 
         if (null === $user) {
-            $this->error(trans('console.user.creation_failed'));
+            $this->error('User creation failed.');
             return self::FAILURE;
         }
 
@@ -59,26 +59,21 @@ class UserCreate extends AbstractCommand
      */
     private function getData(): array
     {
-        $random = $this->option('random', false);
-
-        if (false === $random) {
-            $data = [];
-            $expected = ['username', 'nickname', 'email', 'password'];
-
-            foreach ($expected as $option) {
-                $data[$option] = $this->option($option);
-            }
-
-            return $data;
-        }
+        $data = [];
 
         $faker = Container::getInstance()->make(Generator::class);
 
-        return [
+        $expectedData = [
             'username' => $faker->userName,
             'nickname' => $faker->userName,
             'email' => $faker->email,
             'password' => 'password'
         ];
+
+        foreach ($expectedData as $option => $defaultValue) {
+            $data[$option] = $this->option($option) ?? $defaultValue;
+        }
+
+        return $data;
     }
 }

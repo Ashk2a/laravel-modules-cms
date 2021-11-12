@@ -20,6 +20,7 @@
 </head>
 <body class="antialiased">
 
+<livewire:toasts/>
 @yield('body')
 
 </body>

@@ -67,24 +67,14 @@ class ModuleServiceProvider extends AbstractModuleServiceProvider
     ];
 
     protected array $routeMiddleware = [
-        'auth' => Authenticate::class,
-        'auth.basic' => AuthenticateWithBasicAuth::class,
         'cache.headers' => SetCacheHeaders::class,
-        'can' => Authorize::class,
-        'guest' => RedirectIfAuthenticated::class,
-        'password.confirm' => RequirePassword::class,
         'signed' => ValidateSignature::class,
-        'throttle' => ThrottleRequests::class,
         // Localization
         'localize' => LaravelLocalizationRoutes::class,
         'localizationRedirect' => LaravelLocalizationRedirectFilter::class,
         'localeSessionRedirect' => LocaleSessionRedirect::class,
         'localeCookieRedirect' => LocaleCookieRedirect::class,
         'localeViewPath' => LaravelLocalizationViewPath::class,
-        // RBAC
-        'role' => RoleMiddleware::class,
-        'permission' => PermissionMiddleware::class,
-        'role_or_permission' => RoleOrPermissionMiddleware::class,
     ];
 
     /**

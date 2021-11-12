@@ -13,7 +13,7 @@
                        @click.prevent="account = !account"
                        @click.away="account = false"
                        class="flex inline-flex justify-center items-center text-gray-300 hover:text-gray-50">
-                        <span class="flex">@if(auth()->check()) {{ auth()->user()->nickname }} @else @lang('global.my_account') @endif</span>
+                        <span class="flex">@if(auth()->check()) {{ auth()->user()->nickname }} @else @lang('auth::global.my_account') @endif</span>
                         <x-heroicon-o-chevron-down class="h-4 w-4 flex ml-2"/>
                     </a>
                 </div>
@@ -23,13 +23,13 @@
                         @guest
                             <li class="flex">
                                 <a href="{{ locale()->localizeURL(route('auth.login')) }}" class="flex w-full bg-lightBlue-500 hover:bg-lightBlue-400 px-4 py-2">
-                                    @lang('global.login')
+                                    @lang('auth::global.login')
                                 </a>
                             </li>
                             <li class="flex">
                                 <a href="{{ locale()->localizeURL(route('auth.register')) }}" class="flex w-full inline-flex items-center px-4 py-2 hover:bg-white hover:bg-opacity-5">
                                     <x-heroicon-o-plus class="h-4 w-4 mr-2"/>
-                                    <span class="flex">@lang('global.create_an_account')</span>
+                                    <span class="flex">@lang('auth::global.create_an_account')</span>
                                 </a>
                             </li>
                         @endguest
@@ -44,7 +44,7 @@
                             @endcan
                             <li class="flex">
                                 <a href="{{ locale()->localizeURL(route('auth.login')) }}" class="flex justify-center w-full bg-lightBlue-500 hover:bg-lightBlue-400 px-16 py-2">
-                                    @lang('global.see_my_profile')
+                                    @lang('auth::global.see_my_profile')
                                 </a>
                             </li>
                             <li class="h-[1px] bg-darkGray-700 w-full my-3"></li>
@@ -67,7 +67,7 @@
                             <li class="h-[1px] bg-darkGray-700 w-full my-3"></li>
                             <li class="flex text-danger-400">
                                 <a href="{{ locale()->localizeURL(route('auth.logout')) }}" class="flex w-full inline-flex items-center px-4 py-2 hover:bg-white hover:bg-opacity-5">
-                                    <span class="flex">@lang('global.logout')</span>
+                                    <span class="flex">@lang('auth::global.logout')</span>
                                     <x-heroicon-o-logout class="h-4 w-4 ml-2"/>
                                 </a>
                             </li>

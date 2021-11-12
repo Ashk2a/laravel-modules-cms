@@ -10,6 +10,9 @@
         "$MODULE_NAMESPACE$\\$STUDLY_NAME$\\$PROVIDER_NAMESPACE$\\EventServiceProvider",
         "$MODULE_NAMESPACE$\\$STUDLY_NAME$\\$PROVIDER_NAMESPACE$\\AuthServiceProvider"
     ],
+    "migration": {
+        "seeds": []
+    },
     "aliases": {},
     "files": [],
     "requires": []

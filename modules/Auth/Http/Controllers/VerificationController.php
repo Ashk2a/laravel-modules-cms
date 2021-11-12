@@ -20,9 +20,9 @@ class VerificationController extends AbstractController
         try {
             $authService->verify($verification);
 
-            $this->flashNowInfo(trans('toast.info.user_has_been_verified'));
+            $this->flashNowInfo(trans('auth::text.user_has_been_verified'));
         } catch (UserAlreadyVerifiedException $e) {
-            $this->flashNowWarning(trans('toast.warning.user_already_verified'));
+            $this->flashNowWarning(trans('auth::text.user_already_verified'));
         }
 
         return redirect()->route('auth.login');

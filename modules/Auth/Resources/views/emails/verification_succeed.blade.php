@@ -1,5 +1,5 @@
 @component('mail::message')
     # {{ $subject }}
 
-    @lang('emails.verification_succeed.content')
+    @lang('auth::email.verification_succeed.content')
 @endcomponent
