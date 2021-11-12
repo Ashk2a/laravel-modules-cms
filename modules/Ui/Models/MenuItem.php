@@ -34,6 +34,7 @@ use Spatie\Translatable\HasTranslations;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property-read Collection|MenuItem[] $categories
+ * @property-read Permission|null $requiredPermission
  * @method static Builder|MenuItem newModelQuery()
  * @method static Builder|MenuItem newQuery()
  * @method static Builder|MenuItem query()
@@ -70,7 +71,8 @@ class MenuItem extends Model
     ];
 
     /**
-     * @return Collection|array|MenuItem[]
+     * @param array $types
+     * @return Collection|array
      */
     public static function buildTree(array $types): Collection|array
     {
