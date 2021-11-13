@@ -1,9 +1,11 @@
 <x-ui::header.dropdown @click.prevent="account = !account">
     @auth
         {{ auth()->user()->nickname }}
-    @elseauth
-        @lang('auth::global.my_account')
     @endauth
+
+    @guest
+        @lang('auth::global.my_account')
+    @endguest
 
     <x-slot name="iconRight">
         <x-heroicon-o-chevron-down class="h-4 w-4 flex ml-2"/>
