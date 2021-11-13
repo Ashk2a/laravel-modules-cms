@@ -10,16 +10,16 @@ class RbacSeeder extends AbstractSeeder
 {
     private const ROLES = [
         Role::USER => [
-            'panel',
+            'panel.dashboard.index',
             'profiles.show',
-            'news.index',
-            'news.show',
-            'comments.create',
-            'comments.like',
-            'comments.reply',
+            'news.news.index',
+            'news.news.show',
+            'news.comments.create',
+            'news.comments.like',
+            'news.comments.reply',
         ],
         Role::MODERATOR => [
-            'manager',
+            'manager.dashboard.index',
             'manager.users.index',
             'manager.users.show',
             'manager.news.index',

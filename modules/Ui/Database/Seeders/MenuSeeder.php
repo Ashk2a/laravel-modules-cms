@@ -108,9 +108,17 @@ class MenuSeeder extends AbstractSeeder
             'href' => '/'
         ],
         [
-            'name' => ['en' => 'Create an account', 'fr' => 'Créer un compte'],
+            'name' => ['en' => 'Sign up', 'fr' => 'Inscription'],
             'type' => MenuItem::TYPE_ROOT_SIDE_RIGHT,
-            'href' => '/register'
+            'href' => '/register',
+            'auth_condition' => MenuItem::AUTH_CONDITION_ONLY_GUEST
+        ],
+        [
+            'name' => ['en' => 'My panel', 'fr' => 'Mon panel'],
+            'type' => MenuItem::TYPE_ROOT_SIDE_RIGHT,
+            'href' => '/',
+            'auth_condition' => MenuItem::AUTH_CONDITION_ONLY_AUTHENTICATED,
+            'required_permission_name' => 'panel.dashboard.index'
         ],
     ];
 
@@ -119,7 +127,7 @@ class MenuSeeder extends AbstractSeeder
             'name' => ['en' => 'Dashboard', 'fr' => 'Tableau de bord'],
             'type' => MenuItem::TYPE_ROOT_ADMIN,
             'href' => '/manager',
-            'required_permission_name' => 'manager'
+            'required_permission_name' => 'manager.dashboard.index'
         ],
     ];
 
