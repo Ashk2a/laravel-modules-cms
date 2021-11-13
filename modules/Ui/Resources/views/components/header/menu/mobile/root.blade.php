@@ -28,7 +28,7 @@
             >
                 @foreach($root->categories as $category)
                     @if ($category->canShowed())
-                        <x-ui::menu.mobile.category :category="$category"/>
+                        <x-ui::header.menu.mobile.category :category="$category"/>
                     @endif
                 @endforeach
             </div>

@@ -1,6 +1,6 @@
 <x-ui::section.boxed>
     <div class="flex inline-flex justify-center items-baseline space-x-2">
-        <h1 class="text-3xl text-shadow">Latest news & updates</h1>
+        <x-ui::text.title class="text-3xl text-white">Latest news & updates</x-ui::text.title>
         <a href="#" class="text-gold-300 align-middle font-bold text-shadow">View all</a>
     </div>
 

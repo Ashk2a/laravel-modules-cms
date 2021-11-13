@@ -2,6 +2,6 @@
 
 @foreach($category->items as $item)
     @if ($item->canShowed())
-        <x-ui::menu.mobile.item :item="$item"/>
+        <x-ui::header.menu.mobile.item :item="$item"/>
     @endif
 @endforeach

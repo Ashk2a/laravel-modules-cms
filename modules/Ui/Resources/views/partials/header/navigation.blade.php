@@ -7,7 +7,7 @@
     <x-ui::container.default class="border-b-[1px] border-black border-opacity-20">
         <div class="grid grid-cols-5 lg:py-0 py-3">
             <div class="col-span-2">
-                <x-ui::menu.container :roots="$leftRoots"/>
+                <x-ui::header.menu.container :roots="$leftRoots"/>
 
                 @include('ui::partials.header.mobile.burger')
             </div>
@@ -17,7 +17,7 @@
             </div>
 
             <div class="col-span-2">
-                <x-ui::menu.container :roots="$rightRoots"/>
+                <x-ui::header.menu.container :roots="$rightRoots"/>
             </div>
         </div>
     </x-ui::container.default>

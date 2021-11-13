@@ -3,6 +3,7 @@
 return [
     'create_an_account' => 'Créer un compte',
     'sign_in' => 'Se connecter',
+    'sign_up' => 'Inscription',
     'required_fields' => 'Champs requis',
     'email' => 'Adresse email',
     'news_and_update' => 'Actualités et nouveautés',

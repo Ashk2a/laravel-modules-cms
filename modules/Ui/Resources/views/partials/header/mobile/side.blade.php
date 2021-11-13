@@ -14,5 +14,5 @@
         </button>
     </div>
 
-    <x-ui::menu.mobile.container :roots="$roots"/>
+    <x-ui::header.menu.mobile.container :roots="$roots"/>
 </div>

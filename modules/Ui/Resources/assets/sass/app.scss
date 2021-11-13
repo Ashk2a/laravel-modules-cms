@@ -1,11 +1,15 @@
-@import "utils/text";
+@import 'vendor/filament/forms/module.esm.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @import "components/button";
 @import "components/form";
 @import "components/menu";
 @import "components/news";
 @import "components/section";
-
+@import "components/text";
 [x-cloak] {
     display: none;
 }

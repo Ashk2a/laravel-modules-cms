@@ -34,7 +34,7 @@
         >
             @foreach($root->categories as $category)
                 @if($category->canShowed())
-                    <x-ui::menu.category :category="$category"/>
+                    <x-ui::header.menu.category :category="$category"/>
                 @endif
             @endforeach()
         </div>

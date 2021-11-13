@@ -26,5 +26,6 @@ return [
     'see_my_profile' => 'See my profile',
     'send' => 'Send',
     'sign_in' => 'Sign in',
+    'sign_up' => 'Sign up',
     'username' => 'Account name',
 ];

@@ -5,7 +5,7 @@
     <ul class="ml-4 space-y-2">
         @foreach($category->items as $item)
             @if($item->canShowed())
-                <x-ui::menu.item :item="$item"/>
+                <x-ui::header.menu.item :item="$item"/>
             @endif
         @endforeach
     </ul>
