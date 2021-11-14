@@ -77,12 +77,4 @@ class Account extends Model
         'verifier',
         'session_key'
     ];
-
-    /**
-     * @return HasOne
-     */
-    public function user(): HasOne
-    {
-        return $this->hasOne(User::class);
-    }
 }
