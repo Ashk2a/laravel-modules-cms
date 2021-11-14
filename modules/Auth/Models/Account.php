@@ -5,8 +5,7 @@ namespace Modules\Auth\Models;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use Modules\Auth\Models\User;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Modules\Auth\Models\Auth\Account
@@ -77,4 +76,12 @@ class Account extends Model
         'verifier',
         'session_key'
     ];
+
+    /**
+     * @return BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }

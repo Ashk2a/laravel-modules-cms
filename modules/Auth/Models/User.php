@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\DatabaseNotification;
@@ -88,13 +87,11 @@ class User extends Authenticatable
     }
 
     /**
-     * @return BelongsToMany
+     * @return HasMany
      */
-    public function accounts(): BelongsToMany
+    public function accounts(): HasMany
     {
-        return $this->belongsToMany(Account::class, 'user_accounts')
-            ->using(UserAccount::class)
-            ->withTimestamps();
+        return $this->hasMany(Account::class, 'user_id');
     }
 
     /**

@@ -3,5 +3,6 @@
     "Auth": true,
     "Ui": true,
     "Realm": true,
-    "News": true
+    "News": true,
+    "Panel": true
 }

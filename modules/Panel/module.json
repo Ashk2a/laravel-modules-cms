@@ -1,0 +1,19 @@
+{
+    "name": "Panel",
+    "alias": "panel",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Panel\\Providers\\ModuleServiceProvider",
+        "Modules\\Panel\\Providers\\RouteServiceProvider",
+        "Modules\\Panel\\Providers\\EventServiceProvider",
+        "Modules\\Panel\\Providers\\AuthServiceProvider"
+    ],
+    "migration": {
+        "seeds": []
+    },
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
