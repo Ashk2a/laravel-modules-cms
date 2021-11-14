@@ -6,7 +6,6 @@ return [
     'sign_up' => 'Inscription',
     'required_fields' => 'Champs requis',
     'email' => 'Adresse email',
-    'news_and_update' => 'Actualités et nouveautés',
     'username' => 'Nom de compte',
     'nickname' => 'Pseudonyme',
     'password' => 'Mot de passe',

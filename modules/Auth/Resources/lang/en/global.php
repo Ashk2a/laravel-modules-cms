@@ -14,7 +14,6 @@ return [
     'my_account' => 'My account',
     'new_password' => 'New password',
     'new_password_confirmation' => 'New password confirmation',
-    'news_and_update' => 'News and update',
     'nickname' => 'Nickname',
     'password' => 'Password',
     'password_confirmation' => 'Password confirmation',

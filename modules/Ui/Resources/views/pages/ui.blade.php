@@ -9,6 +9,14 @@
 @section('content')
     <x-ui::section.top class="pb-10">
         <x-ui::section.boxed>
+            <x-ui::breadcrumb>
+                <x-ui::breadcrumb.item>Home</x-ui::breadcrumb.item>
+                <x-ui::breadcrumb.item>Test1</x-ui::breadcrumb.item>
+                <x-ui::breadcrumb.item :last="true">Test2</x-ui::breadcrumb.item>
+            </x-ui::breadcrumb>
+        </x-ui::section.boxed>
+
+        <x-ui::section.boxed>
             <h1 class="text-2xl text-white">Button component</h1>
 
             <div class="grid grid-cols-4 gap-4">
