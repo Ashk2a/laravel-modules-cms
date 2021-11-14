@@ -16,4 +16,6 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
  */
 class UserAccount extends Pivot
 {
+    protected $connection = 'website';
+    protected $table = 'user_accounts';
 }
