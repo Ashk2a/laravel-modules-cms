@@ -49,19 +49,19 @@ class LoginForm extends AbstractFormComponent
                 $this->rememberMe
             );
         } catch (UserNotVerifiedException) {
-            $this->flashNextWarning(trans('auth::text.user_not_verified'));
+            $this->flashNextWarning(trans('ui::text.user_not_verified'));
 
             return redirect()->route('auth.login');
         }
 
         if (null !== $user) {
-            $this->flashNextInfo(trans('auth::text.welcome_back', ['nickname' => $user->nickname]));
+            $this->flashNextInfo(trans('ui::text.welcome_back', ['nickname' => $user->nickname]));
 
             return redirect()->route('home');
         }
 
         // Authentication just fail cause credentials were wrong
-        $this->flashNowDanger(trans('auth::text.wrong_credentials'));
+        $this->flashNowDanger(trans('ui::text.wrong_credentials'));
 
         return null;
     }
@@ -73,17 +73,17 @@ class LoginForm extends AbstractFormComponent
     {
         return [
             TextInput::make('email')
-                ->label(trans('auth::global.email'))
+                ->label(trans('ui::global.email'))
                 ->type('email')
                 ->required()
                 ->email()
                 ->maxLength(191),
             TextInput::make('password')
-                ->label(trans('auth::global.password'))
+                ->label(trans('ui::global.password'))
                 ->type('password')
                 ->required(),
             Checkbox::make('rememberMe')
-                ->label(trans('auth::global.remember_me'))
+                ->label(trans('ui::global.remember_me'))
         ];
     }
 }

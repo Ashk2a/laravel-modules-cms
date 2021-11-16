@@ -26,7 +26,7 @@ class RedirectIfAuthenticated
 
         foreach (array_unique($guards) as $guard) {
             if (Auth::guard($guard)->check()) {
-                $this->flashNowWarning(trans('auth::text.not_allow'));
+                $this->flashNowWarning(trans('ui::text.not_allow'));
 
                 return redirect()->route('home');
             }

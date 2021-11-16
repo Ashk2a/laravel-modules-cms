@@ -15,7 +15,7 @@ class LogoutController extends AbstractController
     {
         Auth::logout();
 
-        $this->flashNowInfo(trans('auth::text.goodbye'));
+        $this->flashNowInfo(trans('ui::text.goodbye'));
 
         return redirect()->route('home');
     }

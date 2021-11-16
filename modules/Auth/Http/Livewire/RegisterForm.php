@@ -59,12 +59,12 @@ class RegisterForm extends AbstractFormComponent
         );
 
         if (null !== $user) {
-            $this->flashNextSuccess(trans('auth::text.verification_email_sent', ['email' => $user->email]));
+            $this->flashNextSuccess(trans('ui::text.verification_email_sent', ['email' => $user->email]));
 
             return redirect()->route('auth.login');
         }
 
-        $this->flashNowDanger(trans('auth::text.cannot_create_account'));
+        $this->flashNowDanger(trans('ui::text.cannot_create_account'));
 
         return null;
     }
@@ -83,7 +83,7 @@ class RegisterForm extends AbstractFormComponent
             Grid::make(['default' => 2])
                 ->schema([
                     TextInput::make('email')
-                        ->label(trans('auth::global.email'))
+                        ->label(trans('ui::global.email'))
                         ->columnSpan(2)
                         ->type('email')
                         ->required()
@@ -92,28 +92,28 @@ class RegisterForm extends AbstractFormComponent
                         ->unique(User::class, 'email')
                         ->unique(Account::class, 'email'),
                     TextInput::make('password')
-                        ->label(trans('auth::global.password'))
+                        ->label(trans('ui::global.password'))
                         ->columnSpan($colSpan)
                         ->type('password')
                         ->required()
                         ->minLength(6),
                     TextInput::make('passwordConfirmation')
-                        ->label(trans('auth::global.password_confirmation'))
+                        ->label(trans('ui::global.password_confirmation'))
                         ->columnSpan($colSpan)
                         ->type('password')
                         ->required()
                         ->same('password'),
                     TextInput::make('username')
-                        ->label(trans('auth::global.username'))
-                        ->helperText(trans('auth::global.help_username'))
+                        ->label(trans('ui::global.username'))
+                        ->helperText(trans('ui::global.help_username'))
                         ->columnSpan($colSpan)
                         ->required()
                         ->minLength(4)
                         ->maxLength(24)
                         ->unique(Account::class, 'username'),
                     TextInput::make('nickname')
-                        ->label(trans('auth::global.nickname'))
-                        ->helperText(trans('auth::global.help_nickname'))
+                        ->label(trans('ui::global.nickname'))
+                        ->helperText(trans('ui::global.help_nickname'))
                         ->columnSpan($colSpan)
                         ->required()
                         ->minLength(2)

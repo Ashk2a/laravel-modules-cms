@@ -10,6 +10,17 @@
 @import "components/news";
 @import "components/section";
 @import "components/text";
+
+@layer utilities {
+    .flex-basis-0 {
+        flex-basis: 0;
+    }
+
+    .flex-grow-2 {
+        flex-grow: 2;
+    }
+}
+
 [x-cloak] {
     display: none;
 }

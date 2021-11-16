@@ -10,7 +10,7 @@
     <x-ui::section.top>
         <x-ui::section.boxed>
             <x-ui::breadcrumb>
-                <x-ui::breadcrumb.item :last="$last" :route="$route">@lang('panel::global.master_account')</x-ui::breadcrumb.item>
+                <x-ui::breadcrumb.item :last="$last" :route="$route">@lang('ui::global.master_account')</x-ui::breadcrumb.item>
                 @yield('breadcrumb')
             </x-ui::breadcrumb>
 
@@ -38,13 +38,25 @@
 
                         {{-- Pushed right --}}
                         <div class="flex">
-                            <x-ui::button class="btn-xs btn-lightBlue">@lang('auth::global.see_my_profile')</x-ui::button>
+                            <x-ui::button class="btn-xs btn-lightBlue">@lang('ui::global.see_my_profile')</x-ui::button>
                         </div>
                     </div>
                     <div class="flex justify-between flex-grow flex-wrap items-end">
-                        <div class="flex flex-row">
-                            <div class="flex">
-                                <x-heroicon-s-user-group class="h-4 w-4"/>
+                        <div class="flex flex-row space-x-3">
+                            <div class="flex flex-col border-[1px] border-brown-400 px-5 py-1 bg-brown-400 bg-opacity-30">
+                                <div class="flex justify-items-center items-center">
+                                    <x-heroicon-o-desktop-computer class="h-5 w-5 mr-2"/>
+                                    <span class="text-lg">1 / 3</span>
+                                </div>
+                                <div class="flex text-sm text-gold-400 font-bold">@lang('ui::global.game_accounts')</div>
+                            </div>
+
+                            <div class="flex flex-col border-[1px] border-brown-400 px-5 py-1 bg-brown-400 bg-opacity-30">
+                                <div class="flex justify-items-center items-center">
+                                    <x-heroicon-o-fire class="h-5 w-5 mr-2"/>
+                                    <span class="text-lg">300</span>
+                                </div>
+                                <div class="flex text-sm text-gold-400 font-bold">@lang('ui::global.tokens')</div>
                             </div>
                         </div>
                     </div>

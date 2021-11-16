@@ -35,7 +35,7 @@ class ResetPasswordForm extends AbstractFormComponent
 
         $authService->reset($reminder, $this->newPassword);
 
-        $this->flashNextSuccess(trans('auth::text.password_reset'));
+        $this->flashNextSuccess(trans('ui::text.password_reset'));
 
         return redirect()->route('auth.login');
     }
@@ -47,12 +47,12 @@ class ResetPasswordForm extends AbstractFormComponent
     {
         return [
             TextInput::make('newPassword')
-                ->label(trans('auth::global.new_password'))
+                ->label(trans('ui::global.new_password'))
                 ->type('password')
                 ->required()
                 ->minLength(6),
             TextInput::make('newPasswordConfirmation')
-                ->label(trans('auth::global.new_password_confirmation'))
+                ->label(trans('ui::global.new_password_confirmation'))
                 ->type('password')
                 ->required()
                 ->same('password'),
