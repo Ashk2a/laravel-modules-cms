@@ -1,64 +1,39 @@
 @extends('panel::layouts.default')
 
+@section('breadcrumb')
+    <x-ui::breadcrumb.item :last="true" :route="route('panel.preferences')">@lang('ui::global.preferences')</x-ui::breadcrumb.item>
+@endsection
+
 @section('section')
-    <div class="grid grid-cols-1 gap-4">
+    <div class="grid gap-y-10" x-data="{open: false}">
         <div class="col-span-1">
-            <h2 class="text-2xl text-white mb-4">Profil</h2>
-            <ul class="flex flex-col flex-grow text-white gap-4 grid grid-cols-2">
-                @foreach (range(1, 2) as $k)
-                    <li class="flex bg-brown-500 flex-grow border-[1px] border-brown-400">
-                        <div class="flex items-center flex-1 px-4 py-2">
-                            <h2 class="flex text-gold-400 flex-grow flex-basis-0">Hello</h2>
-                            <span class="flex text-md flex-basis-0 flex-grow-2">Lorem {{ $k % 2 === 0 ? 'Ta mere la tchOUIN' : ''}}</span>
-                            <x-heroicon-o-arrow-down class="h-3 w-3{{-- rotate-180--}}"/>
-                        </div>
-                    </li>
-                @endforeach
-            </ul>
+            <x-panel::preference.container :title="trans('ui::global.master_account')">
+                <x-panel::preference.item :section="trans('ui::global.nickname')" :description="trans('panel::text.desc_nickname')">
+                    <div class="flex items-center">
+                        <x-heroicon-o-exclamation-circle class="h-5 w-5 text-red-600 mr-2"/> @lang('panel::text.alert_nickname')
+                    </div>
+                </x-panel::preference.item>
+
+                <x-panel::preference.item :section="trans('ui::global.avatar')" :description="trans('panel::text.desc_avatar')">
+                    <div class="flex items-center">
+                        <x-heroicon-o-exclamation-circle class="h-5 w-5 text-red-600 mr-2"/> @lang('panel::text.alert_nickname')
+                    </div>
+                </x-panel::preference.item>
+            </x-panel::preference.container>
         </div>
+
         <div class="col-span-1">
-            <h2 class="text-2xl text-white mb-4">Profil</h2>
-            <ul class="flex flex-col flex-grow text-white space-y-3">
-                @foreach (range(1, 4) as $k)
-                    <li class="flex bg-brown-500 flex-grow border-[1px] border-brown-400">
-                        <div class="flex items-center flex-1 px-4 py-2">
-                            <h2 class="flex text-gold-400 flex-grow flex-basis-0">Hello</h2>
-                            <span class="flex text-md flex-basis-0 flex-grow-2">Lorem {{ $k % 2 === 0 ? 'Ta mere la tchOUIN' : ''}}</span>
-                            <x-heroicon-o-arrow-down class="h-3 w-3{{-- rotate-180--}}"/>
-                        </div>
-                    </li>
-                @endforeach
-            </ul>
-        </div>
-        <div class="col-span-1">
-            <h2 class="text-2xl text-white mb-4">Profil</h2>
-            <ul class="flex flex-col flex-grow text-white space-y-3">
-                @foreach (range(1, 6) as $k)
-                    <li class="flex bg-brown-500 flex-grow border-[1px] border-brown-400">
-                        <div class="flex items-center flex-1 px-4 py-2">
-                            <h2 class="flex text-gold-400 flex-grow flex-basis-0">Hello</h2>
-                            <span class="flex text-md flex-basis-0 flex-grow-2">Lorem {{ $k % 2 === 0 ? 'Ta mere la tchOUIN' : ''}}</span>
-                            <x-heroicon-o-arrow-down class="h-3 w-3{{-- rotate-180--}}"/>
-                        </div>
-                    </li>
-                @endforeach
-            </ul>
-        </div>
-        <div class="col-span-1">
-            <h2 class="text-2xl text-white mb-4">Profil</h2>
-            <ul class="flex flex-col flex-grow text-white space-y-3">
-                @foreach (range(1, 6) as $k)
-                    <li class="flex bg-brown-500 flex-grow border-[1px] border-brown-400">
-                        <div class="flex items-center flex-1 px-4 py-2">
-                            <h2 class="flex text-gold-400 flex-grow flex-basis-0">Hello</h2>
-                            <span class="flex text-md flex-basis-0 flex-grow-2">Lorem {{ $k % 2 === 0 ? 'Ta mere la tchOUIN' : ''}}</span>
-                            <x-heroicon-o-arrow-down class="h-3 w-3{{-- rotate-180--}}"/>
-                        </div>
-                    </li>
-                @endforeach
-            </ul>
+            <x-panel::preference.container :title="trans('ui::global.security')">
+                <x-panel::preference.item :section="trans('ui::global.email')" :description="trans('panel::text.desc_email')">
+
+                </x-panel::preference.item>
+
+                <x-panel::preference.item :section="trans('ui::global.password')" :description="trans('panel::text.desc_password')">
+                    <div class="flex items-center">
+                        <x-heroicon-o-exclamation-circle class="h-5 w-5 text-red-600 mr-2"/> @lang('panel::text.alert_nickname')
+                    </div>
+                </x-panel::preference.item>
+            </x-panel::preference.container>
         </div>
     </div>
-
-
 @endsection

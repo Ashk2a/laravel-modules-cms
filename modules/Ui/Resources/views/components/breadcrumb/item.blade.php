@@ -5,7 +5,7 @@
         <a
             @if (null !== $route)href="{{ locale()->localizeURL($route) }}"@endif
             @class([
-                'text-sm font-medium',
+                'font-medium',
                 'text-white' => $last,
                 'text-gold-500 hover:text-gold-700' => false === $last
             ])>

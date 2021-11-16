@@ -35,7 +35,7 @@ class ResetPasswordForm extends AbstractFormComponent
 
         $authService->reset($reminder, $this->newPassword);
 
-        $this->flashNextSuccess(trans('ui::text.password_reset'));
+        $this->flashNextSuccess(trans('auth::text.password_reset'));
 
         return redirect()->route('auth.login');
     }

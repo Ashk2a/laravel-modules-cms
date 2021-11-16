@@ -24,7 +24,7 @@
 .menu-root-item {
     @apply flex inline-flex justify-center items-center
     w-full py-[1.5rem]
-    text-base xl:text-lg font-medium
+    text-sm xl:text-lg font-medium
     group-hover:text-gray-50;
 }
 
@@ -38,7 +38,7 @@
 | Dropdown
 |--------------------------------------------------------------------------*/
 .menu-dropdown {
-    @apply absolute xl:top-[4.80rem] top-[4.6rem]
+    @apply absolute xl:top-[4.80rem] top-[4.3rem]
     p-6 w-full
     grid grid-cols-2 xl:gap-x-10 gap-x-6
     bg-gradient-to-b

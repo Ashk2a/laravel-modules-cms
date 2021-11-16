@@ -40,5 +40,9 @@ return [
     'active' => 'Active',
     'tokens' => 'Tokens',
     'overview' => 'Overview',
-    'preferences' => 'Preferences'
+    'preferences' => 'Preferences',
+    'profile' => 'Profile',
+    'security' => 'Security',
+    'schedule' => 'Schedule',
+    'avatar' => 'Avatar'
 ];

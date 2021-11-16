@@ -34,7 +34,7 @@ class ForgetPasswordForm extends AbstractFormComponent
 
         $authService->forget($this->email);
 
-        $this->flashNextInfo(trans('ui::text.forget_password_procedure_sent'));
+        $this->flashNextInfo(trans('auth::text.forget_password_procedure_sent'));
 
         return redirect()->route('auth.login');
     }

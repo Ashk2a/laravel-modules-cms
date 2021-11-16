@@ -59,12 +59,12 @@ class RegisterForm extends AbstractFormComponent
         );
 
         if (null !== $user) {
-            $this->flashNextSuccess(trans('ui::text.verification_email_sent', ['email' => $user->email]));
+            $this->flashNextSuccess(trans('auth::text.verification_email_sent', ['email' => $user->email]));
 
             return redirect()->route('auth.login');
         }
 
-        $this->flashNowDanger(trans('ui::text.cannot_create_account'));
+        $this->flashNowDanger(trans('auth::text.cannot_create_account'));
 
         return null;
     }

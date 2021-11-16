@@ -3,7 +3,7 @@
 @section('content')
     <x-ui::section.title style="background-image: url('{{ asset('images/background/news.jpg') }}')">
         <x-slot name="title">
-            trans('ui::global.news_and_update')
+            @lang('ui::global.news_and_update')
         </x-slot>
     </x-ui::section.title>
 

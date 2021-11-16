@@ -49,19 +49,19 @@ class LoginForm extends AbstractFormComponent
                 $this->rememberMe
             );
         } catch (UserNotVerifiedException) {
-            $this->flashNextWarning(trans('ui::text.user_not_verified'));
+            $this->flashNextWarning(trans('auth::text.user_not_verified'));
 
             return redirect()->route('auth.login');
         }
 
         if (null !== $user) {
-            $this->flashNextInfo(trans('ui::text.welcome_back', ['nickname' => $user->nickname]));
+            $this->flashNextInfo(trans('auth::text.welcome_back', ['nickname' => $user->nickname]));
 
             return redirect()->route('home');
         }
 
         // Authentication just fail cause credentials were wrong
-        $this->flashNowDanger(trans('ui::text.wrong_credentials'));
+        $this->flashNowDanger(trans('auth::text.wrong_credentials'));
 
         return null;
     }

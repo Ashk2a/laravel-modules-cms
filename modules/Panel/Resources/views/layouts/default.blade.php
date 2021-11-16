@@ -28,7 +28,7 @@
                                 <x-ui::text.title class="font-bold">{{ ucfirst(auth()->user()->nickname) }}</x-ui::text.title>
                             </div>
 
-                            <div class="flex flex-wrap text-sm text-gray-200">
+                            <div class="flex flex-wrap text text-gray-200">
                                 <div class="flex justify-between items-center">
                                     <x-heroicon-s-mail class="h-4 w-4 mr-2"/>
                                     <span class="flex">{{ auth()->user()->email }}</span>
@@ -48,7 +48,7 @@
                                     <x-heroicon-o-desktop-computer class="h-5 w-5 mr-2"/>
                                     <span class="text-lg">1 / 3</span>
                                 </div>
-                                <div class="flex text-sm text-gold-400 font-bold">@lang('ui::global.game_accounts')</div>
+                                <div class="flex text-gold-400 font-bold">@lang('ui::global.game_accounts')</div>
                             </div>
 
                             <div class="flex flex-col border-[1px] border-brown-400 px-5 py-1 bg-brown-400 bg-opacity-30">
@@ -56,7 +56,7 @@
                                     <x-heroicon-o-fire class="h-5 w-5 mr-2"/>
                                     <span class="text-lg">300</span>
                                 </div>
-                                <div class="flex text-sm text-gold-400 font-bold">@lang('ui::global.tokens')</div>
+                                <div class="flex text-gold-400 font-bold">@lang('ui::global.tokens')</div>
                             </div>
                         </div>
                     </div>
