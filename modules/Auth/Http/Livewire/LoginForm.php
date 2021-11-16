@@ -36,9 +36,9 @@ class LoginForm extends AbstractFormComponent
 
     /**
      * @param AuthService $authService
-     * @return Redirector|RedirectResponse
+     * @return Redirector|RedirectResponse|null
      */
-    public function submit(AuthService $authService): Redirector|RedirectResponse
+    public function submit(AuthService $authService): Redirector|RedirectResponse|null
     {
         $this->form->getState();
 
@@ -62,6 +62,8 @@ class LoginForm extends AbstractFormComponent
 
         // Authentication just fail cause credentials were wrong
         $this->flashNowDanger(trans('auth::text.wrong_credentials'));
+
+        return null;
     }
 
     /**

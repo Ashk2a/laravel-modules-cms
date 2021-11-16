@@ -45,9 +45,9 @@ class RegisterForm extends AbstractFormComponent
 
     /**
      * @param AuthService $authService
-     * @return Redirector|RedirectResponse
+     * @return Redirector|RedirectResponse|null
      */
-    public function submit(AuthService $authService): Redirector|RedirectResponse
+    public function submit(AuthService $authService): Redirector|RedirectResponse|null
     {
         $this->form->getState();
 
@@ -65,6 +65,8 @@ class RegisterForm extends AbstractFormComponent
         }
 
         $this->flashNowDanger(trans('auth::text.cannot_create_account'));
+
+        return null;
     }
 
     /**
