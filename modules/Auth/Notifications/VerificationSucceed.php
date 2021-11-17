@@ -16,7 +16,8 @@ class VerificationSucceed extends AbstractNotification implements HasMarkdownMai
 
     public function toMail(Model $notifiable): MarkdownMail
     {
-        return (new MarkdownMail(trans('auth::email.verification_succeed.subject')))
+        return MarkdownMail::create()
+            ->subject(trans('auth::email.verification_succeed.subject'))
             ->markdown('auth::emails.verification_succeed');
     }
 }

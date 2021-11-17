@@ -23,7 +23,8 @@ class ResetPasswordProcedure extends AbstractNotification implements HasMarkdown
      */
     public function toMail(Model $notifiable): MarkdownMail
     {
-        return (new MarkdownMail(trans('auth::email.reset_password_procedure.subject')))
+        return MarkdownMail::create()
+            ->subject(trans('auth::email.reset_password_procedure.subject'))
             ->markdown('auth::emails.reset_password_procedure', [
                 'url' => $this->event->reminder->getUrl()
             ]);

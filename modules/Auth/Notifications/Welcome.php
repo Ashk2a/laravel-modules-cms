@@ -24,7 +24,8 @@ class Welcome extends AbstractNotification implements HasMarkdownMailNotificatio
             ? trans('auth::email.welcome.subject')
             : trans('auth::email.welcome.subject_with_verification');
 
-        return (new MarkdownMail($subject))
+        return MarkdownMail::create()
+            ->subject($subject)
             ->markdown('auth::emails.welcome', [
                 'completed' => $this->event->autoCompleted,
                 'url' => $this->event->verification->getUrl()
