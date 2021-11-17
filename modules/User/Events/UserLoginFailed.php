@@ -16,14 +16,12 @@ class UserLoginFailed extends AbstractEvent
      * @param string $guard
      * @param User|null $user
      * @param array $credentials
-     * @param array $context
      * @param string $cause
      */
     public function __construct(
         public string $guard,
         public ?User  $user = null,
         public array  $credentials = [],
-        public array  $context = [],
         public string $cause = self::WRONG_CREDENTIALS_CAUSE
     )
     {
