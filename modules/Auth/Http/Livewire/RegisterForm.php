@@ -10,7 +10,7 @@ use Livewire\Redirector;
 use Modules\Auth\Models\User;
 use Modules\Auth\Services\AuthService;
 use Modules\Core\Http\Livewire\AbstractFormComponent;
-use Modules\Auth\Models\Account;
+use Modules\Game\Models\Auth\Account;
 
 class RegisterForm extends AbstractFormComponent
 {

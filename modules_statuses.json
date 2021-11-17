@@ -4,5 +4,6 @@
     "Ui": true,
     "Realm": true,
     "News": true,
-    "Panel": true
+    "Panel": true,
+    "Game": true
 }

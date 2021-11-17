@@ -2,7 +2,7 @@
 
 namespace Modules\Auth\Contracts\Hashing;
 
-use Modules\Auth\Models\Account;
+use Modules\Game\Models\Auth\Account;
 
 interface WotlkHasher
 {

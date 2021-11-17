@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Auth\Models;
+namespace Modules\Game\Models\Auth;
 
 use Illuminate\Database\Eloquent\Model;
 

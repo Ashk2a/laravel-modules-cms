@@ -1,14 +1,15 @@
 <?php
 
-namespace Modules\Realm\Models;
+namespace Modules\Game\Models\Auth;
 
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Modules\Realm\Models\Server;
 
 /**
- * Modules\Realm\Models\Realmlist
+ * Modules\Game\Models\Auth\Realmlist
  *
  * @property int $id
  * @property string $name

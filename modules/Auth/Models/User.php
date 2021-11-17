@@ -16,6 +16,7 @@ use Modules\Auth\Database\Factories\UserFactory;
 use Modules\Core\Database\Eloquent\Concerns\HasActivities;
 use Modules\Core\Database\Eloquent\Concerns\IsNotifiable;
 use Modules\Core\Models\Activity;
+use Modules\Game\Models\Auth\Account;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;

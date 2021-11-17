@@ -1,0 +1,19 @@
+{
+    "name": "Game",
+    "alias": "game",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Game\\Providers\\ModuleServiceProvider",
+        "Modules\\Game\\Providers\\RouteServiceProvider",
+        "Modules\\Game\\Providers\\EventServiceProvider",
+        "Modules\\Game\\Providers\\AuthServiceProvider"
+    ],
+    "migration": {
+        "seeds": []
+    },
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

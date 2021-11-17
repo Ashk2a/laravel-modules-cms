@@ -2,10 +2,10 @@
 
 namespace Modules\Auth\Database\Seeders;
 
-use Modules\Auth\Models\Account;
 use Modules\Auth\Models\Role;
 use Modules\Auth\Services\AuthService;
 use Modules\Core\Database\Seeders\AbstractSeeder;
+use Modules\Game\Models\Auth\Account;
 
 class UserSeeder extends AbstractSeeder
 {
