@@ -1,4 +1,4 @@
-<form wire:submit.prevent="submit" class="space-y-6">
+<x-ui::form wire:submit.prevent="submit">
     {{ $this->form }}
     <x-ui::button class="btn-lightBlue btn-base btn-w-full">@lang('ui::global.login')</x-ui::button>
-</form>
+</x-ui::form>
