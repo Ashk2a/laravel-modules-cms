@@ -2,12 +2,13 @@
 
 namespace Modules\Core\Events;
 
-use Modules\Core\Models\Activity;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Str;
+use Modules\Core\Models\Activity;
+use Modules\User\Models\User;
 
 abstract class AbstractEvent
 {
@@ -75,6 +76,15 @@ abstract class AbstractEvent
      */
     public function causer(): ?Model
     {
-        return null;
+        /**
+         * @var ?User $causer
+         */
+        $causer = auth()->user();
+
+        if ((null !== $causer) && $this->subject() instanceof User && $this->subject()->id === $causer->getAuthIdentifier()) {
+            return null;
+        }
+
+        return $causer;
     }
 }
