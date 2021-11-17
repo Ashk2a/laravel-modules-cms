@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Carbon;
-use Modules\Auth\Models\User;
+use Modules\User\Models\User;
 use Modules\Core\Models\Comment;
 use Modules\News\Database\Factories\NewsFactory;
 use Spatie\Translatable\HasTranslations;

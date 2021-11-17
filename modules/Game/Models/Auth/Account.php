@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Modules\Auth\Models\User;
+use Modules\User\Models\User;
 
 /**
- * Modules\Auth\Models\Auth\Account
+ * Modules\User\Models\Auth\Account
  *
  * @property int $id Identifier
  * @property string $username

@@ -10,7 +10,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection;
 use Spatie\MediaLibrary\MediaCollections\Models\Media as SpatieMedia;
 
 /**
- * Modules\Auth\Models\Media
+ * Modules\User\Models\Media
  *
  * @property int $id
  * @property string $model_type

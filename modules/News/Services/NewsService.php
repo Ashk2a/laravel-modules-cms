@@ -2,7 +2,7 @@
 
 namespace Modules\News\Services;
 
-use Modules\Auth\Models\User;
+use Modules\User\Models\User;
 use Modules\News\Models\News;
 use Modules\News\Models\NewsCategory;
 

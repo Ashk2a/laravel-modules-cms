@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Carbon;
 
 /**
- * Modules\Auth\Models\Comment
+ * Modules\User\Models\Comment
  *
  * @property int $id
  * @property int $author_id

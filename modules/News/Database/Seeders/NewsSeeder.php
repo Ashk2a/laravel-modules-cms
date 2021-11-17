@@ -2,7 +2,7 @@
 
 namespace Modules\News\Database\Seeders;
 
-use Modules\Auth\Models\User;
+use Modules\User\Models\User;
 use Modules\Core\Database\Seeders\AbstractSeeder;
 use Modules\News\Models\News;
 use Modules\News\Models\NewsCategory;

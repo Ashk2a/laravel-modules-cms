@@ -3,9 +3,9 @@
 namespace Modules\Core\Database\Seeders;
 
 use Illuminate\Database\Seeder as LaravelSeeder;
-use Modules\Auth\Database\Seeders\UserSeeder;
-use Modules\Auth\Models\Role;
-use Modules\Auth\Models\User;
+use Modules\User\Database\Seeders\UserSeeder;
+use Modules\User\Models\Role;
+use Modules\User\Models\User;
 
 abstract class AbstractSeeder extends LaravelSeeder
 {

@@ -1,6 +1,6 @@
 {
     "Core": true,
-    "Auth": true,
+    "User": true,
     "Ui": true,
     "Realm": true,
     "News": true,

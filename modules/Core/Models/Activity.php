@@ -10,7 +10,7 @@ use Illuminate\Support\Collection;
 use Spatie\Activitylog\Models\Activity as SpatieActivity;
 
 /**
- * Modules\Auth\Models\Activity
+ * Modules\User\Models\Activity
  *
  * @property int $id
  * @property string|null $log_name
