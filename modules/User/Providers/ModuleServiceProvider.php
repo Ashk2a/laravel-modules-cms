@@ -23,12 +23,12 @@ class ModuleServiceProvider extends AbstractModuleServiceProvider
     /**
      * @var string
      */
-    protected string $moduleName = 'Auth';
+    protected string $moduleName = 'User';
 
     /**
      * @var string
      */
-    protected string $moduleNameLower = 'auth';
+    protected string $moduleNameLower = 'user';
 
     /**
      * @var array|string[]

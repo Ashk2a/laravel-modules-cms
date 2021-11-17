@@ -9,5 +9,5 @@ class RouteServiceProvider extends AbstractRouteServiceProvider
     /**
      * @var string
      */
-    protected string $moduleName = 'Auth';
+    protected string $moduleName = 'User';
 }
