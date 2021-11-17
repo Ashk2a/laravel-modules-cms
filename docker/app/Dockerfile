@@ -58,11 +58,9 @@ RUN install-php-extensions \
 COPY start-container /usr/local/bin/start-container
 
 # Composer configuration
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 ENV COMPOSER_ALLOW_SUPERUSER=1
-ENV COMPOSER_HOME=/tmp
-ENV PATH="${PATH}:/root/.composer/vendor/bin"
-RUN find /tmp -type d -exec chmod -v 1777 {} +
+ENV COMPOSER_ALLOW_XDEBUG=0
+ENV COMPOSER_DISABLE_XDEBUG_WARN=1
 
 # Miscellany
 RUN setcap "cap_net_bind_service=+ep" /usr/local/bin/php
@@ -75,9 +73,6 @@ RUN chown -R $USER:$GROUP /usr/local/bin/start-container
 RUN apk add shadow \
     && usermod -u $UID $USER \
     && groupmod -g $GID $GROUP
-
-RUN mkdir /.composer
-RUN chmod -R ugo+rw /.composer
 
 COPY xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 COPY php.ini /usr/local/etc/php/conf.d/99-php.ini
