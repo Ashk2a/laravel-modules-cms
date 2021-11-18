@@ -57,7 +57,7 @@ class SessionGuard extends LaravelSessionGuard
      */
     public function fireLoginEvent($user, $remember = false): void
     {
-        event(new UserLogin($this->name, $user, $remember));
+        UserLogin::dispatch($this->name, $user, $remember);
     }
 
     /**
@@ -67,7 +67,7 @@ class SessionGuard extends LaravelSessionGuard
      */
     public function fireLoginFailedEvent(?User $user, array $credentials = [], string $cause = UserLoginFailed::WRONG_CREDENTIALS_CAUSE): void
     {
-        event(new UserLoginFailed($this->name, $user, $credentials, $cause));
+        UserLoginFailed::dispatch($this->name, $user, $credentials, $cause);
     }
 
     /**

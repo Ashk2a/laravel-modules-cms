@@ -64,7 +64,7 @@ class AuthService
 
         $autoCompleted = $autoCompleted ?? (bool)Config::get('auth.verification.auto');
 
-        event(new UserRegistered($user, $verification, $autoCompleted));
+        UserRegistered::dispatch($user, $verification, $autoCompleted);
 
         if ($autoCompleted) {
             try {
@@ -96,7 +96,7 @@ class AuthService
 
         $user->verifications()->where('completed', false)->delete();
 
-        event(new UserVerified($verification, $autoCompleted));
+        UserVerified::dispatch($verification, $autoCompleted);
     }
 
     /**
@@ -145,7 +145,7 @@ class AuthService
 
         $reminder = $user->reminders()->create();
 
-        event(new UserForgetPassword($reminder));
+        UserForgetPassword::dispatch($reminder);
 
         return true;
     }
@@ -161,7 +161,7 @@ class AuthService
             'password' => Hash::make($newPassword)
         ]);
 
-        event(new UserResetPassword($reminder->user));
+        UserResetPassword::dispatch($reminder->user);
 
         $reminder->delete();
     }
