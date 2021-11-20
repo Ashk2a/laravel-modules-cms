@@ -6,7 +6,7 @@
     <div class="col-span-1">
         <a href="{{ $root->getUrl() }}"
            @if($hasSub) @click.prevent="if (open === {{ $root->id }}) open = false; else open = {{ $root->id }}" @endif
-           class="bg-black bg-opacity-20 text-white group w-full flex items-center pl-4 py-3 text-sm font-medium"
+           class="text-gold-400 font-bold group w-full flex items-center pl-4 py-3 text-sm font-medium"
         >
             <span class="flex-1">{{ $root->name }}</span>
 

@@ -22,4 +22,11 @@ mix
         processCssUrls: false,
         postCss: [ tailwind('./tailwind.config.js') ],
     })
-
+    .browserSync({
+        proxy: 'wowlf.local',
+        files: [
+            'modules/**/Resources/**/*.blade.php',
+            'modules/**/Resources/**/*.js'
+        ],
+        open: false
+    });
