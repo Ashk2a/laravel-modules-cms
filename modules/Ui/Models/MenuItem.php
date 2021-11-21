@@ -14,6 +14,7 @@ use JetBrains\PhpStorm\Pure;
 use Mcamara\LaravelLocalization\Exceptions\UnsupportedLocaleException;
 use Spatie\Permission\Models\Permission;
 use Spatie\Translatable\HasTranslations;
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
 
 /**
  * Modules\Ui\Models\MenuItem
@@ -44,14 +45,16 @@ class MenuItem extends Model
 {
     use HasTranslations;
 
-    public const TYPE_ROOT_SIDE_LEFT = 0;
-    public const TYPE_ROOT_SIDE_RIGHT = 1;
-    public const TYPE_ROOT_ADMIN = 2;
-    public const TYPE_CATEGORY = 3;
-    public const TYPE_NORMAL_ITEM = 4;
+    public const SCOPE_MAIN_MANAGER = 0;
+    public const SCOPE_MAIN_RIGHT = 1;
+    public const SCOPE_MAIN_LEFT = 2;
 
-    public const TYPE_HREF_INTERNAL = 0;
-    public const TYPE_HREF_EXTERNAL = 1;
+    public const TYPE_CATEGORY = 2;
+    public const TYPE_ITEM = 1;
+
+    public const TYPE_HREF_URL_EXTERNAL = 0;
+    public const TYPE_HREF_URL_INTERNAL = 1;
+    public const TYPE_HREF_ROUTE_NAME_INTERNAL = 2;
 
     public const AUTH_CONDITION_NONE = 0;
     public const AUTH_CONDITION_ONLY_GUEST = 1;
@@ -63,22 +66,26 @@ class MenuItem extends Model
      * @var array
      */
     protected $fillable = [
+        'scope',
         'type',
         'position',
         'parent_id',
         'name',
-        'href'
+        'type_href',
+        'href',
+        'auth_condition'
     ];
 
     /**
-     * @param array $types
+     * @param array $scopes
      * @return Collection|array
      */
-    public static function buildTree(array $types): Collection|array
+    public static function buildTree(array $scopes): Collection|array
     {
         return self::query()
             ->with(['categories', 'categories.items'])
-            ->whereIn('type', $types)
+            ->whereNull('parent_id')
+            ->whereIn('scope', $scopes)
             ->get();
     }
 
@@ -91,11 +98,12 @@ class MenuItem extends Model
 
         try {
             return match ($this->type_href) {
-                self::TYPE_HREF_INTERNAL => locale()->localizeURL($this->href),
-                self::TYPE_HREF_EXTERNAL => $this->href,
+                self::TYPE_HREF_URL_EXTERNAL => $this->href,
+                self::TYPE_HREF_URL_INTERNAL => locale()->localizeURL($this->href),
+                self::TYPE_HREF_ROUTE_NAME_INTERNAL => locale()->localizeURL(route($this->href)),
                 default => locale()->localizeURL(),
             };
-        } catch (UnsupportedLocaleException $e) {
+        } catch (UnsupportedLocaleException|RouteNotFoundException) {
             return $default;
         }
     }
@@ -122,47 +130,6 @@ class MenuItem extends Model
     }
 
     /**
-     * @return bool
-     */
-    #[Pure] public function isRootSideLeft(): bool
-    {
-        return $this->isTypeOf(self::TYPE_ROOT_SIDE_LEFT);
-    }
-
-    /**
-     * @param int $type
-     * @return bool
-     */
-    public function isTypeOf(int $type): bool
-    {
-        return $this->type === $type;
-    }
-
-    /**
-     * @return bool
-     */
-    #[Pure] public function isRootSideRight(): bool
-    {
-        return $this->isTypeOf(self::TYPE_ROOT_SIDE_RIGHT);
-    }
-
-    /**
-     * @return bool
-     */
-    #[Pure] public function isCategory(): bool
-    {
-        return $this->isTypeOf(self::TYPE_CATEGORY);
-    }
-
-    /**
-     * @return bool
-     */
-    #[Pure] public function isItem(): bool
-    {
-        return $this->isTypeOf(self::TYPE_NORMAL_ITEM);
-    }
-
-    /**
      * @return HasMany
      */
     public function categories(): HasMany
@@ -177,25 +144,7 @@ class MenuItem extends Model
     public function items(): HasMany
     {
         return $this->hasMany(__CLASS__, 'parent_id', 'id')
-            ->where('type', self::TYPE_NORMAL_ITEM);
-    }
-
-    /**
-     * @return BelongsTo
-     */
-    public function root(): BelongsTo
-    {
-        return $this->belongsTo(__CLASS__, 'parent_id', 'id')
-            ->whereIn('type', [self::TYPE_ROOT_SIDE_LEFT, self::TYPE_ROOT_SIDE_RIGHT, self::TYPE_ROOT_ADMIN]);
-    }
-
-    /**
-     * @return BelongsTo
-     */
-    public function category(): BelongsTo
-    {
-        return $this->belongsTo(__CLASS__, 'parent_id', 'id')
-            ->where('type', self::TYPE_CATEGORY);
+            ->where('type', self::TYPE_ITEM);
     }
 
     /**

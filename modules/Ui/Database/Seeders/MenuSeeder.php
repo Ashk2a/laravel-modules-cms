@@ -13,12 +13,14 @@ class MenuSeeder extends AbstractSeeder
         // Left side
         [
             'name' => ['en' => 'News', 'fr' => 'Actualités'],
-            'type' => MenuItem::TYPE_ROOT_SIDE_LEFT,
+            'scope' => MenuItem::SCOPE_MAIN_LEFT,
+            'type' => MenuItem::TYPE_ITEM,
             'href' => '/news'
         ],
         [
             'name' => ['en' => 'Game', 'fr' => 'Jeu'],
-            'type' => MenuItem::TYPE_ROOT_SIDE_LEFT,
+            'scope' => MenuItem::SCOPE_MAIN_LEFT,
+            'type' => MenuItem::TYPE_ITEM,
             'categories' => [
                 [
                     'name' => ['en' => 'Play with us', 'fr' => 'Jouer avec nous'],
@@ -58,7 +60,8 @@ class MenuSeeder extends AbstractSeeder
         ],
         [
             'name' => 'Community',
-            'type' => MenuItem::TYPE_ROOT_SIDE_LEFT,
+            'scope' => MenuItem::SCOPE_MAIN_LEFT,
+            'type' => MenuItem::TYPE_ITEM,
             'categories' => [
                 [
                     'name' => 'Category 1',
@@ -99,23 +102,27 @@ class MenuSeeder extends AbstractSeeder
         // Right side
         [
             'name' => 'Vote',
-            'type' => MenuItem::TYPE_ROOT_SIDE_RIGHT,
+            'scope' => MenuItem::SCOPE_MAIN_RIGHT,
+            'type' => MenuItem::TYPE_ITEM,
             'href' => '/'
         ],
         [
             'name' => ['en' => 'Shop', 'fr' => 'Boutique'],
-            'type' => MenuItem::TYPE_ROOT_SIDE_RIGHT,
+            'scope' => MenuItem::SCOPE_MAIN_RIGHT,
+            'type' => MenuItem::TYPE_ITEM,
             'href' => '/'
         ],
         [
             'name' => ['en' => 'Sign up', 'fr' => 'Inscription'],
-            'type' => MenuItem::TYPE_ROOT_SIDE_RIGHT,
+            'scope' => MenuItem::SCOPE_MAIN_RIGHT,
+            'type' => MenuItem::TYPE_ITEM,
             'href' => '/register',
             'auth_condition' => MenuItem::AUTH_CONDITION_ONLY_GUEST
         ],
         [
             'name' => ['en' => 'My panel', 'fr' => 'Mon panel'],
-            'type' => MenuItem::TYPE_ROOT_SIDE_RIGHT,
+            'scope' => MenuItem::SCOPE_MAIN_RIGHT,
+            'type' => MenuItem::TYPE_ITEM,
             'href' => '/',
             'auth_condition' => MenuItem::AUTH_CONDITION_ONLY_AUTHENTICATED,
             'required_permission_name' => 'panel.dashboard.index'
@@ -125,7 +132,8 @@ class MenuSeeder extends AbstractSeeder
     private const ADMIN_MENU = [
         [
             'name' => ['en' => 'Dashboard', 'fr' => 'Tableau de bord'],
-            'type' => MenuItem::TYPE_ROOT_ADMIN,
+            'scope' => MenuItem::SCOPE_MAIN_MANAGER,
+            'type' => MenuItem::TYPE_ITEM,
             'href' => '/manager',
             'required_permission_name' => 'manager.dashboard.index'
         ],
@@ -155,6 +163,8 @@ class MenuSeeder extends AbstractSeeder
             );
 
             foreach ($rootDefinition['categories'] ?? [] as $categoryPosition => $categoryDefinition) {
+                $categoryDefinition['scope'] = $rootDefinition['scope'];
+
                 $category = $this->createMenuItem(
                     $categoryPosition,
                     MenuItem::TYPE_CATEGORY,
@@ -163,9 +173,11 @@ class MenuSeeder extends AbstractSeeder
                 );
 
                 foreach ($categoryDefinition['items'] ?? [] as $itemPosition => $itemDefinition) {
+                    $itemDefinition['scope'] = $rootDefinition['scope'];
+
                     $this->createMenuItem(
                         $itemPosition,
-                        MenuItem::TYPE_NORMAL_ITEM,
+                        MenuItem::TYPE_ITEM,
                         $category->id,
                         $itemDefinition
                     );
@@ -184,11 +196,12 @@ class MenuSeeder extends AbstractSeeder
     private function createMenuItem(int $position, int $type, ?int $parentId = null, array $definition = []): MenuItem
     {
         $href = Arr::get($definition, 'href');
+        $scope = Arr::get($definition, 'scope');
         $typeHref = Arr::get($definition, 'type_href');
         $requiredPermissionName = Arr::get($definition, 'required_permission_name');
 
         if (null !== $href && null === $typeHref) {
-            $typeHref = MenuItem::TYPE_HREF_INTERNAL;
+            $typeHref = MenuItem::TYPE_HREF_URL_INTERNAL;
         }
 
         if (null !== $requiredPermissionName) {
@@ -198,6 +211,7 @@ class MenuSeeder extends AbstractSeeder
         return MenuItem::create([
             'position' => $position,
             'name' => $definition['name'],
+            'scope' => $scope,
             'type' => $type,
             'href' => $href,
             'type_href' => $typeHref,

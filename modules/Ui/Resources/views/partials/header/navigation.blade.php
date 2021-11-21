@@ -1,6 +1,6 @@
 @php
-    $leftRoots = \Modules\Ui\Models\MenuItem::buildTree([\Modules\Ui\Models\MenuItem::TYPE_ROOT_SIDE_LEFT]);
-    $rightRoots = \Modules\Ui\Models\MenuItem::buildTree([\Modules\Ui\Models\MenuItem::TYPE_ROOT_SIDE_RIGHT])
+    $leftRoots = \Modules\Ui\Models\MenuItem::buildTree([\Modules\Ui\Models\MenuItem::SCOPE_MAIN_LEFT]);
+    $rightRoots = \Modules\Ui\Models\MenuItem::buildTree([\Modules\Ui\Models\MenuItem::SCOPE_MAIN_RIGHT])
 @endphp
 
 <div class="bg-brown-500 bg-opacity-90" x-data="{mobileMenu: true}">

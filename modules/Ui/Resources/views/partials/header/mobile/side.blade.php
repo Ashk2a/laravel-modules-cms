@@ -1,5 +1,8 @@
 @php
-    $roots = \Modules\Ui\Models\MenuItem::buildTree([\Modules\Ui\Models\MenuItem::TYPE_ROOT_SIDE_LEFT, \Modules\Ui\Models\MenuItem::TYPE_ROOT_SIDE_RIGHT]);
+    $roots = \Modules\Ui\Models\MenuItem::buildTree([
+        \Modules\Ui\Models\MenuItem::SCOPE_MAIN_LEFT,
+        \Modules\Ui\Models\MenuItem::SCOPE_MAIN_RIGHT
+    ]);
 @endphp
 
 <div

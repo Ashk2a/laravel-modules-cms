@@ -14,6 +14,7 @@ class CreateMenuItemsTable extends Migration
     {
         Schema::create('menu_items', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('scope');
             $table->integer('type');
             $table->integer('position');
             $table->foreignId('parent_id')->nullable()->references('id')->on('menu_items');
