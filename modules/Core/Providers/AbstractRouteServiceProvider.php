@@ -3,6 +3,7 @@
 namespace Modules\Core\Providers;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -63,7 +64,7 @@ abstract class AbstractRouteServiceProvider extends RouteServiceProvider
 
         if (file_exists($routeFile)) {
             Route::prefix('manager')
-                ->middleware(['auth:web', 'can:manager'])
+                ->middleware(['auth:web', 'can:manager.dashboard.index'])
                 ->namespace($this->namespace)
                 ->group($routeFile);
         }

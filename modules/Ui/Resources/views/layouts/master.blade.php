@@ -16,9 +16,10 @@
     @livewireScripts
     @toastScripts
     <script src="{{ asset('js/app.js') }}" defer></script>
-    @stack('scripts')
+    @stack('headScripts')
 </head>
-<body class="antialiased">
+
+<body class="antialiased @yield('bodyClasses')">
 
 <livewire:toasts/>
 @yield('body')

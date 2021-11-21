@@ -26,6 +26,9 @@
 
 body {
     font-family: Roboto, sans-serif;
-    background: url("/images/texture/dark-blue.jpg");
     @apply text-base
+}
+
+.body-web-bg {
+    background: url("/images/texture/dark-blue.jpg");
 }

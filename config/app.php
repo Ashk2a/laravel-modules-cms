@@ -56,6 +56,11 @@ return [
 
     'asset_url' => env('ASSET_URL', null),
 
+    'domains' => [
+        'default' => env('HOST_APP'),
+        'manager' => env('HOST_MANAGER_APP')
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Application Timezone
