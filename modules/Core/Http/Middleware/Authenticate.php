@@ -19,6 +19,9 @@ class Authenticate extends Middleware
         if (!$request->expectsJson()) {
             $this->flashNextDanger(trans('user::text.not_allow'));
 
+            session()->remove('url.intended');
+            session()->push('url.intended', url()->current());
+
             return route('auth.login');
         }
 

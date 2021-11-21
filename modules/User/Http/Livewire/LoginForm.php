@@ -6,10 +6,13 @@ use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Arr;
 use Livewire\Redirector;
 use Modules\User\Exceptions\UserNotVerifiedException;
 use Modules\User\Services\AuthService;
 use Modules\Core\Http\Livewire\AbstractFormComponent;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 class LoginForm extends AbstractFormComponent
 {
@@ -56,6 +59,14 @@ class LoginForm extends AbstractFormComponent
 
         if (null !== $user) {
             $this->flashNextInfo(trans('user::text.welcome_back', ['nickname' => $user->nickname]));
+
+            try {
+                $intended = session()->get('url.intended');
+
+                if (null !== $intended) {
+                    return redirect($intended);
+                }
+            } catch (NotFoundExceptionInterface | ContainerExceptionInterface) {}
 
             return redirect()->route('home');
         }
