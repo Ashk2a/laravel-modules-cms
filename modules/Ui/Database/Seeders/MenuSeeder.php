@@ -137,6 +137,23 @@ class MenuSeeder extends AbstractSeeder
             'href' => '/manager',
             'required_permission_name' => 'manager.dashboard.index'
         ],
+        [
+            'name' => ['en' => 'News', 'fr' => 'Actualités'],
+            'scope' => MenuItem::SCOPE_MAIN_MANAGER,
+            'type' => MenuItem::TYPE_CATEGORY,
+            'items' => [
+                [
+                    'name' => ['en' => 'Posts', 'fr' => 'Articles'],
+                    'type' => MenuItem::TYPE_ITEM,
+                    'href' => '/'
+                ],
+                [
+                    'name' => ['en' => 'Categories', 'fr' => 'Catégories'],
+                    'type' => MenuItem::TYPE_ITEM,
+                    'href' => '/'
+                ],
+            ]
+        ]
     ];
 
     /**
